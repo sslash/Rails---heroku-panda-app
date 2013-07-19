@@ -1,0 +1,145 @@
+<div class="container">
+	<h1>Shred up Your Profile </h1>
+
+  <h4 class="editTitle">Specs</h4>
+  <div class="row-fluid">
+    <div class="span6">
+      <label class="text-error" id="addImageWarning"></label>
+        <div id="thing_drop_zone">
+          {{#if profileImagePath}}
+            <img class="img-medium"src="/uploads/{{profileImagePath}}">
+          {{else}}
+            <img class="img-medium" src="/unknown.gif">
+          {{/if}}
+        </div>
+        <p><input type="file" id="profileImgId"></p>
+    </div>
+
+    <div class="span6">
+      {{#if profileImagePath}}
+        <label class="text-left">"Change your profile image"</label>
+      {{else}}
+        <label class="text-left">"Add a picture of you"</label>
+      {{/if}}    
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+    	<input type="text" class="input-xlarge" id="birthdateId" placeholder="Birthdate">
+    </div>
+    <div class="span6">
+      {{#if birthdate}}
+        <label class="text-left">"{{birthdate}}"</label>
+      {{else}}
+        <label class="text-left">"25-2-1990"</label>
+      {{/if}}    
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <input type="text" class="input-xlarge" id="countryId" placeholder="Country you live in">
+    </div>
+    <div class="span6">
+       {{#if country}}
+        <label class="text-left">"{{country}}"</label>
+      {{else}}
+        <label class="text-left">"E.g Denmark"</label>
+      {{/if}}    
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <input type="text" class="input-xlarge" id="playstyleId" placeholder="Descrive your playstyle">
+    </div>
+    <div class="span6">
+       {{#if playstyle}}
+        <label class="text-left">"{{playstyle}}"</label>
+      {{else}}
+         <label class="text-left">"E.g Passionate & blue</br>Fast Shredder</br>Douchbag Afterparty Acustic"</label>
+      {{/if}}    
+     
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <textarea class="input-xlarge" id="historyId" placeholder="Your history"/>
+    </div>
+    <div class="span6">
+      {{#if history}}
+        <label class="text-left">"{{history}}"</label>
+      {{else}}
+          <label class="text-left">"E.g Played for 7 yrs. Loves bluegrass fusion and telecasters.</br>Went to Berkeley school of music..."</label>
+      {{/if}}    
+     
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <label class="radio inline">
+        {{#equal gender "Male"}}
+          <input type="radio" name="optionsRadios" id="maleId" value="Male" checked>
+          Male
+          </label>
+          <label class="radio inline">
+          <input type="radio" name="optionsRadios" id="femaleId" value="Female">
+          Female
+        {{/equal}}
+        {{#equal gender "Female"}}
+          <input type="radio" name="optionsRadios" id="maleId" value="Male">
+          Male
+          </label>
+          <label class="radio inline">
+          <input type="radio" name="optionsRadios" id="femaleId" value="Female" checked>
+          Female
+        {{/equal}}
+      </label>
+      
+    </div>
+    <div class="span6">
+      <label class="text-left">"Guy or Girl?"</label>
+    </div>
+
+      <button class="btn btn-success" id="savebtnId">Save</button>
+  </div>
+
+  <h4 class="editTitle">Your Guitars</h4>
+
+  <div class="row-fluid">
+    <p>Add a guitar</p>
+   <p><input type="file" id="guitarFileId" title="foo"></p>
+   <input type="text" class="input-xlarge" id="guitarModelId" placeholder="Model">
+   <button class="btn btn-success" id="saveGtrbtnId">Save</button>
+  </div>
+
+<div class="row-fluid">
+  {{#each guitars}}
+    <div class="listOfEqpt">
+      <img src="uploads/{{this.file}}"/>
+      <label>{{this.model}}</label>
+    </div>
+  {{/each}}
+</div>
+
+  <h4 class="editTitle">Your Gear</h4>
+
+  <div class="row-fluid">
+    <p>Add equipment</p>
+   <p><input type="file" id="gearFileId" title="foo"></p>
+   <input type="text" class="input-xlarge" id="gearModelId" placeholder="Model">
+   <button class="btn btn-success" id="saveGearbtnId">Save</button>
+  </div>
+
+  <div class="row-fluid">
+  {{#each equiptment}}
+    <div class="listOfEqpt">
+      <img src="uploads/{{this.file}}"/>
+      <label>{{this.model}}</label>
+    </div>
+  {{/each}}
+</div>
+
+</div>

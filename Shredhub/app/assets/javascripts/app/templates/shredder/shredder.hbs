@@ -1,0 +1,167 @@
+<div class="container center-page">
+	<div class="modal hide fade modalAuth" backdrop="true"
+	id="challengeModal" aria-hidden="true" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">X</button>
+
+		<h3>Challenge {{username}} to Battle</h3>
+	</div>
+
+
+	<form class="form-horizontal" id="addShredForm">
+		<div class="modal-body">
+			<p class="lead">Set battle style</p>
+
+			<label class="radio text-left">
+				<input type="radio" name="optionsRadios"value="Bet you cant shred this" checked>
+				Bet you can't shred this
+			</label>
+
+			<label class="radio text-left">
+				<input type="radio" name="optionsRadios" value="Shred something better in the same key">
+				Shred something better in the same key
+			</label>
+
+			<label class="radio text-left">
+				<input type="radio" name="optionsRadios" value="Shred something better using this scale">
+				Shred something better using this scale
+			</label>
+
+			<label class="radio text-left">
+				<input type="radio" name="optionsRadios" value="Shred faster then this">
+				Shred faster then this
+			</label>
+
+			<p class="lead">Upload your shred video</p>
+			<input name="shredVideo" type="file" id="challengeFile" placeholder="Browse" />
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary">Ready</button>
+		</div>
+	</form>
+</div>
+<div class="row-fluid">
+	<div class="span4">
+		<div class="box">
+			<img class="img-medium thumbnail photo"src="uploads/{{profileImagePath}}" />
+		</div>
+
+		<div class="box">
+			<p class="text-left">Born <strong>{{birthdate}}</strong> </p>
+			<p class="text-left">From <strong>{{country}}</strong> </p>
+			<p class="text-left">Has <strong>{{fanSize}}</strong> fanees </p>
+			<em>{{history}} </em>				
+		</div>
+
+		<div class="box">
+			{{#if isSelf}}
+			<a href="/#editProfile" class="btn btn-inverse">Shred up your profile</a>
+			{{else}}
+
+			{{#if fanees}}
+			<p><i class="icon-ok"/>You're a fan!</p>
+			{{else}}
+			<button class="btn btn-inverse" id="becomeFanBtn">Become Fan</button>
+			{{/if}}	
+			{{/if}}
+		</div>
+
+		{{#unless isSelf}}
+		<div class="box challengeBox">
+			<button class="btn btn-danger btn-large" id="battleChallenge">Challenge to Battle</button>
+		</div>
+		{{/unless}}
+
+
+		<p class="text-left">
+			<a href="#gtrModal" role="button" class="gear-btn btn btn-large btn-danger" data-toggle="modal">Guitars</a></p>
+			<p class="text-left">
+				<a href="#gearModal" role="button" class="gear-btn btn btn-large btn-danger" data-toggle="modal">Gear</a></p>
+			</div>
+
+			<div class="span8">
+
+				<div class="box">
+					<h2>{{username}}</h2>
+					<p class="text-center">Level {{shredderLevel}} - {{levelLabel}} </p> 
+					<em>"{{playstyle}}"</em>
+				</div>
+
+				<div class="box">
+					<p class="text-left lead w_border">Shreds</p>
+					<div class="row-fluid">
+						{{#each shreds}}
+						<div class="span3">
+							<a href="#" class="pShreds thumbnail" id="pShreds-{{@index}}">
+								<img src="uploads/thumbs/{{this.videoThumbnail}}">
+							</a>
+						</div>
+						{{/each}}
+					</div>
+				</div>
+
+				<div class="box">
+					<p class="text-left lead w_border">Battles</p>
+					<div class="row-fluid">
+						{{#each battles}}
+						<div class="span3">
+							<a href="/#battles/{{this.id}}" class="thumbnail">
+								<div class="photo">
+									<img src="uploads/{{this.otherGuy.profileImagePath}}">
+									<p class="thumbnail-overlay full-with-opacity"><small>vs: </small><br>{{this.otherGuy.username}}</p>
+								</div>
+							</a>
+						</div>
+						{{/each}}
+					</div>
+				</div>
+
+				<!--
+				<div class="box">
+					<p class="lead text-left">
+						{{username}} has many awesome guitars and nice equiptment. Check out his gear in the 
+						<a href="/#showroom/{{id}}">Showroom</a>
+					</p>
+				</div>
+			-->
+		</div>
+
+
+		<!-- Gear images -->
+
+
+		<div id="gtrModal" class="modal hide fade gearModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+				<h3 id="myModalLabel">{{username}}'s guitars</h3>
+			</div>
+			<div class="modal-body gear-img">
+				<div class="photo">
+					<img src="uploads/{{guitars.0.file}}"/>
+					<a class="leftGtr left carousel-control" href="#">‹</a>
+					<a class="rightGtr right carousel-control" href="#">›</a>
+					<p>{{guitars.0.model}} </p>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="gearModal" class="modal hide fade gearModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">{{username}}'s gear</h3>
+			</div>
+			<div class="modal-body gear-img">
+				<div class="photo">
+					<img src="uploads/{{equiptment.0.file}}"/>
+					<a class="leftGear left carousel-control" href="#">‹</a>
+					<a class="rightGear right carousel-control" href="#">›</a>
+					<p>{{equiptment.0.model}} </p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

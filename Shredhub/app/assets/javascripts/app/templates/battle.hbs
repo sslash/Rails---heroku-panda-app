@@ -1,0 +1,89 @@
+<div class="jumbotron masthead battle">
+	<h1>The Battle Arena</h1>
+
+	<div class="container marketing center-page">
+		<div class="row-fluid">
+			<div class="span9">
+
+				<div class="box battlebox">
+					<div class="row-fluid">
+						<div class="span5">
+							<div class="photo thumbnail">
+								<img class="img-large-f" src="uploads/{{b.battler.profileImagePath}}"/>
+								<h3 class="photo-label">{{b.battler.username}}</h3>
+							</div>
+						</div>
+						<div class="span2">
+							<h1 class="vs">VS</h1>
+						</div>
+						<div class="span5">
+							<div class="photo thumbnail">
+								<img class="img-large-f" src="uploads/{{b.battlee.profileImagePath}}"/>
+								<h3 class="photo-label">{{b.battlee.username}}</h3>
+							</div>
+						</div>
+					</div>
+					<div class="battleStatus">
+						<p class="lead"><small> Rounds</small> <br>{{rounds}} </p>
+						<p class="lead"><small> Slash leads </small><br> 88 points</p>
+						<p class="lead"><small> Evan </small><br> 33 points </p>
+						<p class="lead"><small>Style </small><br>{{b.battleStyle}}</p>
+
+					</div>
+				</div>
+
+				{{#if canAdd}}
+				<div class="box">
+					<p class="lead">Add a new battle shred</p>
+					<p><input type="file" id="guitarFileId" title="foo"></p>
+				</div>
+				{{/if}}
+
+				{{#each b.battleRounds}}
+				<div class="box">
+					<p class="text-right battleRound">Round: {{this.roundNo}}</p>
+					<div class="row-fluid">
+						<div class="span6">
+							<video id="my_video_1" class="video-js vjs-default-skin" controls
+							preload="auto" width="250" height= "150" data-setup="{}">
+							<source src="uploads/{{this.battlersShred.videoPath}}" type='video/mp4'>
+							</video>
+							<p class="instrx text-left">Rate it! 
+								<input type="range" name="Rating" min="1" max="10">
+								<button class="rateBtn btn btn-small btn-inverse" id="rate-er-{{@index}}">Rate</button></p>
+
+							</div>
+							<div class="span6">
+
+								{{#if this.battleesShred}}
+								<video id="my_video_2" class="video-js vjs-default-skin" controls
+								preload="auto" width="250" height= "150" data-setup="{}">
+								<source src="uploads/{{this.battleesShred.videoPath}}" type='video/mp4'>
+								</video>
+
+								<p class="instrx text-left">Rate it! 
+									<input type="range" name="Rating" min="1" max="10">
+									<button class="rateBtn btn btn-small btn-inverse" id="rate-ee-{{@index}}">Rate</button></p>
+									{{/if}}
+								</div>
+							</div>
+						</div>
+						{{/each}}
+
+					</div>
+
+					<div class="span3 box">
+						<input type="text" class="input-medium search-query searchSpace" placeholder="Search Battles">
+
+						{{#each battles}}
+						<div class="shredderList photo">
+							<img src="uploads/{{this.battler.profileImagePath}}" class="battleThumb"/> 
+							<img src="uploads/{{this.battlee.profileImagePath}}" class="battleThumb"/> 
+
+							<a class="photo-label smallOverlay"href="/#battles/{{this.id}}">{{this.battler.username}}<br> vs <br>
+								{{this.battlee.username}}</a>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+				</div>
