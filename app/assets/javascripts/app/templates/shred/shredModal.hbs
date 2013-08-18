@@ -1,0 +1,68 @@
+<div id="shredModal" class="modal hide fade shredModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="row-fluid top">
+    <div class="span11">
+      <h1>{{owner.username}} <small> ({{country}}) </small></h1>
+      <p class="lead"> - {{title}}</p>
+    </div> <!-- /span12 -->
+
+    <div class="span1">
+      <button type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">close</button>
+    </div>
+
+  </div><!-- /row fluid -->
+
+
+  <div class="row-fluid center">
+    <div class="span7">
+     <video id="my_video_1" class="video-js vjs-default-skin" controls
+     preload="auto" width="530" height= "350" data-setup="{}">
+     <source src="uploads/vidz/{{videoPath}}" type='video/mp4'>
+     </video>
+     <div class="underShredImage">
+      <p>Rating: <small id="rating">{{shredRating.currentRating}}</small> 
+        <small><span>Created: {{timeCreated}}</span></small></p>
+      <p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
+        <small><span>Views: {{viewed}}</span></small></p>
+    </div>
+
+    <blockquote>
+      <p>{{description}}</p>
+    </blockquote>
+
+    <p class="lead instrx text-left">Tags: 
+      {{#each tags}}
+      <span class="label label-inverse" style="float:none">{{this}}</span> 
+      {{/each}}
+    </p>
+
+
+  </div> <!-- /span7 -->
+  <div class="span5">
+   <p class="lead instrx">Comments</p>
+
+   <ul>
+    <div id="commentsList">
+      {{#each shredComments}}
+      <li class="comments">
+        <a> <small> {{this.commenterName}} <span>{{this.timeCreated}}</span></small></a>
+        <p>{{this.text}}</p>
+      </li>
+      {{/each}}
+    </div>
+
+    <li>
+      <textarea rows="2" autofocus id="commentText" placeholder="Leave a comment!"></textarea>
+    </li>
+
+    <li>
+      <p class="instrx text-left">Rate it! 
+        <input type="range" name="Rating" min="1" max="10">
+        <button class="btn btn-inverse btn-small" id="rateBtn">Rate</button>
+      </p>
+    </li>
+  </ul>
+</div> <!-- /span5 -->
+</div> <!-- /row-fluid -->
+
+</div>

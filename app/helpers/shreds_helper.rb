@@ -1,0 +1,2 @@
+module ShredsHelper
+end

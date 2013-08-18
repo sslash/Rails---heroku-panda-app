@@ -1,0 +1,62 @@
+<!-- Navbar 
+    ================================================== -->
+<div id="navbar-mid" class="navbar navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="brand" href="#">Shredhub</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class=""><a href="#shredpool">The Shredpool</a></li>
+					<li class=""><a href="#battles/">Battles</a></li>
+					<li class=""><a href="#shredders">Shredders</a></li>
+					<li class=""><a href="#About">About</a></li>
+					<li class=""><a href="Contact">Contact</a></li>
+					<li class="">
+						<div class="btn-group">
+							<a class="btn btn-info dropdown-toggle" data-bypass="true" data-toggle="dropdown"
+								href=""> Battle Requests! <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu battleRequestList"> 
+								{{#each battleRequests}}
+									<li>
+									 <p>
+									 	<img src="uploads/{{this.battler.profileImagePath}}" class="battleThumb leImg battleReqModal" id="batReq-{{@index}}"/> 
+									 	{{this.battler.username}}</a>
+									 	<button class="btn btn-small btn-success batReqAcc" id="batReqAcc-{{@index}}">Accept</button>
+									 	<button class="btn btn-small batReqDec" id="batReqDec-{{@index}}"> Decline</button>
+									 </p>
+									 <p><em><a href="#" class="battleReqModal" id="battlereqA-{{@index}}">{{this.battleStyle}}</a></em></p>
+								</li>  
+								{{/each}}
+							</ul>
+						</div>
+					</li>
+					<li class="">
+						<div class="btn-group faneesBtn">
+							<a class="btn btn-info dropdown-toggle" data-bypass="true" data-toggle="dropdown"
+								href="#">You're Fanees<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								{{#each fanees}}
+									<li>
+										<a href="/#shredders/{{this._id}}">{{this.username }}</a>
+									</li>
+								{{/each}}
+							</ul>
+						</div>
+					</li>
+
+					<li class=""><a href="#editProfile">Edit Profile</a></li>
+					<li class=""><a href="/#logout">Log out {{username}}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="battleReqWrapper"></div>
