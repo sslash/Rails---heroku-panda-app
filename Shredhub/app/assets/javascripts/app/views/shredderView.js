@@ -123,8 +123,6 @@ define([
     setFaneeRelationship : function() {
       var user = Session.getUser();
       var shredderId = this.model.get('id'); 
-      console.log("shre: " + shredderId);
-      console.log("user: " + user.id);
       this.fanees = false;
       this.isSelf = false;
       var that = this;

@@ -10,8 +10,11 @@ class SessionsController < ApplicationController
 	before_filter :save_login_state, :only => [:login, :login_attempt]
 
 	def home
-		logger.debug "login:"
 		render :file => "app/assets/index.html", :formats => [:html]
+	end
+
+	def drums
+		render :file => "app/views/layouts/application.html.erb", "sap" => "saaaap"
 	end
 
 	def login

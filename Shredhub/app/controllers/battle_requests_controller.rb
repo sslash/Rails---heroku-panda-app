@@ -55,8 +55,8 @@ class BattleRequestsController < ApplicationController
 		}
 
 		battleData[:battleRounds].push({
-				:battlersShred => shred,
-				:battleesShred => Hash.new
+				:battlersShred => shred#,
+				#:battleesShred => Hash.new
 		})
 
 		logger.debug("battle: #{battleData}" )

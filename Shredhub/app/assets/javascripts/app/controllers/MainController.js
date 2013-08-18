@@ -111,13 +111,17 @@ define([
 			},
 
 			battlePage : function(uid) {
+				//debugger;
+				if (uid === undefined) {
+					uid = "52012d473ae74073b800161c";
+				}
 				var battle = new Battle({id: uid});
 				var battles = new Battles();
-				var view = new BattleView({model : battle, collection : battles});
+				var view = new BattleView({model : battle});//, collection : battles});
 				var that = this;
 				Shredhub.main.show(view);
 				battle.fetch();
-				battles.fetch({reset:true});
+				//battles.fetch({reset:true});
 			},
 
 			addFanee : function(fanee){

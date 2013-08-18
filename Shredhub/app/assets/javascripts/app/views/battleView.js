@@ -25,12 +25,7 @@ define([
 
 			initialize : function() {
 				this.listenTo(this.model, 'change', this.render);
-				this.listenTo(this.collection, 'reset', this.render);
-
-			},
-
-			onRender : function(){
-				console.log("RENDERING btl");
+				//this.listenTo(this.collection, 'reset', this.render);
 			},
 
 			serializeData: function(){
@@ -39,8 +34,9 @@ define([
 				data.b = this.model.toJSON();
 				if ( this.collection) {
 					data.battles = this.collection.toJSON();
-					data.rounds = data.b.battleRounds.length;
 				}
+				data.rounds = data.b.battleRounds.length;
+				console.log("DATA: " + JSON.stringify(data));
 				return data;
 			},
 

@@ -21,16 +21,16 @@ define([
    });
 
     Shredhub.addInitializer(function(options){
-      var sync = Backbone.sync;
+      /*var sync = Backbone.sync;
       Backbone.sync = function(method, model, options) {
         options.beforeSend = function(xhr){
           xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
         };
         sync(method, model, options);
       };
-
+    */
       Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
-        if (arguments.length < 3)
+        if (arguments.length <3)
           throw new Error("Handlebars Helper equal needs 2 parameters");
         if( lvalue!=rvalue ) {
           return options.inverse(this);
@@ -38,6 +38,14 @@ define([
           return options.fn(this);
         }
       });
+    });
+
+    Shredhub.addInitializer(function(options) {
+      $.ajaxSetup({
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        }
+      }); 
     });
 
     Shredhub.addInitializer(function(options){

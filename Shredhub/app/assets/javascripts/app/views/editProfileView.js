@@ -32,10 +32,6 @@ define([
 				this.gearImg = null;
 			},
 
-			onRender: function() {
-				console.log("ON RENDER: " + JSON.stringify(this.model.toJSON()));
-			},
-
 			saveGtrBtnClicked : function() {
 				if ( this.guitarImg ){
 					this.uploadFile( {
@@ -70,9 +66,10 @@ define([
 					type: 'POST',
 					data : JSON.stringify(meta.data),
 					contentType : 'application/json',
-					beforeSend: function ( xhr ) {
+					/*beforeSend: function ( xhr ) {
 						xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
 					},
+					*/
 					success:function(res){
 						console.log(meta.success + ": " + JSON.stringify(res.shredder));
 						that.model.set(res.shredder);
@@ -204,9 +201,9 @@ define([
 						url : obj.url,
 						type : 'POST',
 						data : data,
-						beforeSend: function ( xhr ) {
+						/*beforeSend: function ( xhr ) {
 							xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
-						},
+						},*/
 						success : function(res) {
 							obj.handler(res);
 						},

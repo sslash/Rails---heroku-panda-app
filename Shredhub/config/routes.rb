@@ -1,6 +1,9 @@
 Shredhub::Application.routes.draw do
   root :to => 'sessions#home'
 
+  # Main domains
+  get "drums" => "sessions#drums"
+
   post "sessions/login"
   post "sessions/logout"
   #get "sessions/home"

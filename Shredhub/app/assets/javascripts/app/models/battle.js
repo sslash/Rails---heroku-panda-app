@@ -38,7 +38,6 @@ define([
 
 				for ( var i = response.battleRounds.length-1, y=1; i >= 0; i--, y++){
 					response.battleRounds[i].roundNo = y;
-					console.log("R: " + response.id);
 					points.battler += response.battleRounds[i].battlersShred.rating.currentRating; 
 					points.battlee += response.battleRounds[i].battleesShred != null ? 
 						response.battleRounds[i].battleesShred.rating.currentRating : 0; 
