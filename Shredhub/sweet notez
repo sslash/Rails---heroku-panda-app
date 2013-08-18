@@ -1,2 +1,0 @@
-#Reinstall all gems:
-$ sudo gem pristine --all
