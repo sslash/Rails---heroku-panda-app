@@ -17,4 +17,4 @@
 *.mp4
 *.jpg
 *.png
-Shredhub/public/uploads/*
+public/uploads/*
