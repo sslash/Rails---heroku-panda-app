@@ -6,7 +6,7 @@
 /*@import "../vendor/bootstrap/css/bootstrap-responsive.css";*/
 /*@import "../vendor/bootstrap/css/font-awesome.css";*/
 /*@import "../../vendor/bootstrap/css/docs.css";*/
-@import "modals.css";
+
 
 /*-- Application stylesheets. -----------------------------------------------*/
 body{
@@ -336,6 +336,9 @@ hr.soften {
 * border-image-source: 
 */
 
+.img-xsmall {
+  width:20px;
+}
 
 .img-small {
   min-height: 100px;
@@ -552,14 +555,6 @@ hr.soften {
     position: absolute;
     top: 0; left: 0;
     height: 110%; width:100%;
-}
-
-.vs {
-  margin-top:50%;
-}
-
-h1.vs{
-  color: midnightblue;
 }
 
 .photo-transparency{

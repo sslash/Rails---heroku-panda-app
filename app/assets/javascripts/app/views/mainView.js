@@ -14,7 +14,8 @@ define([
 
 	// Plugins
 	'session',
-	'ajaxHelper'
+	'ajaxHelper',
+
 	], function (Marionette,Handlebars, bs, navigationTpl, mainPageTpl,
 		footerTpl, navLoggedInTpl,battleReqModalTpl, Session, Ah) {
 
@@ -40,6 +41,10 @@ define([
 				changeNavBar : function() {
 					this.template = Handlebars.compile(navLoggedInTpl);	
 					this.loggedIn = true;							
+				},
+
+				onDomRefresh: function(){
+					$('#popover').popover({html:true});
 				},
 
 				serializeData : function() {
@@ -110,10 +115,14 @@ MainLayout : Marionette.Layout.extend({
 	},
 
 	regions: {
+		modal : "#modal",
 		topShreds: "#topShreds",
 		sotw : "#sotw",
 		sweetShredders : "#sweetShredders"
 	},
+
+
+	
 
 	registerBtnClc : function(event) {
 		event.preventDefault();

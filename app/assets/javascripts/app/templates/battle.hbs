@@ -29,66 +29,125 @@
 
 	<div class="well">
 		{{#if canAdd}}
-			<div class="box">
-				<p class="lead">Add a new battle shred</p>
-				<p><input type="file" id="guitarFileId" title="foo"></p>
-			</div>
+		<div class="box">
+			<p class="lead">Add a new battle shred</p>
+			<p><input type="file" id="guitarFileId" title="foo"></p>
+		</div>
 		{{/if}}
 
 		{{#each b.battleRounds}}
 		<div class="row-fluid">
 			<div class="span5">
-					<video class="video-js vjs-default-skin battle-video" controls>
+				<video class="video-js vjs-default-skin battle-video" controls>
 					<source src="uploads/{{this.battlersShred.videoPath}}" type='video/mp4'>
-					</video>
-					<div class="underShredImage">
-						<p>Rating: <small id="rating">{{shredRating.currentRating}}</small> 
-						<small><span>Created: {{timeCreated}}</span></small></p>
-						<p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
-						<small><span>Views: {{viewed}}</span></small></p>
+				</video>
+				<div class="underShredImage">
+					<div class="row">
+						<div class="span6">
+							<p>Added on: 23.2.2013 </p>
+							<p>Rating: 45039 </p>
+						</div>
+						<div class="span6">
+							<p>Views: 20</p>
+							<p>Raters: 120</p>
+						</div>
 					</div>
+				</div>
 
-				<div class="span6 offset2">
-					
+				<div class="span12">
 					<em>You're going down bitch!</em>
 				</div>
 
-				<div class="span11 offset1">
-					<p class="text-left">Rate it! 
-						<input type="range" name="Rating" min="1" max="10">					
-						<button class="rateBtn btn btn-small btn-inverse" id="rate-er-{{@index}}">Rate</button></p>
-				</div>
-			</div>
-
-			<div class="span2">
-				<h1 class="round">Round<br>1/5</h1>
-				<i class="icon-chevron-left"></i>
-				<i class="icon-chevron-right"></i>
-			</div>
-
-			<div class="span5">
-					{{#if this.battleesShred}}
-						<video class="video-js vjs-default-skin battle-video" controls>
-						<source src="uploads/{{this.battleesShred.videoPath}}" type='video/mp4'>
-						</video>
-						<div class="underShredImage">
-						<p>Rating: <small id="rating">{{shredRating.currentRating}}</small> 
-							<small><span>Created: {{timeCreated}}</span></small></p>
-							<p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
-							<small><span>Views: {{viewed}}</span></small></p>
-						</div>
-					<div class="span6 offset2">
-						<em>Taste my SHRED-WRATH yo!</em>
-					</div>
-
-					<div class="span11 offset1">
+					<div class="span12 shred-video">
 						<p class="text-left">Rate it! 
-							<input type="range" name="Rating" min="1" max="10">
-							<button class="rateBtn btn btn-small btn-inverse" id="rate-ee-{{@index}}">Rate</button></p>
-							{{/if}}
+							<input type="range" name="Rating" min="1" max="10">					
+							<button class="rateBtn btn btn-small btn-inverse" id="rate-er-{{@index}}">Rate</button></p>
+							<ul>
+								<div class="commentsList">
+									<li>
+										<textarea rows="2" autofocus id="commentText" placeholder="Leave a comment!"></textarea>
+									</li>
+									{{#each shredComments}}
+									<li class="comments">
+										<a> <small> {{this.commenterName}} <span>{{this.timeCreated}}</span></small></a>
+										<p>{{this.text}}</p>
+									</li>
+									{{/each}}
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>Wooooho </p>
+									</li>
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>hei dei seg på deg ei jo meg ti</p>
+									</li>
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>hei dei </p>
+									</li>
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>hei dei seg på deg ei jo meg timeg timeg timeg timeg ti</p>
+									</li>
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>hei dei smeg tieg på deg ei jo meg ti</p>
+									</li>
+									<li class="comments">
+										<a> <small> Name of me<span>20-10-2013</span></small></a>
+										<p>hei dei meg timeg tiseg på deg ei jo meg ti</p>
+									</li>
+								</div>
+							</ul>
+						</div>
+					</div> <!-- /span 5 -->
+
+					<div class="span2">
+						<h1 class="round">Round<br>1/5</h1>
+						<i class="icon-chevron-left icon-4x"></i>
+						<i class="icon-chevron-right icon-4x"></i>
 					</div>
-			</div>
-		</div> <!-- /row-fluid -->
-		{{/each}}
-	</div> <!-- /well -->
-</div> <!-- /battle -->
+
+					<div class="span5">
+						{{#if this.battleesShred}}
+						<video class="video-js vjs-default-skin battle-video" controls>
+							<source src="uploads/{{this.battleesShred.videoPath}}" type='video/mp4'>
+							</video>
+							<div class="underShredImage">
+								<div class="row">
+									<div class="span6">
+										<p>Added on: 23.2.2013 </p>
+										<p>Rating: 45039 </p>
+									</div>
+									<div class="span6">
+										<p>Views: 20</p>
+										<p>Raters: 120</p>
+									</div>
+								</div>
+							</div>
+							<div class="span12">
+								<em>Taste my SHRED-WRATH yo!</em>
+							</div>
+
+							<div class="span12 shred-video">
+								<p class="text-left">Rate it! 
+									<input type="range" name="Rating" min="1" max="10">					
+									<button class="rateBtn btn btn-small btn-inverse">Rate</button></p>
+								<ul>
+									<div class="commentsList">
+										<li>
+											<textarea rows="2" autofocus placeholder="Leave a comment!"></textarea>
+										</li>
+										<li class="comments">
+											<a> <small> Name of me<span>20-10-2013</span></small></a>
+											<p>hei dei meg timeg tiseg på deg ei jo meg ti</p>
+										</li>
+									</div>
+								</ul>
+							</div>
+							{{/if}}
+						</div> <!-- /span5 -->
+					</div> <!-- /row-fluid -->
+				{{/each}}
+			</div> <!-- /well -->
+		</div> <!-- /battle -->

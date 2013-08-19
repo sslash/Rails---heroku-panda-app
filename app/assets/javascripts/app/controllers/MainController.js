@@ -9,6 +9,7 @@ define([
 	'views/editProfileView',
 	'views/shredroomView',
 	'views/battleView',
+	'views/battleRequestView',
 
 	// Models
 	'models/user',
@@ -24,7 +25,7 @@ define([
 	'session'
 	], function (Marionette, MainView, ShredpoolView, 
 		ShredderView, ShredView, EditProfileView, ShredroomView,
-		BattleView, User, Shredder, Shred, Battle, Shredders, 
+		BattleView, BattleRequestView, User, Shredder, Shred, Battle, Shredders, 
 		Shreds, Battles, Session) {
 
 		var MainController = Marionette.Controller.extend({
@@ -38,7 +39,9 @@ define([
 				this.listenTo(this, "action:addFanee", this.addFanee);
 				this.listenTo(this, "action:updateNavBar", this.updateNavBar);
 				this.listenTo(this, "shredroom:rendered", this.shredroomViewRendered);	
-				this.listenTo(this, "user:battleAccepted", this.battleAccepted);				
+				this.listenTo(this, "user:battleAccepted", this.battleAccepted);	
+				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
+				this.listenTo(this, "regions:hideModal", this.hideModal);
 			},
 
 			shredderPage : function(id){
@@ -206,6 +209,15 @@ define([
 				if ( !this.user )
 					this.user = new User();
 				this.user.resetUser();
+			},
+
+			showBattleRequest : function(shredderModel) {
+				var view = new BattleRequestView.ModalView({model: shredderModel});
+				Shredhub.modal.show(view);
+			},
+
+			hideModal : function() {
+				Shredhub.modal.close();
 			}
 		});
 

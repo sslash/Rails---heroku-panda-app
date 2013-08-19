@@ -22,47 +22,46 @@
      <div class="underShredImage">
       <p>Rating: <small id="rating">{{shredRating.currentRating}}</small> 
         <small><span>Created: {{timeCreated}}</span></small></p>
-      <p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
-        <small><span>Views: {{viewed}}</span></small></p>
-    </div>
+        <p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
+          <small><span>Views: {{viewed}}</span></small></p>
+        </div>
 
-    <blockquote>
-      <p>{{description}}</p>
-    </blockquote>
+        <blockquote>
+          <p>{{description}}</p>
+        </blockquote>
 
-    <p class="lead instrx text-left">Tags: 
-      {{#each tags}}
-      <span class="label label-inverse" style="float:none">{{this}}</span> 
-      {{/each}}
-    </p>
+        <p class="lead instrx text-left">Tags: 
+          {{#each tags}}
+          <span class="label label-inverse" style="float:none">{{this}}</span> 
+          {{/each}}
+        </p>
 
 
-  </div> <!-- /span7 -->
-  <div class="span5">
-   <p class="lead instrx">Comments</p>
+      </div> <!-- /span7 -->
+      <div class="span5">
+       <p class="lead instrx">Comments</p>
 
-   <ul>
-    <div id="commentsList">
-      {{#each shredComments}}
-      <li class="comments">
-        <a> <small> {{this.commenterName}} <span>{{this.timeCreated}}</span></small></a>
-        <p>{{this.text}}</p>
-      </li>
-      {{/each}}
-    </div>
+       <ul>
+        <div id="commentsList">
+          {{#each shredComments}}
+          <li class="comments">
+            <a> <small> {{this.commenterName}} <span>{{this.timeCreated}}</span></small></a>
+            <p>{{this.text}}</p>
+          </li>
+          {{/each}}
+        </div>
 
-    <li>
-      <textarea rows="2" autofocus id="commentText" placeholder="Leave a comment!"></textarea>
-    </li>
+        <li>
+          <textarea rows="2" autofocus id="commentText" placeholder="Leave a comment!"></textarea>
+        </li>
 
-    <li>
-      <p class="instrx text-left">Rate it! 
-        <input type="range" name="Rating" min="1" max="10">
-        <button class="btn btn-inverse btn-small" id="rateBtn">Rate</button>
-      </p>
-    </li>
-  </ul>
-</div> <!-- /span5 -->
-</div> <!-- /row-fluid -->
-
+        <li>
+          <p class="instrx text-left">Rate it! 
+            <input type="range" name="Rating" min="1" max="10">
+            <button class="btn btn-inverse btn-small" id="rateBtn">Rate</button>
+          </p>
+        </li>
+      </ul>
+    </div> <!-- /span5 -->
+  </div> <!-- /row-fluid -->
 </div>

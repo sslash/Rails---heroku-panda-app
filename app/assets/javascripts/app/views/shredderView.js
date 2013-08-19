@@ -182,7 +182,7 @@ define([
    },
 
    openChallengeModal : function() {
-    $('#challengeModal').modal('show');
+    mainController.trigger("battle:battleRequest:showModal", this.model);
   },
 
   challengeSubmitted : function(e){
