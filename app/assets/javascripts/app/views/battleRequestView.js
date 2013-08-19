@@ -17,8 +17,6 @@ define([
 
 			template: Handlebars.compile(battleReqTmpl),
 
-
-
 			events : {
 				'hide #shredModal' : 'modalHidden',
 				'click #rateBtn' : 'rateShred',
@@ -64,7 +62,6 @@ define([
 
 			/* EVENT HANDLERS */
 			onRender: function(){
-				console.log("YEEEEAH");
 				this.$('#challengeModal').modal('show');
 			}
     	});

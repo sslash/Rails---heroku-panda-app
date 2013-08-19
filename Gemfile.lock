@@ -79,9 +79,6 @@ GEM
       less (~> 2.3.1)
     less-rails-bootstrap (2.3.3)
       less-rails (~> 2.3.1)
-    less-rails-fontawesome (0.5.1)
-      less-rails (>= 2.1.7)
-      railties (>= 3.1.1)
     libv8 (3.11.8.17)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -177,7 +174,6 @@ DEPENDENCIES
   jquery-rails
   less-rails
   less-rails-bootstrap
-  less-rails-fontawesome
   linecache19!
   mongo_mapper
   rails (= 3.2.13)

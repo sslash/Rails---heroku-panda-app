@@ -53,8 +53,6 @@ define([
 			},
 
 			fetchShredpoolShreds : function() {
-				//this.setUrl('api/shreds/byFanees/' + Session.getUser().id);
-				console.log("sesH: " + JSON.stringify(Session.getUser()));
 				this.initURL({
 					query : 'byPopularity/',
 					uid: '&uid=' + Session.getUser().id,
