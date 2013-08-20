@@ -41,6 +41,7 @@ define([
 				this.listenTo(this, "shredroom:rendered", this.shredroomViewRendered);	
 				this.listenTo(this, "user:battleAccepted", this.battleAccepted);	
 				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
+				this.listenTo(this, "shred:createShred:showModal", this.showCreateShredModal);
 				this.listenTo(this, "regions:hideModal", this.hideModal);
 			},
 
@@ -114,7 +115,6 @@ define([
 			},
 
 			battlePage : function(uid) {
-				//debugger;
 				if (uid === undefined) {
 					uid = "52012d473ae74073b800161c";
 				}
@@ -125,6 +125,13 @@ define([
 				Shredhub.main.show(view);
 				battle.fetch();
 				//battles.fetch({reset:true});
+			},
+
+			__renderNavbar : function() {
+				if (!this.navigationView) {
+					this.navigationView = new MainView.NavigationView();
+					Shredhub.header.show(this.navigationView);
+				}
 			},
 
 			addFanee : function(fanee){
@@ -150,6 +157,7 @@ define([
 			},
 
 			shredpoolPage : function() {
+				this.__renderNavbar();
 				this.shredpoolView = new ShredpoolView.MainLayout();
 				var that = this;
 				this.shredpoolView.on("show", function(){
@@ -213,6 +221,11 @@ define([
 
 			showBattleRequest : function(shredderModel) {
 				var view = new BattleRequestView.ModalView({model: shredderModel});
+				Shredhub.modal.show(view);
+			},
+
+			showCreateShredModal : function() {
+				var view = new ShredView.CreateShredView();
 				Shredhub.modal.show(view);
 			},
 

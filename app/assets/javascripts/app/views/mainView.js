@@ -35,7 +35,8 @@ define([
 				events : {
 					'click .battleReqModal' : 'openBattleReqModal',
 					'click .batReqAcc' : 'battleReqAccepted',
-					'click .batReqDec' : 'battleReqDeclined'
+					'click .batReqDec' : 'battleReqDeclined',
+					'click .createShred' : '__createShredClicked'
 				},
 
 				changeNavBar : function() {
@@ -84,7 +85,6 @@ define([
 
 				openBattleReqModal : function(e) {
 					e.preventDefault();
-					console.log("saP:" + e.currentTarget.id.split("-")[1]);
 					var index = e.currentTarget.id.split("-")[1];
 					this.$('#battleReqWrapper').html(this.battleReqTmpl(
 					{
@@ -95,33 +95,26 @@ define([
 
 				},
 
-				// render: function() {
-				// 	console.log("render nav: " + JSON.stringify(Session.getUser()));
-				// 	if ( this.loggedIn )
-				// 		$(this.el).html(this.template());
-				// 	else
-				// 		$(this.el).html(this.template());
-				// 	return this;  
-				// }
+				__createShredClicked : function() {
+					mainController.trigger('shred:createShred:showModal');
+				}
 			}),
 
-MainLayout : Marionette.Layout.extend({
-	template: Handlebars.compile(mainPageTpl),
+	MainLayout : Marionette.Layout.extend({
+		template: Handlebars.compile(mainPageTpl),
 
-	events : {
-		"click #loginBtn" : "loginBtnClc",
-		"click #regBtn" : "registerBtnClc",
-		"click #authBtn" : "authBtnClk"
-	},
+		events : {
+			"click #loginBtn" : "loginBtnClc",
+			"click #regBtn" : "registerBtnClc",
+			"click #authBtn" : "authBtnClk"
+		},
 
-	regions: {
-		modal : "#modal",
-		topShreds: "#topShreds",
-		sotw : "#sotw",
-		sweetShredders : "#sweetShredders"
-	},
-
-
+		regions: {
+			modal : "#modal",
+			topShreds: "#topShreds",
+			sotw : "#sotw",
+			sweetShredders : "#sweetShredders"
+		},
 	
 
 	registerBtnClc : function(event) {
@@ -138,7 +131,7 @@ MainLayout : Marionette.Layout.extend({
 				}
 			},
 			success: function(res) {
-				console.log("SUCCESS: " + JSON.stringify(res));
+				$('#registerModal').modal('hide');
 			}
 		});
 	},
