@@ -10,13 +10,14 @@ define([
 	'text!templates/shred/topShreds.hbs',
 	'text!templates/shred/shredModal.hbs',
 	'text!templates/shred/createShred.hbs',
+	'text!templates/shred/createTabs.hbs',
 
 	// Modules
 	'session',
 	'collections/shreds',
 	'models/shred'
 	], function (Marionette,Handlebars, bs, _, shredsRowTpl, topShredsTpl, 
-		modalShredTpl, createShredTpl, Session, Shreds, Shred) {
+		modalShredTpl, createShredTpl, createTabsTpl, Session, Shreds, Shred) {
 
 		var ShredView = {}
 
@@ -115,12 +116,31 @@ define([
     		},
     	});
 
-		ShredView.CreateShredView = Marionette.ItemView.extend({
+		ShredView.CreateShredView = Marionette.Layout.extend({
 			template : Handlebars.compile(createShredTpl),
-		
+
+			regions: {
+   				meta: "#metaRegion",
+    			tabs: "#tabsRegion"
+			},
+
+			events : {
+				'click .add-tabs-btn': '__addTabsBtnClicked'
+			},
+
+			__addTabsBtnClicked : function(e) {
+				$(this.regions.meta).hide();
+				var view = new ShredView.CreateTabsForShredView();
+				this.tabs.show(view);
+			},			
+
 			onDomRefresh: function(){
 				this.$('#createShred').modal('show');
 			}
+		});
+
+		ShredView.CreateTabsForShredView = Marionette.ItemView.extend({
+			template : Handlebars.compile(createTabsTpl),
 		});
 
 
