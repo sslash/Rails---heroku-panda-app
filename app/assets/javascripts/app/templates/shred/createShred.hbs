@@ -1,7 +1,8 @@
 <div class="modal hide fade" id="createShred">
 
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+		{{! <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button> }}
+		<img src="images/icons/pick-icon-30.png" class="close" data-dismiss="modal" aria-hidden="true">
 		<h3 class="lead">Create A Shred</h3>
 	</div>
 
@@ -12,17 +13,20 @@
 
 			<div class="row-fluid">
 				<div class="span4">
-					<i class="icon-music icon-2x"></i>
+					{{! <i class="icon-music icon-2x"></i> }}
+					<img src="images/icons/guitar-icon-30.png" class="icon"/>
 					<input type="text" placeholder="Guitar" class="input-xsmall"/>
 				</div> <!-- /span4 -->
 
 				<div class="span4">
-					<i class="icon-bolt icon-2x"></i>
+					{{! <i class="icon-bolt icon-2x"></i> }}
+					<img src="images/icons/amp-icon-32.png" class="icon"/>
 					<input type="text" placeholder="Amplifier" class="input-xsmall"/>
 				</div> <!-- /span4 -->
 
 				<div class="span4">
-					<i class="icon-headphones icon-2x"></i>
+					{{! <i class="icon-headphones icon-2x"></i> }}
+					<img src="images/icons/pedal-icon-30.png" class="icon"/>
 					<input type="text" placeholder="Effects" class="input-xsmall"/>
 				</div> <!-- /span4 -->
 			</div><!-- /row -->
@@ -65,7 +69,22 @@
 	</div>	<!-- /modal-body-->
 
 	<div class="modal-footer">
-		<button class="btn btn-danger">Finish</button>
+		<div class="pull-right">
+			<span class="icon-stack">
+          		<i class="icon-circle icon-stack-base"></i>
+          		<i class="icon-twitter icon-light"></i>
+        	</span>
+        	<span class="icon-stack">
+          		<i class="icon-circle icon-stack-base"></i>
+          		<i class="icon-facebook icon-light"></i>
+        	</span>
+        	<span class="icon-stack">
+          		<i class="icon-circle icon-stack-base"></i>
+          		<i class="icon-google-plus icon-light"></i>
+        	</span>
+
+		</div>
+		<button class="btn btn-danger" data-dismiss="modal">Finish</button>
 	</div>
 </div>
 

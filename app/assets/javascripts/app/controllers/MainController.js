@@ -30,6 +30,16 @@ define([
 
 		var MainController = Marionette.Controller.extend({
 
+			/*
+			* Global event listeners should be on the form:
+			*
+			* category:resource:action
+			*
+			* E.g:
+			*
+			* regions:modal:showBadge
+			*
+			*/
 			initialize: function(options){
 				this.listenTo(this, "authenticateSuccess", this.authenticateSuccess);
 				this.listenTo(this, "sessionDataFetched", this.sessionDataFetched);
@@ -42,10 +52,12 @@ define([
 				this.listenTo(this, "user:battleAccepted", this.battleAccepted);	
 				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
 				this.listenTo(this, "shred:createShred:showModal", this.showCreateShredModal);
-				this.listenTo(this, "regions:hideModal", this.hideModal);
+				this.listenTo(this, "regions:modal:showBadge", this.showBadgeModal);
+				this.listenTo(this, "regions:modal:hideModal", this.hideModal);
 			},
 
 			shredderPage : function(id){
+				this.__renderNavbar();
 				var that = this;
 				new Shredder({id: id}).fetch({
 					success : that.shredderExistPage,
@@ -59,9 +71,8 @@ define([
 				Shredhub.main.show(mainView);
 			},
 
-			shredderNoExistPage : function(err){},
-
 			shreddersPage : function() {
+				this.__renderNavbar();
 				var that = this;
 				var collection = new Shredders();
 				collection.fetch({
@@ -70,18 +81,15 @@ define([
 			},
 
 			renderShreddersPage : function(shredders) {
+				this.__renderNavbar();
 				var mainView = new ShredderView.ShreddersView({collection : shredders});
-				mainView.render();
+				//mainView.render();
 				Shredhub.main.show(mainView);
 			},
 
-			homePage : function() {
-				console.log("home page");				
+			homePage : function() {			
 				var that = this;
-
-				// Need to keep this reference
-				this.navigationView = new MainView.NavigationView();
-				//this.navigationView.render();
+				this.__renderNavbar();
 
 				// Init main layout
 				this.mainView = new MainView.MainLayout();				
@@ -105,6 +113,7 @@ define([
 			},
 
 			showroomPage : function(uid) {
+				this.__renderNavbar();
 				var user = new Shredder({id: uid});
 				var shredders = new Shredders();
 				var view = new ShredroomView({model : user, collection: shredders});
@@ -115,6 +124,7 @@ define([
 			},
 
 			battlePage : function(uid) {
+				this.__renderNavbar();
 				if (uid === undefined) {
 					uid = "52012d473ae74073b800161c";
 				}
@@ -135,7 +145,6 @@ define([
 			},
 
 			addFanee : function(fanee){
-				console.log("adding fanee: " + JSON.stringify(fanee));
 				if ( !this.user )
 					this.user = new User();
 
@@ -231,6 +240,11 @@ define([
 
 			hideModal : function() {
 				Shredhub.modal.close();
+			},
+
+			// Show a badge in the modal region
+			showBadgeModal : function(modalView) {
+
 			}
 		});
 

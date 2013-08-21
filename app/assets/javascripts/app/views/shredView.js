@@ -141,6 +141,52 @@ define([
 
 		ShredView.CreateTabsForShredView = Marionette.ItemView.extend({
 			template : Handlebars.compile(createTabsTpl),
+
+			events: {
+				"keyup #tab-input" : "__keypressed"
+			},
+
+			ui : {
+				tabInput : "#tab-input"
+			},
+
+			__keypressed : function(e) {
+				var key = e.keyCode;
+				switch(key){
+					case 13: // enter
+						this.ui.tabInput.animate({ left: "+=16px"}, 1);
+						console.log("e");
+						break;
+
+					case 39: // right
+						this.ui.tabInput.animate({ left: "+=16px"}, 1);
+						console.log("r");
+						break;
+
+					case 37: // left
+						this.ui.tabInput.animate({ left: "-=16px"}, 1);
+						console.log("l");
+						break;
+
+					case 38: // up
+						this.ui.tabInput.animate({ top: "-=15px"}, 1);
+						console.log("u");
+						break;
+
+					case 40: // down
+						this.ui.tabInput.animate({ top: "+=15px"}, 1);
+						console.log("d");
+						break;
+					default:
+						return;
+				}
+				var str = "<label>" + this.ui.tabInput.val() + "</label>";
+				var label = $(str);
+				label.offset($("#tab-input").position());
+				this.ui.tabInput.after(label);
+				this.ui.tabInput[0].left -= 11;
+				this.ui.tabInput.val("");
+			}
 		});
 
 
