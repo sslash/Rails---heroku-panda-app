@@ -54,7 +54,7 @@ define([
 
 			fetchShredpoolShreds : function() {
 				this.initURL({
-					query : 'byPopularity/',
+					query : 'byDate/',
 					uid: '&uid=' + Session.getUser().id,
 					page : 1,
 					offset: 40

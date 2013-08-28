@@ -54,6 +54,7 @@ define([
 		ShredView.ModalView = Marionette.ItemView.extend({
 			template: Handlebars.compile(modalShredTpl),
 			model : Shred,
+			barsIndex : 0,
 
 			initialize : function() {
 				this.listenTo(this.model, 'shred:change:rate', this.ratingChanged);
@@ -63,20 +64,117 @@ define([
 			events : {
 				'hide #shredModal' : 'modalHidden',
 				'click #rateBtn' : 'rateShred',
-				'keypress #commentText' : 'saveComment'
+				'keypress #commentText' : 'saveComment',
+				'click #nextTabsBtn' : '__nextTabClicked',
+				'click #prevTabsBnt' : '__prevTabClicked'
+			},
+
+			ui : {
+				tab : ".tab"
 			},
 
 			modalHidden : function() {
 				this.close();
 			},
 
-			/* EVENT HANDLERS */
 			onRender: function(){
 				this.$('#shredModal').modal('show');
 			},
 
+			onDomRefresh : function() {
+				// set Note Width
+				this.__paintTabs();
+				this.__paintBars();
+				this.__initVideo();
+			},
+
+			__paintBars : function() {
+				var bar=document.getElementById("bars");
+				var width  = bar.width;
+				var barSize = width / 4;
+				var height = 250;
+
+				
+				var ctx=bar.getContext("2d");
+				ctx.lineWidth = 1;
+
+				ctx.beginPath();
+				ctx.moveTo(barSize,0);
+				ctx.lineTo(barSize,height);
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.moveTo((barSize*2),0);
+				ctx.lineTo((barSize*2),height);
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.moveTo((barSize*3),0);
+				ctx.lineTo((barSize*3),height);
+				ctx.stroke();
+			},
+
+			__paintTabs : function() {
+				if ( this.model.get('tabs')) {
+					this.prevBarsIndex = this.barsIndex;
+					var prevLeft = 0;
+					var that = this;
+					var width = 1111; //$('#bars').width(); TODO: SHOULD BE THIS
+					var tabs = this.model.get('tabs');
+					var prevRest = tabs[0].rest * 2; // Start from 32 px left margin
+
+					for (var barsCounter = 0; (this.barsIndex < tabs.length && barsCounter < 4); this.barsIndex ++ ){
+						var tab = tabs[this.barsIndex];
+						barsCounter += 1/tab.rest;
+
+						prevLeft = ( width / (prevRest*4)) + prevLeft;
+						prevRest = tab.rest;
+						
+						_.each(tab.stringz, function(obj) {
+							var le_string = Object.keys(obj)[0];
+							var label = $("<label class='note' title='" +tab.rest + "'>" + obj[le_string] + "</label>");
+							label.css('left', (prevLeft + "px") );
+							var top = -10 + (le_string*12);
+							label.css('top', (top + "px") );
+
+							that.ui.tab.append(label);
+						});							
+					}
+				}
+			},
+
+
+			// TODO: this doesnt work
+			__prevTabClicked : function() {
+				$('.note').remove();
+				this.barsIndex = this.prevBarsIndex;
+				this.__paintTabs();
+			},
+
+			__nextTabClicked : function() {
+				$('.note').remove();
+				this.__paintTabs();
+			},
+
+			__initVideo : function() {
+				var pop = Popcorn("#leShredVideo");
+				pop.footnote({
+			       start: 2,
+			       end: 6,
+			       text: "Pop!",
+			       target: "footnotediv"
+			    });
+
+				/** SET INTERVAL
+			    pop.on("play", function() {
+				    // 120 bpm = 120 / 60 = 2 beats/sek
+				    // = 1000s / 2 = 500
+				    setInterval(function() {
+					}, 500);									    
+				}); */
+			},
+
 			ratingChanged : function() {
-				"nigga swag";
 				var rating = this.model.get('shredRating');
 				this.$('#rating').html(rating.currentRating);
 				this.$('#nRaters').html(rating.numberOfRaters);				
@@ -152,9 +250,6 @@ define([
 				
 				this.title = $('.shredTitle').val() || this.__error(
 					{msg: "Title must be included", inputTag : '.shredTitle', errorTag : '.error-msg' });
-				//if (!this.title ) return;
-				//if (!this.file)
-				//	this.file = $('#addShredFile')[0].files[0];
 
 				// precondition: file has been uploaded!
 				this.__saveShredMeta();
@@ -202,10 +297,7 @@ define([
 					return;
 				}
 
-				//var shred = new Shred();
 				this.shred.save({
-					//videoPath : res.filename,
-					//videoThumbnail : res.thumbname,
 					title : this.title,
 					description : $('#descriptionInput').val(),
 					owner : Session.getUser().id,
@@ -341,7 +433,6 @@ define([
 				var width  = bar.width;
 				var barSize = width / 4;
 				var height = 250;
-
 				
 				var ctx=bar.getContext("2d");
 				ctx.lineWidth = 1;
@@ -363,14 +454,9 @@ define([
 			},
 
 			__painTabInputField : function() {
-				var intervallWidth = $('#bars').width() / (this.intervall*4);
-				
-				// Set the pixel intervall between each intervallWidthPx
-				this.intervallWidthPx = intervallWidth + "px";				
-				 	
-
+				var intervallWidthPx = $('#bars').width() / (this.intervall*4);
 				// Set tab-input start location
-				this.ui.tabInput.css("left", ((intervallWidth / 2) + "px"));
+				this.ui.tabInput.css("left", ((intervallWidthPx / 2) + "px"));
 			},	
 
 			__noteChangeClicked : function(e) {
@@ -378,31 +464,24 @@ define([
 				switch (true) {
 					case /^semibreve$/.test(divId):
 						this.intervall = 1;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^minim$/.test(divId):
 						this.intervall = 2;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^crotchet$/.test(divId):
 						this.intervall = 4;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^quaver$/.test(divId):
 						this.intervall = 8;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^semiquaver$/.test(divId):
 						this.intervall = 16;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^demisemiquaver$/.test(divId):
 						this.intervall = 32;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 					case /^hemidemisemiquaver$/.test(divId):
 						this.intervall = 64;
-						this.intervallWidthPx = ($('#bars').width() / (this.intervall*4)) + "px";
 						break;
 				}
 				$(this.noteDiv).removeClass("selected");
@@ -420,8 +499,10 @@ define([
 						this.tabsIndex ++;
 						this.bars += 1/this.intervall;
 
-						if ( this.bars !== 4)
-							this.ui.tabInput.animate({ left: "+=" + this.intervallWidthPx}, 1);
+						if ( this.bars !== 4){
+							var intervallWidthPx = ($('#bars').width() / (this.intervall*4));
+							this.ui.tabInput.animate({ left: "+=" + intervallWidthPx + "px"}, 1);
+						}
 						break;
 
 					case 39: // right
@@ -429,13 +510,15 @@ define([
 						this.__createNote(fret, this.tabsIndex, this.tabsStringIndex);
 						this.tabsIndex ++;
 						this.bars += 1/this.intervall;
-						if ( this.bars !== 4)
-							this.ui.tabInput.animate({ left: "+=" + this.intervallWidthPx}, 1);
-
+						if ( this.bars !== 4){
+							var intervallWidthPx = ($('#bars').width() / (this.intervall*4));
+							this.ui.tabInput.animate({ left: "+=" + intervallWidthPx + "px"}, 1);
+						}
 						break;
 
 					case 37: // left
-						this.ui.tabInput.animate({ left: "-=" + this.intervallWidthPx}, 1);
+						var intervallWidthPx = ($('#bars').width() / (this.intervall*4));
+						this.ui.tabInput.animate({ left: "-=" + intervallWidthPx + "px"}, 1);
 						this.tabsIndex --;
 						this.bars -= 1/this.intervall;
 						break;
@@ -457,14 +540,17 @@ define([
 				var label = $("<label class='note'>" + fret + "</label>");
 				label.offset($("#tab-input").position());
 				this.ui.tabInput.after(label);
-				//this.ui.tabInput.left -= this.intervallWidthPx;
 				this.ui.tabInput.val("");
 
 				if ( this.bars === 4 ) {
-					$('.note').remove();
-					this.__painTabInputField();
-					this.bars = 0;
+					this.__clearAndIterateBars();				
 				}
+			},
+
+			__clearAndIterateBars : function() {
+				$('.note').remove();
+				this.__painTabInputField();
+				this.bars = 0;
 			},
 
 			__trySetFretWhenUpOrDown : function() {
@@ -484,11 +570,15 @@ define([
 					tabs[tabsIndex] = {};
 				}
 
-				tabs[tabsIndex].rest = this.intervallWidthPx;
+				tabs[tabsIndex].rest = this.intervall;
 				if (!tabs[tabsIndex].stringz) {
 					tabs[tabsIndex].stringz = []
 				}
-				tabs[tabsIndex].stringz[tabsStringIndex] = parsedFret;
+
+				// add the fret at the given string
+				var obj = {}
+				obj[tabsStringIndex] = parsedFret
+				tabs[tabsIndex].stringz.push(obj);
 				this.model.set({tabs : tabs});
 			}
 		});

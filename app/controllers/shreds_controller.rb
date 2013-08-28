@@ -36,6 +36,9 @@ class ShredsController < ApplicationController
 				'username' => @shredder.username,
 				'imgPath' => @shredder.profileImagePath
 			}
+			if params[:tabs]
+				shredData[:tabs] = params[:tabs]
+			end
 			shredData['country'] = @shredder.country
 			shredData['timeCreated'] = Time.now
 			@shredMongo = Shred.new(shredData)
@@ -179,7 +182,7 @@ class ShredsController < ApplicationController
 		page = params[:page] || 0
 		offset = offset.gsub(/\D/, '').to_i;
 		page = page.gsub(/\D/, '').to_i; 
-		skip = offset * page
+		skip = offset * (page-1)
 		query = addParams(params)
 		@shreds = Shred.where(query).sort('viewed').reverse.limit(offset).skip(skip)
 		render json: @shreds
@@ -191,7 +194,7 @@ class ShredsController < ApplicationController
 		page = params[:page] || 0
 		offset = offset.gsub(/\D/, '').to_i;
 		page = page.gsub(/\D/, '').to_i; 
-		skip = offset * page
+		skip = offset * (page-1)
 		query = addParams(params)
 		@shreds = Shred.where(query).sort('timeCreated').reverse.limit(offset).skip(skip)
 		render json: @shreds

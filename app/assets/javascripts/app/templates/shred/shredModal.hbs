@@ -14,12 +14,18 @@
 
 
   <div class="row-fluid center">
-    <div class="span7">
-     <video id="my_video_1" class="video-js vjs-default-skin" controls
-     preload="auto" width="530" height= "350" data-setup="{}">
-     <source src="uploads/{{videoPath}}" type='video/mp4'>
+    <div class="span1">
+       <p class="lead instrx">Tags:</p>
+        {{#each tags}}
+          <p><span class="label label-inverse" style="float:none">{{this}}</span> </p>
+          {{/each}}
+    </div>
+    <div class="span8">
+     <video id="leShredVideo" class="video-js vjs-default-skin" controls width="720">
+     <source src="uploads/{{videoPath}}">
      </video>
      <div class="underShredImage">
+      <div id="footnote"></div>
       <p>Rating: <small id="rating">{{shredRating.currentRating}}</small> 
         <small><span>Created: {{timeCreated}}</span></small></p>
         <p>Raters: <small id="nRaters">{{shredRating.numberOfRaters}}</small>
@@ -30,15 +36,9 @@
           <p>{{description}}</p>
         </blockquote>
 
-        <p class="lead instrx text-left">Tags: 
-          {{#each tags}}
-          <span class="label label-inverse" style="float:none">{{this}}</span> 
-          {{/each}}
-        </p>
 
-
-      </div> <!-- /span7 -->
-      <div class="span5">
+      </div> <!-- /span8 -->
+      <div class="span3">
        <p class="lead instrx">Comments</p>
 
        <ul>
@@ -62,6 +62,17 @@
           </p>
         </li>
       </ul>
-    </div> <!-- /span5 -->
+    </div> <!-- /span3 -->
   </div> <!-- /row-fluid -->
+
+  <div class="row-fluid">
+    <div class="span1" id="prevTabsBnt"> <li class="icon-chevron-left icon-2x"></li></div>
+      <div class="span10">
+        <div class="tab">
+          <canvas id="bars" style="width:100%; height:60px"></canvas>
+        </div>
+      </div>
+      <div class="span1" id="nextTabsBtn"><li class="icon-chevron-right icon-2x"></li> </div>
+    </div>
+  
 </div>

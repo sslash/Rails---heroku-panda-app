@@ -12,9 +12,7 @@ class Shred
     key :owner, Hash
     key :tags, Array
     key :shredType, String
-    key :timeCreated, Time #TODO: Check if this gets created
+    key :timeCreated, Date #TODO: Check if this gets created
     #key :_id, ObjectId
-
-
 
 end

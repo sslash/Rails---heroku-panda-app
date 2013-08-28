@@ -81,7 +81,7 @@ define([
 			},
 
 			renderShreddersPage : function(shredders) {
-				this.__renderNavbar();
+				//this.__renderNavbar();
 				var mainView = new ShredderView.ShreddersView({collection : shredders});
 				//mainView.render();
 				Shredhub.main.show(mainView);

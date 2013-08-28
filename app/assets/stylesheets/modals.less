@@ -1,3 +1,18 @@
+//@import "createTabs.css.less";
+// .tab {
+// 		position: relative; 
+// 		background-image:url('/images/others/tabs2.png');
+// 		background-size: 100% 95%;
+// 		background-repeat: no-repeat;
+//    		width: 100%; /* for IE 6 */
+//    		label {
+// 			position: absolute;
+// 			font-size: 12px;
+// 			font-weight:bold;
+// 		}
+// 	}
+
+
 /* general stuff */
 .modal{
 	-webkit-border-radius: 0;
@@ -68,74 +83,17 @@
 	height: 15%;
 }
 
-
-.shredModal {
-	width: 57%;
-	left: 20%;
-	margin-left: 0;
-	height: 700px;
-	padding-right: 20px;
-	padding-left: 20px;
-	border: 3px solid black;
+.tabs (@height:95%) {
+	position: relative; 
+	background-image:url('/images/others/tabs2.png');
+	background-size: 100% @height;
+	background-repeat: no-repeat;
+		width: 100%; /* for IE 6 */
+		label {
+			position: absolute;
+			font-size: 12px;
+			font-weight:bold;
+			//top:-10px
+	}
 }
 
-.shredModal ul {
-	list-style: none;
-}
-
-.shredModal li.comments {
-	border-bottom: solid;
-	border-width: 1px;
-	border-color: lightgray;
-}
-
-.shredModal li {
-	padding-top: 10px;
-}
-
-.shredModal a span, .shredModal p span{
-	float: right;
-}
-
-.shredModal h4 {
-	text-align: center;
-}
-.shredModal video {
-	box-shadow: 4px 4px 5px #888;
-}
-
-
-.shredModal .center textarea {
-	margin-left: 25px;
-	width: 90%;
-	margin-top: 30px;
-}
-
-.instrx{
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-}
-
-#commentsList {
-	height:200px;
-	overflow:scroll;
-	height: 350px;
-}
-
-
-
-.underShredImage {
-	background-color: lightgray;
-}
-
-.modal-right-column {
-	margin-left: 25px;
-	width: 90%;
-	margin-top: 30px;
-}
-
-.underShredImage p {
-	margin: 0 10px 0 10px;
-}
