@@ -29,6 +29,7 @@ define([
 
 			events: {
 				'submit #addShredForm' : 'saveShred',
+				'click #createShredBtn': '__createShredClicked',
 				'keypress #ed_inputTags': 'pushTag',
 				'click input[type=radio]' : "radioClicked",
 				'keypress #inputTags' : 'inputTagsKeyPress',
@@ -47,6 +48,11 @@ define([
 				var data = {}
 				data.user = Session.getUser();
 				return data;
+			},
+
+			__createShredClicked : function(e) {
+				e.preventDefault();
+				mainController.trigger('shred:createShred:showModal');
 			},
 
 			inputTagsKeyPress : function(e) {
@@ -93,86 +99,84 @@ define([
 					query : query
 				});
 				shreds.fetch({reset:true});
-
 			},
 
 			/* Event handlers */
-			pushTag : function (event) {
-				if ( event.which === 13 ) {
-					event.preventDefault();
-					var tags = $("#ed_inputTags");
-					var input = tags.val();
-					tags.val('');
-					this.appendInterest(input);
-					this.tagsArr.push(input);
-				}			
-			},
+			// pushTag : function (event) {
+			// 	if ( event.which === 13 ) {
+			// 		event.preventDefault();
+			// 		var tags = $("#ed_inputTags");
+			// 		var input = tags.val();
+			// 		tags.val('');
+			// 		this.appendInterest(input);
+			// 		this.tagsArr.push(input);
+			// 	}			
+			// },
 
-			appendInterest : function(tag) {
-				var span = '<a href="#" class="tagTooltip" data-toggle="tooltip"' +
-				'title="Click to Remove" id = "tooltipTag_'+ tag + '">' +
-				'<span class="label label-info tag-label">' + tag + '</span>';
-				$('.tagPool').append(span);
-			},
+			// appendInterest : function(tag) {
+			// 	var span = '<a href="#" class="tagTooltip" data-toggle="tooltip"' +
+			// 	'title="Click to Remove" id = "tooltipTag_'+ tag + '">' +
+			// 	'<span class="label label-info tag-label">' + tag + '</span>';
+			// 	$('.tagPool').append(span);
+			// },
 
-			saveShred : function(evt) {
-				evt.preventDefault();
+			// saveShred : function(evt) {
+			// 	evt.preventDefault();
 
-				// upload file first
+			// 	// upload file first
+			// 	Ah.uploadFile( {
+			// 		file : this.file,
+			// 		url : '/api/shreds/file',
+			// 		handler : $.proxy(this.saveShredMeta, this)
+			// 	});
+			// },
 
-				Ah.uploadFile( {
-					file : this.file,
-					url : '/api/shreds/file',
-					handler : $.proxy(this.saveShredMeta, this)
-				});
-			},
+			// saveShredMeta : function(res){
+			// 	if (!res.filename) return;
+			// 	var title = $('#inputName').val();
+			// 	var desc = $('#inputDescription').val();
+			// 	var owner = Session.getUser().id;
+			// 	var tags = this.tagsArr;
+			// 	var shred = new Shred();
+			// 	shred.save({
+			// 		videoPath : res.filename,
+			// 		videoThumbnail : res.thumbname,
+			// 		title : title,
+			// 		description : desc,
+			// 		owner : owner,
+			// 		tags : tags
+			// 	},{
+			// 		success : this.saveSuccess
+			// 	});
+			// },
 
-			saveShredMeta : function(res){
-				if (!res.filename) return;
-				var title = $('#inputName').val();
-				var desc = $('#inputDescription').val();
-				var owner = Session.getUser().id;
-				var tags = this.tagsArr;
-				var shred = new Shred();
-				shred.save({
-					videoPath : res.filename,
-					videoThumbnail : res.thumbname,
-					title : title,
-					description : desc,
-					owner : owner,
-					tags : tags
-				},{
-					success : this.saveSuccess
-				});
-			},
+			// saveSuccess : function(res){
+			// 	$('#addShredModal').modal('hide');
+			// },
 
-			saveSuccess : function(res){
-				$('#addShredModal').modal('hide');
-			},
+			// onDomRefresh: function(){
+			// 	var dropZone = document.getElementById('shred_drop_zone');
+			// 	dropZone.addEventListener('dragover', $.proxy(this.handleDragOver,this), false);
+			// 	dropZone.addEventListener('drop', $.proxy(this.handleFileDrop,this), false);
+			// },
 
-			onDomRefresh: function(){
-				var dropZone = document.getElementById('shred_drop_zone');
-				dropZone.addEventListener('dragover', $.proxy(this.handleDragOver,this), false);
-				dropZone.addEventListener('drop', $.proxy(this.handleFileDrop,this), false);
-			},
+			// handleDragOver : function (evt) {
+			// 	evt.stopPropagation();
+			// 	evt.preventDefault();
+   //  			evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+   //  		},
 
-			handleDragOver : function (evt) {
-				evt.stopPropagation();
-				evt.preventDefault();
-    			evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-    		},
-
-    		handleFileDrop: function(evt) {
-    			evt.stopPropagation();
-    			evt.preventDefault();
-				// files is a FileList of File objects. List some properties.
-				var files = evt.dataTransfer.files; 
-				if ( files[0] && files[0].type.match('video.*')) {
-					this.file = files[0];
-				} else {
-					// TODO: give error message to user
-				}
-			},
+   //  		handleFileDrop: function(evt) {
+   //  			evt.stopPropagation();
+   //  			evt.preventDefault();
+			// 	// files is a FileList of File objects. List some properties.
+			// 	var files = evt.dataTransfer.files; 
+			// 	if ( files[0] && files[0].type.match('video.*')) {
+			// 		this.file = files[0];
+			// 	} else {
+			// 		// TODO: give error message to user
+			// 	}
+			// },
 
 			// uploadFile : function(obj) {
 			// 	var that = this;

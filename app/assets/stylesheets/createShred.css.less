@@ -15,9 +15,19 @@
 
 #createShred {
 	width: 780px;
+	max-height:600px;
 	left:44%;
 	top:6%;
 	text-align: center;
+
+	.input-error{
+		border-color: #b94a48;
+	}
+
+	.error-msg {
+		display:none;
+		color:#b94a48;
+	}
 
 	.close {
 		color: black;
@@ -37,7 +47,8 @@
 		}
 	}
 
-	.modal-body {		
+	.modal-body {
+		max-height: 455px;
 		input[type="text"].input-xsmall {
 			height: 4px;
 			width: 130px;
@@ -51,11 +62,11 @@
 	}
 
 	.add-tabs-btn {
-		margin-top: 10%;
+		margin-top: 20%;
 	}
 
 	.shred-meta {
-		margin-top: 20%;
+		margin-top: 3%;
 		border: 2px solid #1abc9c;
 
 		textarea {
@@ -66,9 +77,27 @@
 		.button-shiet {
 			background-color: @grayLighter;
 			i {
-				padding-left:8%;
-				padding-right:8%;
+				padding-left:12%;
+				padding-right:12%;
 			}
+		}
+	}
+
+	.popover-content {
+		.row-fluid {
+			margin : 0;
+		}
+		span {
+			font-size: 10px;
+			padding-top: 1px;
+			cursor:pointer;
+			padding-bottom: 1px;
+			&:hover {
+				background-color:@blue;
+			};
+		}
+		input {
+			margin-top: 10px;
 		}
 	}
 }

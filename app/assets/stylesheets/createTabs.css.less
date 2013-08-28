@@ -3,8 +3,34 @@
 		width: 420px;
 	}
 
+	.row-fluid{
+		margin:0;
+
+		p {
+			margin:0;
+			padding:0;
+		}
+	}
+
+	.icon-chevron-right, .icon-checvron-left {
+		cursor:pointer;
+	}
+
+	.notes {
+		width:20px;
+		height:20px;
+		cursor:pointer;
+		opacity: 0.4;
+		&.selected {
+			opacity: 1;
+		}
+	}
+
 	.tab {
 		position: relative; 
+		background-image:url('/images/others/tabs2.png');
+		background-size: 100% 95%;
+		background-repeat: no-repeat;
    		width: 100%; /* for IE 6 */
    		label {
 			position: absolute;
@@ -13,10 +39,10 @@
 		}
 	}
 
+
 	#tab-input {
 		position: absolute;
-		top: 5px;
-		left: 160px;
+		top: -11px;
 		width: 13px;
 		height: 4px;
 		font-size: 10px;

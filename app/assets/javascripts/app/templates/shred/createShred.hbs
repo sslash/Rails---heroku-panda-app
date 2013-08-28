@@ -9,25 +9,38 @@
 
 	<div class="modal-body">
 		<div id="metaRegion">
-			<input class="input-xlarge" type="text" placeholder="Shred Title" autofocus>
+				<input class="input-xlarge shredTitle" type="text" placeholder="Shred Title" autofocus>
+			<span class="error-msg"></span>
 
 			<div class="row-fluid">
 				<div class="span4">
-					{{! <i class="icon-music icon-2x"></i> }}
 					<img src="images/icons/guitar-icon-30.png" class="icon"/>
-					<input type="text" placeholder="Guitar" class="input-xsmall"/>
+					<input type="text" placeholder="Guitar" class="input-xsmall" id="guitarInput"/>
 				</div> <!-- /span4 -->
 
 				<div class="span4">
 					{{! <i class="icon-bolt icon-2x"></i> }}
 					<img src="images/icons/amp-icon-32.png" class="icon"/>
-					<input type="text" placeholder="Amplifier" class="input-xsmall"/>
+					<input type="text" placeholder="Amplifier" class="input-xsmall" id="ampInput"/>
 				</div> <!-- /span4 -->
 
 				<div class="span4">
-					{{! <i class="icon-headphones icon-2x"></i> }}
-					<img src="images/icons/pedal-icon-30.png" class="icon"/>
-					<input type="text" placeholder="Effects" class="input-xsmall"/>
+					<select class="span10" id="categoryInput">
+                		<option selected value="default">Category</option>
+                		<option>Metal</option>
+                		<option>Rock</option>
+                		<option>Pop</option>
+                		<option>Blues</option>
+                		<option>Jazz</option>
+                		<option>Country</option>
+                		<option>R&B</option>
+                		<option>Bluegrass</option>
+                		<option>Fusion</option>
+                		<option>Classical</option>
+                		<option>Tags</option>
+              </select>
+
+
 				</div> <!-- /span4 -->
 			</div><!-- /row -->
 
@@ -37,10 +50,10 @@
 					<label class="text-error" id="addImageWarning"></label>
 						<div class="photo">
 							<div id="shred_drop_zone">
-								<img class= "thumbnail" src="/assets/app/images/guitarplayer.jpg">
+								<img id="uploadShredThmb"class= "thumbnail" src="/assets/app/images/guitarplayer.jpg">
 								<label class="label label-inverse photo-label one-line">Drop The File Here</label>
 								<div class="orAddFile">
-									<span>Or click here</span><input type="file" class="addFile"></div>
+									<span>Or click here</span><input type="file" id="addShredFile"></div>
 							</div>
 						</div>
 					<div id="vidThumb"></div>
@@ -50,12 +63,15 @@
 				<div class="span6 rightside">
 
 					<div class="shred-meta">
-						<textarea class="span12" placeholder="Describe Your Shred" rows="3"></textarea>
+						<textarea class="span12" id="descriptionInput" placeholder="Describe Your Shred" rows="3"></textarea>
 						<div class="button-shiet">
-							<i class="icon-tags"></i>
-							<i class="icon-music"></i>
-							<i class="icon-microphone"></i>
-							<i class="icon-globe"></i>
+							<i class="icon-tags" title="Add Category"></i>
+
+							<i class="icon-music" id="popoverTags" title="Add Tags" data-toggle="popover"
+								data-placement="bottom"></i>
+
+
+							<i class="icon-microphone" title="Set Location"></i>
 						</div>
 					</div>			
 
@@ -84,7 +100,7 @@
         	</span>
 
 		</div>
-		<button class="btn btn-danger" data-dismiss="modal">Finish</button>
+		<button class="btn btn-danger submit">Finish</button>
 	</div>
 </div>
 
