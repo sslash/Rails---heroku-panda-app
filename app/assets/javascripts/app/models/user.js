@@ -10,8 +10,8 @@ define([
   // This represents an authenticated User!
   var User = Backbone.Model.extend({
 
-    initUser : function(user){
-      Session.setUser(user);
+    initUser : function(jsonData){
+      Session.setUser(jsonData);
       this.resetUser();
     },
 
@@ -104,12 +104,11 @@ define([
   },
 
   doLogOut : function() {
-    console.log("WILL LOG OUT");
     var that = this;
     $.post('/sessions/logout')
     .done( function() {
-      console.log("logout win. ");
       Session.clear(); 
+      mainController.trigger("auth:logout:success");
       router.navigate("/", {trigger : true});
     })
     .fail( function() { console.log("logout fail");});

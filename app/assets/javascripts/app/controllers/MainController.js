@@ -41,7 +41,8 @@ define([
 			*
 			*/
 			initialize: function(options){
-				this.listenTo(this, "authenticateSuccess", this.authenticateSuccess);
+				this.listenTo(this, "auth:login:success", this.authenticateSuccess);
+				this.listenTo(this, "auth:logout:success", this.logOutSuccess);
 				this.listenTo(this, "sessionDataFetched", this.sessionDataFetched);
 				this.listenTo(this, "mainLayout:rendered", this.mainLayoutRendered);
 				this.listenTo(this, "shredpoolView:rendered", this.shredpoolViewRendered);
@@ -145,22 +146,21 @@ define([
 			},
 
 			addFanee : function(fanee){
-				if ( !this.user )
-					this.user = new User();
+				if ( !Shredhub.user )
+					Shredhub.user = new User();
 
-				this.user.addFaneeRelationship(fanee);
+				Shredhub.user.addFaneeRelationship(fanee);
 			},
 
 			authenticateSuccess : function(user) {
-				console.log("user: " + JSON.stringify(user));
-				this.user = new User();
-				this.user.initUser(user);
+				Shredhub.user = new User(user);
+				Shredhub.user.initUser(user);
 				router.navigate("shredpool", {trigger: true});
 			},
 
 			logout : function() {
-				if ( this.user )
-					this.user.doLogOut();
+				if ( Shredhub.user )
+					Shredhub.user.doLogOut();
 				else
 					new User().doLogOut();
 			},
@@ -223,9 +223,9 @@ define([
 			},
 
 			battleAccepted : function(){
-				if ( !this.user )
-					this.user = new User();
-				this.user.resetUser();
+				if ( !Shredhub.user )
+					Shredhub.user = new User();
+				Shredhub.user.resetUser();
 			},
 
 			showBattleRequest : function(shredderModel) {
@@ -245,6 +245,11 @@ define([
 			// Show a badge in the modal region
 			showBadgeModal : function(modalView) {
 
+			},
+
+			logOutSuccess : function() {
+				Shredhub.user = null;
+				Shredhub.loggedIn = false;
 			}
 		});
 

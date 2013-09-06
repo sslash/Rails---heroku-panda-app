@@ -10,7 +10,14 @@ class SessionsController < ApplicationController
 	before_filter :save_login_state, :only => [:login, :login_attempt]
 
 	def home
-		render :file => "app/assets/index.html", :formats => [:html]
+
+		#render :file => "app/assets/index.html", :formats => [:html]
+		if session[:user_id]
+			logger.debug("User is logged in already: #{session[:user_id]}")
+			@user = Shredder.first(:id => session[:user_id])
+			#logger.debug("User is logged in already: #{@user.username}")
+		end
+		render "layouts/application"
 	end
 
 	def drums
@@ -39,5 +46,20 @@ class SessionsController < ApplicationController
 		logger.debug "logout: #{@current_user} "
 		session[:user_id] = nil
 		render :nothing => true, :status => 200
+	end
+
+
+	# FACEBOOK
+	def create 
+		auth = request.env["omniauth.auth"]
+		user = FbUser.from_omniauth(auth)
+		logger.debug("SWAG: #{user.id}" )
+		session[:user_id] = user.id
+		redirect_to root_url
+	end
+
+	def destroy
+		session[user_id] = nil
+		redirect_to root_url
 	end
 end

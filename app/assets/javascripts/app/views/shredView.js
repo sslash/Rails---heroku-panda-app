@@ -17,10 +17,12 @@ define([
 	'session',
 	'ajaxHelper',
 	'collections/shreds',
-	'models/shred'
+	'models/shred',
+
+	'panda'
 	], function (Marionette,Handlebars, bs, _, shredsRowTpl, topShredsTpl, 
 		modalShredTpl, createShredTpl, createTabsTpl, addTagsTpl,
-		Session, Ah, Shreds, Shred) {
+		Session, Ah, Shreds, Shred, panda) {
 
 		var ShredView = {}
 
@@ -228,6 +230,7 @@ define([
 			initialize : function() {
 				this.addTagsTpl = Handlebars.compile(addTagsTpl);
 				this.tags = [];
+				this.vidId = "a10744cbb86de37b1565e7636498217d"; 
 			},
 
 			events : {
@@ -236,6 +239,52 @@ define([
 				'change input:file' : '__fileChanged',
 				'click .label' : '__labelClicked',
 				'click .submit' : '__submitClicked'
+			},			
+
+			onDomRefresh: function(){
+				this.$('#createShred').modal('show');
+				$('#popoverTags').popover({
+					html:true,
+					animation: true,
+					content: this.addTagsTpl
+				});
+
+				var dropZone = document.getElementById('shred_drop_zone');
+				dropZone.addEventListener('dragover', $.proxy(this.__handleDragOver,this), false);
+				dropZone.addEventListener('drop', $.proxy(this.__handleFileDrop,this), false);
+				this.__initPanda();
+			},
+
+			__initPanda : function() {
+				var that = this;
+				var upl = panda.uploader.init({
+				'buttonId': 'browse-files',
+				'onProgress': function(file, percent) {
+					console.log("progress", percent, "%");
+				},
+
+				'onSuccess': function(file, data) {
+					that.vidId = data.id;
+					// $("#new_video")
+					// .find("[name=panda_video_id]")
+					// .val(data.id)
+					// .end()
+					// .submit();
+					debugger;
+				},
+				'onError': function(file, message) {
+					console.log("error", message);
+				},
+			});
+		//var that = this;
+		// $.get('/panda/show/?id=48dbcf05925b2789dc8de16555e01134')
+		// .done(function(res) {
+		// 	debugger
+		// 	that.$el.append(res);
+		// })
+		// .fail(function(err){
+		// 	debugger
+		// });
 			},
 
 			__error : function(error) {
@@ -281,9 +330,11 @@ define([
 					});
 
 					// Change image src
-					console.log("SAP: " + res.thumbname);
-					 $('#uploadShredThmb').attr("src", "uploads/thumbs/" + res.thumbname);
-
+					 $('#uploadShredThmb').remove();
+					 $('.photo-label').remove();
+					 var vidHtml = '<video width="320" height="240" controls>' +
+					 '<source src="uploads/' + res.filename + '"</source></video>';
+					 $('#shred_drop_zone').append(vidHtml);
 				} else {
 					// Something must have gone wrong saving the file :(
 					this.file = null;
@@ -292,13 +343,19 @@ define([
 
 
 			__saveShredMeta : function(){
-				if (!this.shred.get('videoPath') || !this.title ){
-					alert("Error! Failed to upload shred :(");
+				this.shred = new Shred();
+				// if (!this.shred.get('videoPath') || !this.title ){
+				// 	alert("Error! Failed to upload shred :(");
+				// 	return;
+				// }
+				if (!this.vidId ){
+					alert("Fail! You must add a shred video first!");
 					return;
 				}
 
 				this.shred.save({
 					title : this.title,
+					vidId : this.vidId,
 					description : $('#descriptionInput').val(),
 					owner : Session.getUser().id,
 					tags : this.tags,
@@ -311,7 +368,7 @@ define([
 				});
 			},
 
-			__saveSuccess : function(res){
+			__saveSuccess : function(res) {
 				$('#createShred').modal('hide');
 			},
 
@@ -359,19 +416,6 @@ define([
 					var view = new ShredView.CreateTabsForShredView({model : this.shred});
 					this.tabs.show(view);
 				}
-			},			
-
-			onDomRefresh: function(){
-				this.$('#createShred').modal('show');
-				$('#popoverTags').popover({
-					html:true,
-					animation: true,
-					content: this.addTagsTpl
-				});
-
-				var dropZone = document.getElementById('shred_drop_zone');
-				dropZone.addEventListener('dragover', $.proxy(this.__handleDragOver,this), false);
-				dropZone.addEventListener('drop', $.proxy(this.__handleFileDrop,this), false);
 			}
 		});
 

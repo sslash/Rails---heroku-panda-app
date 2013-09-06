@@ -6,7 +6,16 @@ Shredhub::Application.routes.draw do
 
   post "sessions/login"
   post "sessions/logout"
-  #get "sessions/home"
+
+  # FACEBOOK login!
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+
+  # Panda end-point
+  match "/panda/authorize_upload", :to => "panda#authorize_upload"
+  match "/panda/show/", :to => "panda#show"
+  resources :videos
 
 
   post "users/create"
@@ -17,8 +26,8 @@ Shredhub::Application.routes.draw do
 
   # API
   scope "/api" do
-    # battles
 
+    # battles
     post "/battleRequests/create/:battler/:battlee/" => "battleRequests#create"
     post "/battleRequests/:bid/accept/:uid/" => "battleRequests#accept"
     post "/battleRequests/:bid/decline/:uid/" => "battleRequests#decline"

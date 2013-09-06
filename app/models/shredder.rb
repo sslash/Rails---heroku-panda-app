@@ -13,6 +13,8 @@ class Shredder
   key :country, String
   key :playstyle, String
   key :profileImagePath, String
+  key :onlineProfileImagePath, String # Only face!
+  key :uid, String # For face users only
   many :shreds
 
 end

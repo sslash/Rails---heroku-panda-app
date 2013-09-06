@@ -2,8 +2,10 @@ define([
   'marionette',
   'controllers/MainController',
   'handlebars',
-  'router'
-  ], function (Marionette, MainController, Handlebars, AppRouter) {
+  'router',
+
+  'models/user'
+  ], function (Marionette, MainController, Handlebars, AppRouter, User) {
 
     Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
       return Handlebars.compile(rawTemplate);
@@ -45,16 +47,16 @@ define([
       window.router = new AppRouter({controller:options.controller});
       Backbone.history.start();
     });
+
+    Shredhub.addInitializer (function(options) {
+      if ( window.user) {
+        Shredhub.user = new User(window.user);
+        Shredhub.user.initUser(window.user);
+      }
+    });
     
     window.mainController = new MainController();
     Shredhub.start({controller : mainController} );
-
-
-
-    
-
-
-
 
     return Shredhub;
   });

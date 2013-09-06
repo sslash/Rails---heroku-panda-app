@@ -5,17 +5,18 @@
 		<div class="row-fluid">
 			<div class="span3"></div>
 			<div class="span6">
+				{{#unless isLoggedIn}}
 				<p class="lead">
 					<a href="" role="button" class="btn btn-primary btn-large" data-toggle="modal" id="loginBtn">Login</a>
 					or
 					<a href="#registerModal" class="btn btn-danger btn-large" data-toggle="modal">Register</a>
 				</p>
+				{{/unless}}				
 			</div>
 			<div class="span3"></div>
 		</div>
 	</div>
 </div>
-
 <!-- Register -->
 <div id="registerModal" class="modal hide fade modalAuth" tabindex="-1" role="dialog" aria-hidden="true">
 
@@ -44,20 +45,28 @@
 aria-labelledby="myModalLabel" aria-hidden="true">
 
 <div class="modal-header">
+	<div id="fb-root"></div>
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
 	<h3 id="myModalLabel">Login to Shreddr</h3>
 </div>
-<form class="form-horizontal">
+
 	<div class="modal-body">
+		<span id="sign_in" class="icon-stack icon-2x" style="cursor:pointer">
+  			<i class="icon-circle icon-stack-base icon-2x"></i>
+  			<i class="icon-facebook-sign icon-2x icon-light"></i>
+		</span>
+
+		<form class="form-horizontal">
 		<input type="text" id="inputUsername" placeholder="Username">
 		<input type="password" id="inputPassword" placeholder="Password">
 		<p class="error-msg" id="auth-error-msg"></p>
 	</div>
 	<div class="modal-footer">
+		<button class="btn" id="sign_in">Sign in with facebook</button>
 		<button class="btn btn-primary" id="authBtn">Login</button>
 		<button class="btn" data-dismiss="modal">Close</button>
+	</form>
 	</div>
-</form>
 </div>
 
 

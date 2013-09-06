@@ -10,6 +10,7 @@ require 'mongo'
 source 'http://gemcutter.org'
 
 gem 'rails', '3.2.13'
+#gem 'rails', '4.0.0'
 gem "mongo_mapper"
 gem 'bson_ext'
 
@@ -24,9 +25,14 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 # File uploads
 gem 'carrierwave'
 
-# FFmpeg
+# streamio-ffmpeg
 require 'rubygems'
 require 'streamio-ffmpeg'
+gem 'panda', '~> 1.6.0'
+
+# Facebook login
+#gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 
 group :development, :test do
 	gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'

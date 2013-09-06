@@ -14,7 +14,7 @@ define([
 
 	// Plugins
 	'session',
-	'ajaxHelper',
+	'ajaxHelper'
 
 	], function (Marionette,Handlebars, bs, navigationTpl, mainPageTpl,
 		footerTpl, navLoggedInTpl,battleReqModalTpl, Session, Ah) {
@@ -36,12 +36,12 @@ define([
 					'click .battleReqModal' : 'openBattleReqModal',
 					'click .batReqAcc' : 'battleReqAccepted',
 					'click .batReqDec' : 'battleReqDeclined',
-					'click .createShred' : '__createShredClicked'
+					'click .createShred' : '__createShredClicked',
 				},
 
 				changeNavBar : function() {
 					this.template = Handlebars.compile(navLoggedInTpl);	
-					this.loggedIn = true;							
+					Shredhub.loggedIn = true;							
 				},
 
 				onDomRefresh: function(){
@@ -49,12 +49,18 @@ define([
 				},
 
 				serializeData : function() {
-					if ( this.loggedIn ){
+					
+					if ( Shredhub.loggedIn ){
+						var user = Session.getUser();
+						var img = user.onlineProfileImagePath ? 
+							user.onlineProfileImagePath : "/uploads/" + user.profileImagePath;
 						return {
-							id : Session.getUser().id,
-							username : Session.getUser().username,
+							id : user.id,
+							username : user.username,
 							battleRequests : Session.getIncomingBattleRequests(),
-							fanees : Session.getUser().fanees
+							fanees : user.fanees,
+							profilePic : img
+
 						}
 					}else{
 						return {}
@@ -100,22 +106,60 @@ define([
 				}
 			}),
 
-	MainLayout : Marionette.Layout.extend({
-		template: Handlebars.compile(mainPageTpl),
+MainLayout : Marionette.Layout.extend({
+	template: Handlebars.compile(mainPageTpl),
 
-		events : {
-			"click #loginBtn" : "loginBtnClc",
-			"click #regBtn" : "registerBtnClc",
-			"click #authBtn" : "authBtnClk"
-		},
+	events : {
+		"click #loginBtn" : "loginBtnClc",
+		"click #regBtn" : "registerBtnClc",
+		"click #authBtn" : "authBtnClk"
+	},
 
-		regions: {
-			modal : "#modal",
-			topShreds: "#topShreds",
-			sotw : "#sotw",
-			sweetShredders : "#sweetShredders"
-		},
-	
+	regions: {
+		modal : "#modal",
+		topShreds: "#topShreds",
+		sotw : "#sotw",
+		sweetShredders : "#sweetShredders"
+	},
+
+	initialize : function() {
+		this.__setUpFaceLogin();
+	},
+
+	serializeData : function (){
+		return {
+			isLoggedIn : (Shredhub.user !== undefined)
+		}
+	},
+
+	__setUpFaceLogin : function() {
+		$.ajax({
+			url: window.location.protocol + "//connect.facebook.net/en_US/all.js",
+			dataType: 'script',
+			cache: true
+		});
+
+		window.fbAsyncInit = function(){
+			FB.init({appId: '322423007904195', cookie: true})
+
+			$('#sign_in').click(function(e) {
+				e.preventDefault();
+				FB.login (function(response){
+					if (response.authResponse)
+						window.location = '/auth/facebook/callback';
+				});
+			});
+		}
+	},
+
+	// __facebookLogoutClicked : function(e) {
+	// 	FB.getLoginStatus (function(response){ 
+	// 		if (response.authResponse)
+	// 			FB.logout();
+	// 		return true;
+	// 	});
+	// },
+
 
 	registerBtnClc : function(event) {
 		event.preventDefault();
@@ -147,16 +191,17 @@ define([
 		$.ajax({
 			type:"POST",
 			url: "sessions/login",
-			beforeSend: function ( xhr ) {
-				xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
-			},
+			// beforeSend: function ( xhr ) {
+			// 	xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
+			// },
 			data: {
 				username_or_email : $('#inputUsername').val(),
 				login_password : $('#inputPassword').val()
 			},
 			success: function(res) {
 				$('#authenticate').modal('hide');
-				mainController.trigger('authenticateSuccess', res);
+				authenticateSuccess
+				mainController.trigger('auth:login:success', res);
 			}, error: function(err) {
 				$('#auth-error-msg').text("Asshole");
 			}

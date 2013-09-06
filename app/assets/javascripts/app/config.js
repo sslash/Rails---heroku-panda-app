@@ -9,7 +9,8 @@ require.config({
 		text : "vendor/text",
 		'backbone.wreqr' : 'vendor/backbone.wreqr',
     	'backbone.babysitter' : 'vendor/backbone.babysitter',
-    	bootstrap : 'vendor/bootstrap/js/bootstrap'
+    	bootstrap : 'vendor/bootstrap/js/bootstrap',
+    	panda: '//cdn.pandastream.com/u/2.0/panda-uploader.min'
 	},
 	shim : {
 		jquery : {
@@ -32,7 +33,10 @@ require.config({
       		exports: "Handlebars"
     	},
     	// Twitter Bootstrap depends on jQuery.
-    	bootstrap : ["jquery"]
+    	bootstrap : ["jquery"],
+    	panda : {
+    		exports : 'panda'
+    	}
 	},
 	
 });

@@ -6,12 +6,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Shreddr.</title>
+  <title>Shredr.</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <!--<link rel="stylesheet" href="assets/app/styles/index.css">-->
   <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tag %>
+
+  <%= javascript_tag do %>
+    window.user = <%=raw @user.to_json %>;
+  <% end %>
+
 </head>
 <body>
   <section id="header"></section>
@@ -41,8 +46,9 @@
     s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
 
-  <!-- Import popcorn here.. -->
+  <!-- CDN hosted stuff.. TODO: Move this to require! -->
   <script src="http://popcornjs.org/code/dist/popcorn-complete.js"></script>
   <!--<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>-->
+
 </body>
 </html>

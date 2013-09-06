@@ -4,6 +4,7 @@ class Shred
 	key :username, String
 	key :email, String
     key :videoPath, String
+    key :videoThumbnail, String
     key :description, String
     key :viewed, Integer 
     key :shredRating, Object

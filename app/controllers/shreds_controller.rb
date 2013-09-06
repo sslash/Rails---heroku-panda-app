@@ -1,5 +1,7 @@
 class ShredsController < ApplicationController
 
+	before_filter :verify_owner_is_user, :only => [:save]
+
 	def upload
 		# Write video
 		file = params[:file]
@@ -28,28 +30,38 @@ class ShredsController < ApplicationController
 		# Fetch Shredder
 		id = params[:owner]
 		@shredder = Shredder.find(id)
-		if @shredder
-			shredData = params[:shred]
+		if !@shredder
+			return :nothing => true, :status => 401
+		end
+		shredData = params[:shred]
 
-			shredData['owner'] = {
-				'_id' => @shredder._id.to_s,
-				'username' => @shredder.username,
-				'imgPath' => @shredder.profileImagePath
-			}
-			if params[:tabs]
-				shredData[:tabs] = params[:tabs]
-			end
-			shredData['country'] = @shredder.country
-			shredData['timeCreated'] = Time.now
-			@shredMongo = Shred.new(shredData)
-			if @shredMongo.save
-				logger.debug("saved shred!");
-				render json: @shredMongo, :status => 200	
-			else
-				logger.debug "FAIL: Form is invalid"
-				render :nothing => true, :status => 401
-			end
+		shredData['owner'] = {
+			'_id' => @shredder._id.to_s,
+			'username' => @shredder.username,
+			'imgPath' => @shredder.profileImagePath
+		}
+		if params[:tabs]
+			shredData[:tabs] = params[:tabs]
+			badge = Badge.obainBadgeWhnTabsAreCreated(@shredder)
+			console.log("badge? #{badge215}")
+		end
+		shredData['country'] = @shredder.country
+		shredData['timeCreated'] = Time.now
+
+		# Fetch video
+		vidId = params[:vidId]
+		@video = Panda::Video.find(vidId)
+    	@h264_encoding = @video.encodings['h264']
+    	shredData['videoPath'] = @h264_encoding.url
+    	shredData['videoThumbnail'] = @h264_encoding.screenshots[1]
+
+
+		@shredMongo = Shred.new(shredData)
+		if @shredMongo.save
+			logger.debug("saved shred!");
+			render json: @shredMongo, :status => 200	
 		else
+			logger.debug "FAIL: Form is invalid"
 			render :nothing => true, :status => 401
 		end
 	end
