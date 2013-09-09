@@ -10,12 +10,14 @@ define([
 	'views/shredroomView',
 	'views/battleView',
 	'views/battleRequestView',
+	'views/badgeView',
 
 	// Models
 	'models/user',
 	'models/shredder',
 	'models/shred',
 	'models/battle',
+	'models/badge',
 
 	// Collections
 	'collections/shredders',
@@ -25,8 +27,8 @@ define([
 	'session'
 	], function (Marionette, MainView, ShredpoolView, 
 		ShredderView, ShredView, EditProfileView, ShredroomView,
-		BattleView, BattleRequestView, User, Shredder, Shred, Battle, Shredders, 
-		Shreds, Battles, Session) {
+		BattleView, BattleRequestView, BadgeView, User, Shredder,
+		Shred, Battle, Badge, Shredders, Shreds, Battles, Session) {
 
 		var MainController = Marionette.Controller.extend({
 
@@ -54,7 +56,7 @@ define([
 				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
 				this.listenTo(this, "shred:createShred:showModal", this.showCreateShredModal);
 				this.listenTo(this, "regions:modal:showBadge", this.showBadgeModal);
-				this.listenTo(this, "regions:modal:hideModal", this.hideModal);
+				this.listenTo(this, "regions:modal:hideBadge", this.hideBadgeModal);
 			},
 
 			shredderPage : function(id){
@@ -223,8 +225,7 @@ define([
 			},
 
 			battleAccepted : function(){
-				if ( !Shredhub.user )
-					Shredhub.user = new User();
+				this.__resetUserFromSession()
 				Shredhub.user.resetUser();
 			},
 
@@ -238,18 +239,45 @@ define([
 				Shredhub.modal.show(view);
 			},
 
-			hideModal : function() {
+			hideBadgeModal : function() {
 				Shredhub.modal.close();
+				this.fetchShredderForNewLevel();
+			},
+
+			// CONTINUE HERE
+			fetchShredderForNewLevel : function() {
+				this.__resetUserFromSession();
+				var that = this;
+				$.get('/api/shredders/' + Session.getUser().id)
+				.done(function(res) {
+					Shredhub.user.set({'xp' : res.shredder.xp});
+					that.showLevelUpModal();
+				})
+			},
+
+			showLevelUpModal : function() {
+				var newLevel = Shredhub.user.checkIfNewLevelReached();
+				if ( newLevel['newLevel'] ) {
+					var view = new ShredderView.LevelModalView(newLevel);
+					Shredhub.modal.show(view);
+				}
 			},
 
 			// Show a badge in the modal region
-			showBadgeModal : function(modalView) {
-
+			showBadgeModal : function(updatedOwner) {
+				var model = new Badge(updatedOwner.newBadge);
+				var view = new BadgeView.ModalView({model : model});
+				Shredhub.modal.show(view);
 			},
 
 			logOutSuccess : function() {
 				Shredhub.user = null;
 				Shredhub.loggedIn = false;
+			},
+
+			__resetUserFromSession : function() {
+				if ( !Shredhub.user )
+					Shredhub.user = new User(Session.getUser());
 			}
 		});
 

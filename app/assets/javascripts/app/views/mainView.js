@@ -200,7 +200,7 @@ MainLayout : Marionette.Layout.extend({
 			},
 			success: function(res) {
 				$('#authenticate').modal('hide');
-				authenticateSuccess
+				//authenticateSuccess
 				mainController.trigger('auth:login:success', res);
 			}, error: function(err) {
 				$('#auth-error-msg').text("Asshole");

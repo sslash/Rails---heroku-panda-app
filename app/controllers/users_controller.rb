@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 			# Create a shredder
 			@shredder = Shredder.new({ :username => @user.username, :email =>@user.email});
 			@shredder.timeCreated = Time.now
+			#@shredder.badges = {}
 			if @shredder.save
 				logger.debug("saved shredder!");
 			end	

@@ -17,13 +17,14 @@ define([
   'text!templates/shredder/shredders.hbs',
   'text!templates/shredder/sotw.hbs',
   'text!templates/shredder/shreddersTransitionTpl.hbs',
+  'text!templates/shredder/levelModalTpl.hbs',
 
 
 	// Plugins
 	'session',
   'ajaxHelper'
   ], function (Marionette,Handlebars, bs, _, Shredder, Shred, Shredders,
-    shredderTpl, shreddersTpl, sotwTpl, shreddersTransitionTpl, Session, Ah) {
+    shredderTpl, shreddersTpl, sotwTpl, shreddersTransitionTpl,levelModalTpl, Session, Ah) {
 
    var ShredderView = {}
 
@@ -247,6 +248,23 @@ define([
     });
     return battles;
   }
+});
+
+ShredderView.LevelModalView = Marionette.ItemView.extend({
+    template : Handlebars.compile(levelModalTpl),
+
+    serializeData : function() {
+      var data = {};
+      data.newLevel = this.options.newLevel;
+      if ( this.options.newLevelLabel )
+        data.newLevelLabel = this.options.newLevelLabel;
+
+      return data;
+    },
+
+    onRender: function(){
+      this.$('#badgeModal').modal('show');
+    },
 });
 
 //   // Return the module for AMD compliance.

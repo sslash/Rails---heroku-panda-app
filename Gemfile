@@ -27,7 +27,7 @@ gem 'carrierwave'
 
 # streamio-ffmpeg
 require 'rubygems'
-require 'streamio-ffmpeg'
+#require 'streamio-ffmpeg'
 gem 'panda', '~> 1.6.0'
 
 # Facebook login

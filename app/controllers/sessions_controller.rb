@@ -10,11 +10,10 @@ class SessionsController < ApplicationController
 	before_filter :save_login_state, :only => [:login, :login_attempt]
 
 	def home
-
-		#render :file => "app/assets/index.html", :formats => [:html]
 		if session[:user_id]
 			logger.debug("User is logged in already: #{session[:user_id]}")
 			@user = Shredder.first(:id => session[:user_id])
+			@guitars = Guitar.all
 			#logger.debug("User is logged in already: #{@user.username}")
 		end
 		render "layouts/application"

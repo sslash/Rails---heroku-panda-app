@@ -35,6 +35,7 @@
      return response;
    },
 
+
   // uploadVideo : function(video){
   //   $.ajax({
   //       url : '/api/shreds/' + this.get('_id'), //server script to process data
@@ -147,17 +148,8 @@
           });
           that.set({'shredComments': res.shredComments});
           that.trigger('shred:change:comment');
-        },
-        error: function(res){
-          // do nothing yet..
-          console.log("comment fail");
         }
       })
-
-      //var shredComments = this.get('shredComments');
-      //shredComments.push(shredComment);
-      //this.save({'shredComments': shredComments});
-      //this.trigger('change');
     },
 
     setDateString : function(c) {      

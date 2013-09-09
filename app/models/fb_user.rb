@@ -40,6 +40,7 @@ class FbUser
 				if !shredder
 					shredder = Shredder.new({ :username => user.name, :email =>user.email});
 					shredder.timeCreated = Time.now
+					#shredder.badges = {}
 					shredder.onlineProfileImagePath = auth['info']['image']
 					if shredder.save
 						shredder

@@ -4,8 +4,6 @@ class ShreddersController < ApplicationController
 		:addGuitar, :addGear] 
 
 		def getById
-			logger.debug "get by id. shredder: #{params[:id]}"
-			logger.debug "sesh: #{session}"
 			shredder = Shredder.find(params[:id].to_s)
 			if shredder 
 				return fetchShredsForShredder(shredder);
@@ -40,8 +38,6 @@ class ShreddersController < ApplicationController
 				render :nothin => true
 			end
 		end
-
-
 
 		def index
 			@shredders = Shredder.all(:limit => 20)

@@ -52,7 +52,7 @@ Shredhub::Application.routes.draw do
     post "/shredders/:uid/addFanee" => "shredders#addFanee"
 
     # Shreds
-    post "/shreds/file" => "shreds#upload"
+    #post "/shreds/file" => "shreds#upload"
     post "/shreds" => "shreds#save"
     post "/shreds/:id/increaseViewed" => "shreds#increaseViewed"
     
@@ -72,6 +72,9 @@ Shredhub::Application.routes.draw do
     
 
     get "/shreds/:id" => "shreds#get"
+
+    # GUITARS
+    get "/guitars/:id" => "guitars#getById"
   end
 
 

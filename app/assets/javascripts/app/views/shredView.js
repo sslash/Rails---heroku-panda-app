@@ -19,10 +19,10 @@ define([
 	'collections/shreds',
 	'models/shred',
 
-	'panda'
+	//'panda'
 	], function (Marionette,Handlebars, bs, _, shredsRowTpl, topShredsTpl, 
 		modalShredTpl, createShredTpl, createTabsTpl, addTagsTpl,
-		Session, Ah, Shreds, Shred, panda) {
+		Session, Ah, Shreds, Shred/*, panda*/) {
 
 		var ShredView = {}
 
@@ -230,7 +230,8 @@ define([
 			initialize : function() {
 				this.addTagsTpl = Handlebars.compile(addTagsTpl);
 				this.tags = [];
-				this.vidId = "a10744cbb86de37b1565e7636498217d"; 
+				this.vidId = "a10744cbb86de37b1565e7636498217d";
+				this.shred = new Shred();
 			},
 
 			events : {
@@ -252,7 +253,7 @@ define([
 				var dropZone = document.getElementById('shred_drop_zone');
 				dropZone.addEventListener('dragover', $.proxy(this.__handleDragOver,this), false);
 				dropZone.addEventListener('drop', $.proxy(this.__handleFileDrop,this), false);
-				this.__initPanda();
+				//this.__initPanda();
 			},
 
 			__initPanda : function() {
@@ -270,21 +271,20 @@ define([
 					// .val(data.id)
 					// .end()
 					// .submit();
-					debugger;
 				},
 				'onError': function(file, message) {
 					console.log("error", message);
 				},
 			});
-		//var that = this;
-		// $.get('/panda/show/?id=48dbcf05925b2789dc8de16555e01134')
-		// .done(function(res) {
-		// 	debugger
-		// 	that.$el.append(res);
-		// })
-		// .fail(function(err){
-		// 	debugger
-		// });
+			//var that = this;
+			// $.get('/panda/show/?id=48dbcf05925b2789dc8de16555e01134')
+			// .done(function(res) {
+			// 	debugger
+			// 	that.$el.append(res);
+			// })
+			// .fail(function(err){
+			// 	debugger
+			// });
 			},
 
 			__error : function(error) {
@@ -343,16 +343,12 @@ define([
 
 
 			__saveShredMeta : function(){
-				this.shred = new Shred();
-				// if (!this.shred.get('videoPath') || !this.title ){
-				// 	alert("Error! Failed to upload shred :(");
-				// 	return;
-				// }
+
 				if (!this.vidId ){
 					alert("Fail! You must add a shred video first!");
 					return;
 				}
-
+				var that = this;
 				this.shred.save({
 					title : this.title,
 					vidId : this.vidId,
@@ -364,12 +360,17 @@ define([
 					category : $("#categoryInput :selected").text() === "Category" ? "" : $("#categoryInput :selected").text()
 
 				},{
-					success : this.__saveSuccess
+					success : that.__saveSuccess
 				});
 			},
 
 			__saveSuccess : function(res) {
 				$('#createShred').modal('hide');
+				if ( res.get('owner').newBadge ) {
+					mainController.trigger('regions:modal:showBadge', res.get('owner'));
+				}else{
+					mainController.fetchShredderForNewLevel();
+				}
 			},
 
 			__handleDragOver : function (evt) {
@@ -408,7 +409,10 @@ define([
 
 			__addTabsBtnClicked : function(e) {
 				if ( !this.file){
-					alert("Upload the Shred video first!");
+				//	alert("Upload the Shred video first!");
+				$(this.regions.meta).hide();				
+				var view = new ShredView.CreateTabsForShredView({model : this.shred});
+				this.tabs.show(view);
 				}else if (!$('.shredTitle').val()) {
 					alert("A Shred title must be provided first!");
 				}else{

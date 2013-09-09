@@ -7,6 +7,7 @@ function(Backbone, Session) {
 	var Shredder = Backbone.Model.extend({
     urlRoot : '/api/shredders',
 
+    // THis one is old! TODO: remove it!
     shredderLvlLabels : ["Beginner", "Skilled", "Awesome", "Shred king", "Wizard"],
 
     defaults : {
@@ -59,7 +60,7 @@ function(Backbone, Session) {
         return this.shredderLvlLabels[2];
       } else if (  currLvl < 80 ) {
         return this.shredderLvlLabels[3];
-      }else {
+      } else {
         return this.shredderLvlLabels[4];
       }
     },

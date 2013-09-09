@@ -2,13 +2,26 @@
 define([
   'session',
   'ajaxHelper',
-  'collections/battleRequests'
+  'collections/battleRequests',
   ],
 
   function(Session, Ah, BattleRequests) {
-
   // This represents an authenticated User!
   var User = Backbone.Model.extend({
+    urlRoot : '/api/shredders',
+
+    xpsInLvl : 20000, 
+    shreddrLvlLabels : {
+    "Shred Youngster" : 1,
+    "Shred Junior" : 2,
+    "Shreddr" : 3,
+    "Shradawan" : 5,
+    "Shredi": 8,
+    "Shrizard" : 21,
+    "Shred Knight" : 34,
+    "Shred King" : 55
+    //"God" : 89    
+    },
 
     initUser : function(jsonData){
       Session.setUser(jsonData);
@@ -35,7 +48,6 @@ define([
       url : "/api/shredders/" +fanee.id + "/addFanee/",
       data : fanee,
       handler : function(res){
-        console.log("res add fanee: " + JSON.stringify(res));
         that.updateSessionAddFanee(res);
       }
     });
@@ -44,7 +56,6 @@ define([
   updateSessionAddFanee : function(fanee) {
     var user = Session.getUser();
     user.fanees.push(fanee);
-    console.log("now: " + JSON.stringify(user.fanees));
     Session.setUser(user);
     mainController.trigger("action:updateNavBar");
   },
@@ -127,7 +138,53 @@ define([
     });      
 
     return dfr.promise();
-  }
+  },
+
+  // TODO: Unit test..
+  /*
+  * This function assumes this model has been refreshed,
+  * but the Session data has not been reset yet (happens at the end)
+  */
+    checkIfNewLevelReached : function() {
+
+      // Session object has not been refreshed yet
+      var oldXp = Session.getUser().xp;
+      var newXp = this.get('xp');
+
+      var oldLevel = Math.floor(oldXp / this.xpsInLvl);
+      var newLevel = Math.floor(newXp / this.xpsInLvl);
+      var toReturn = {}
+
+      // Check of we have reached a new level
+      if ((newXp % this.xpsInLvl === 0 ) ||
+        (oldLevel < newLevel)) {
+          // new level == true
+          toReturn['newLevel'] = newLevel;
+
+          // Check if the new level is within a new badge
+          if (oldLevel === (this.shreddrLvlLabels["Shred Youngster"] - 1) ){
+            toReturn['newLevelLabel'] = "Shred Youngster";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shred Junior"] - 1) ){
+            toReturn['newLevelLabel'] = "Shred Junior";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shreddr"] - 1) ){
+            toReturn['newLevelLabel'] = "Shreddr";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shradawan"] - 1) ){
+            toReturn['newLevelLabel'] = "Shradawan";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shredi"] - 1) ){
+            toReturn['newLevelLabel'] = "Shredi";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shrizard"] - 1) ){
+            toReturn['newLevelLabel'] = "Shrizard";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shred Knight"] - 1) ){
+            toReturn['newLevelLabel'] = "Shred Knight";
+          } else if (oldLevel === (this.shreddrLvlLabels["Shred King"] - 1) ){
+            toReturn['newLevelLabel'] = "Shred King";
+          }
+      }
+
+      // Finally, update the session
+      Session.setUser(this.attributes);
+      return toReturn;
+    }
 
   });
 
