@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby '1.9.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
 
-require 'rubygems'
-require 'mongo'
-source 'http://gemcutter.org'
+#require 'rubygems'
+#require 'mongo'
+#source 'http://gemcutter.org'
 
 gem 'rails', '3.2.13'
 #gem 'rails', '4.0.0'
@@ -27,7 +27,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'carrierwave'
 
 # streamio-ffmpeg
-require 'rubygems'
+#gem 'rubygems'
 #require 'streamio-ffmpeg'
 gem 'panda', '~> 1.6.0'
 

@@ -11,8 +11,10 @@ test:
   database: shredhub_test
 
 # set these environment variables on your prod server
+#production:
+#  <<: *defaults
+#  database: shredhub
+#  username: <%= ENV['MONGO_USERNAME'] %>
+#  password: <%= ENV['MONGO_PASSWORD'] %>
 production:
-  <<: *defaults
-  database: shredhub
-  username: <%= ENV['MONGO_USERNAME'] %>
-  password: <%= ENV['MONGO_PASSWORD'] %>
+    uri: <%= ENV['MONGOHQ_URL'] %>
