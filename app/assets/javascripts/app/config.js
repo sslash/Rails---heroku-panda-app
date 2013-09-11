@@ -9,7 +9,7 @@ require.config({
 		text : "vendor/text",
 		'backbone.wreqr' : 'vendor/backbone.wreqr',
     	'backbone.babysitter' : 'vendor/backbone.babysitter',
-    	bootstrap : 'vendor/bootstrap/js/bootstrap',
+    	bootstrap : 'vendor/bootstrap.min',
     	//panda: '//cdn.pandastream.com/u/2.0/panda-uploader.min'
 	},
 	shim : {
