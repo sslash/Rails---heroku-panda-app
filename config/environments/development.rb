@@ -34,4 +34,6 @@ Shredhub::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  ENV['PANDASTREAM_URL'] = "https://c9dbf3f7a4d7149fabfe:c3f5d2e51b10fbc87183@api.pandastream.com/8b122875218b59fbce9d2d7ed08ad0ea"
 end

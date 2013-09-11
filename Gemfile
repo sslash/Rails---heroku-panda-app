@@ -11,15 +11,12 @@ ruby '1.9.3'
 #source 'http://gemcutter.org'
 
 gem 'rails', '3.2.13'
-#gem 'rails', '4.0.0'
+
 gem "mongo_mapper"
 gem 'bson_ext'
 
 # Becuase file uploads kill sessions
 gem "redactor-rails", "~> 0.3"
-
-# Use haml templates
-#gem 'haml'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
@@ -32,7 +29,6 @@ gem 'carrierwave'
 gem 'panda', '~> 1.6.0'
 
 # Facebook login
-#gem 'omniauth-facebook'
 gem 'omniauth-facebook', '1.4.0'
 
 group :development, :test do
