@@ -17,6 +17,7 @@ gem 'bson_ext'
 
 gem 'rails_12factor', group: :production
 
+
 # Becuase file uploads kill sessions
 #gem "redactor-rails", "~> 0.3"
 
