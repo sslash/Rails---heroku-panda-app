@@ -14,8 +14,8 @@ class BadgeController < ApplicationController
 
 	def addBadgeToUser (badge, user)
 		user.badges[badge.title] = {
-			timeCreated : Time.now,
-			badgeRef : badge.id
+			timeCreated => Time.now,
+			badgeRef => badge.id
 		}
 		user.save
 		return badge
