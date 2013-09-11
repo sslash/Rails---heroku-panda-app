@@ -1,0 +1,10 @@
+<div id="battleReqModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<video id="my_video_1" class="video-js vjs-default-skin" controls
+     preload="auto" width="500" height= "350" data-setup="{}">
+     <source src="uploads/{{b.battleRounds.0.battlersShred.videoPath}}" type='video/mp4'>
+     </video>
+
+     <p><strong>{{b.battler.username}}</strong> says:
+     <em>{{b.battleStyle}}</em>
+     <button class="btn btn-small btn-info" data-dismiss="modal">close</button></p>
+</div>

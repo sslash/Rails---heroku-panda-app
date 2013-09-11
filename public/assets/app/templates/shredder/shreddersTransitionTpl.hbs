@@ -1,0 +1,16 @@
+    <div class="row-fluid">
+            <ul class="thumbnails">
+
+              {{#each items}}
+                <li class="span3">
+                <div class="thumbnail">
+                  <img class="frame-img" src="uploads/{{this.profileImagePath}}">
+                  <div class="caption">
+                    <h3><a href="/#shredders/{{this.id}}">{{this.username}}</a></h3>
+                    <p>{{this.playstyle}}</p>
+                  </div>
+                </div>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
