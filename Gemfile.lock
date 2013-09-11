@@ -56,11 +56,6 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.6)
     debugger-ruby_core_source (1.2.3)
-    devise (3.0.0)
-      bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
-      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -111,7 +106,6 @@ GEM
     omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    orm_adapter (0.4.0)
     panda (1.6.0)
       faraday (>= 0.7.0)
       multi_json (>= 1.3.2)
@@ -144,10 +138,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redactor-rails (0.4)
-      devise
-      mime-types
-      orm_adapter
     ref (1.0.5)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
@@ -185,8 +175,6 @@ GEM
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    warden (1.2.3)
-      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -204,7 +192,6 @@ DEPENDENCIES
   omniauth-facebook (= 1.4.0)
   panda (~> 1.6.0)
   rails (= 3.2.13)
-  redactor-rails (~> 0.3)
   ruby-debug-base19x (~> 0.11.30.pre4)
   ruby-debug19
   sass-rails (~> 3.2.3)

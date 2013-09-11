@@ -16,7 +16,7 @@ gem "mongo_mapper"
 gem 'bson_ext'
 
 # Becuase file uploads kill sessions
-gem "redactor-rails", "~> 0.3"
+#gem "redactor-rails", "~> 0.3"
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
