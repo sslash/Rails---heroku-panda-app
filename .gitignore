@@ -17,3 +17,6 @@ pickle-email-*.html
 /public/uploads/*
 .elasticbeanstalk/
 .DS_STORE
+test/*
+db/*.js
+log/*
