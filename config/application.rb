@@ -69,6 +69,8 @@ module Shredhub
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.requirejs.logical_asset_filter += [/\.hbs$/]
+
     config.assets.initialize_on_precompile = false
 
 
