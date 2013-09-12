@@ -1,0 +1,100 @@
+<div class="jumbotron masthead shredpool" style="background: url(assets/app/images/banners/fender.jpg) repeat center center">
+	<div class="container">
+		<h1>The Shredpool<span></span></h1>
+		<p>Welcome to the Shredpol, the main Shred arena.<br>
+			Hang around, and supply the community with your awesome Shreds </p>
+
+			<a href="#" role="button" class="btn btn-primary btn-large" id="createShredBtn">Add a Shred</a>
+		</div>
+	</div>
+
+
+<!-- STUFF BELOW BANNER -->
+<div class="container below-banner center-page">
+	<div class="row-fluid">
+		<ul class="thumbnails">
+			<li class="span4">
+				<div class="photo">
+					<a href="/#showroom/{{user.id}}" class="thumbnail">
+						<img data-src="holder.js/260x180" alt="260x180" src="/assets/app/images/showroom.jpg">
+					</a>
+					<a href="/#shredpool" class="label label-inverse photo-label">Contests</br>(coming soon)</a>
+				</div>
+			</li>
+			<li class="span4">
+				<div class="photo">
+					<a href="/#shredders/{{user.id}}" class="thumbnail">
+						<img data-src="hlder.js/260x180" alt="260x180" src="/assets/app/images/showroom.jpg">
+					</a>
+					<a href="/#shredders/{{user.id}}" class="label label-inverse photo-label one-line">You</a>
+				</div>
+			</li>
+			<li class="span4">
+				<div class="photo">
+					<a href="#" class="thumbnail">
+						<img data-src="holder.js/260x180" alt="260x180" src="/assets/app/images/showroom.jpg">
+					</a>
+					<a href="/#battles/"class="label label-inverse photo-label">The Battle<br>Arena</a>
+				</div>
+			</li>
+		</ul>
+	</div> <!-- /row-fluid -->
+
+
+	<hr class="soften">
+	<h1>Awesome Shreds</h1>
+
+	<div class="row">
+		<div class="span3">
+			<p class="l'ea'd">Filter Shreds</p>
+			<ul class="nav nav-list sidenav">
+				<li><i class="icon-tag"></i>
+					<p>Tags</p>
+					<input type="text" id="inputTags" placeholder="tag1,tag2,tag3.."></input>
+				</li>
+				<li><i class="icon-search"></i>
+					<p>Country</p>
+					<input type="text" placeholder="Name a country" id="inputCountry"></input>
+				</li>
+			</ul>
+
+			<ul class="nav nav-list sidenav">
+				<li><p><i class="icon-user"></i></p>
+					
+					<input type="radio" name="optionsRadios" id="byFanees" value="option1">
+					<span>By fanees</span>					
+				</li>
+			<li><p><i class="icon-globe"></i></p>
+				<label>
+					<input type="radio" name="optionsRadios" id="byLocation" value="option1" > 
+					<span>Near you</span>
+
+				</li>
+
+				<li><p><i class="icon-star"></i></p>
+
+					<input type="radio" name="optionsRadios" id="topRated" value="option1" > 
+					<span>Highly rated</span>
+
+				</li>
+				<li><p><i class="icon-thumbs-up"></i></p>
+
+					<input type="radio" name="optionsRadios" id="byPopularity" value="option1"> 
+					<span>Popular</span>
+
+				</li>
+				<li><p><i class="icon-refresh"></i></p>
+
+					<input type="radio" name="optionsRadios" id="byDate" value="option1" checked> 
+					<span>New</span>
+
+				</li>
+			</ul>
+
+		</div> <!-- /span3 -->
+
+		<div class="span9">
+			<div id="shreds"> </div>
+		</div><!-- /span9 -->
+	</div> <!-- /row -->
+</div> <!-- /container -->
