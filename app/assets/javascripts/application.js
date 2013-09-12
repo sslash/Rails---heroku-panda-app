@@ -6,9 +6,12 @@ define([
   'models/user'
   ], function (Marionette, MainController, Handlebars, AppRouter, User) {
 
+    console.log("YEAH SAP1");
     Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+      console.log("YEAH SAP1");
       return Handlebars.compile(rawTemplate);
     };
+    console.log("YEAH SAP2");
 
     // set up the app instance
     window.Shredhub = new Marionette.Application();
@@ -22,7 +25,7 @@ define([
    });
 
     Shredhub.addInitializer(function(options){
-     
+      console.log("YEAH SAP13");
       Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
         if (arguments.length <3)
           throw new Error("Handlebars Helper equal needs 2 parameters");
@@ -35,6 +38,7 @@ define([
     });
 
     Shredhub.addInitializer(function(options) {
+      console.log("YEAH SAP112");
       $.ajaxSetup({
         beforeSend: function(xhr) {
           xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
@@ -43,17 +47,20 @@ define([
     });
 
     Shredhub.addInitializer(function(options){
+      console.log("YEAH SAP112q");
       window.router = new AppRouter({controller:options.controller});
       Backbone.history.start();
     });
 
     Shredhub.addInitializer (function(options) {
+      console.log("YEAH SAP1dasda");
       if ( window.user) {
         Shredhub.user = new User(window.user);
         Shredhub.user.initUser(window.user);
       }
     });
     
+    console.log("YEAH SAP1asdasdasd");
     window.mainController = new MainController();
     Shredhub.start({controller : mainController} );
 

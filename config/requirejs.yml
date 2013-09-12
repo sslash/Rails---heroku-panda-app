@@ -13,12 +13,12 @@ shim:
   'underscore':
     exports: '_'
   'jquery': 
-    exports : 'jQuery'
+    exports : 'jquery'
   'backbone':
     deps: ['underscore', 'jquery']
     exports: 'Backbone'
   'marionette':
-    deps: ['jquery', 'underscore', 'jquery']
+    deps: ['jquery', 'underscore', 'backbone']
     exports: 'Marionette'
   'handlebars':
     deps: []
@@ -28,7 +28,4 @@ shim:
     exports: 'Bootstrap'
   'panda' :
     exports : 'panda'
-
-modules:
-  - name: 'main'
 
