@@ -28,6 +28,4 @@ shim:
     exports: 'Bootstrap'
   'panda' :
     exports : 'panda'
-modules:
-  - name: 'application'
 

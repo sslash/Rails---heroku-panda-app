@@ -1,5 +1,5 @@
 require.config({
-	baseUrl:'assets/app/',
+	baseUrl:'assets/',
 	paths : {
 		backbone : 'vendor/backbone',
 		underscore : 'vendor/underscore',
