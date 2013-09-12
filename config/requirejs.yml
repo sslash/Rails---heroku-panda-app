@@ -29,3 +29,6 @@ shim:
   'panda' :
     exports : 'panda'
 
+modules:
+  - name: 'main'
+
