@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="badgeModal">
+
+	<div class="modal-body">
+		<p class="lead">
+			Congrats! You've reached level: {{newLevel}}
+		</p>
+
+		{{#if newLevelLabel}}
+			<p class="lead">
+			You are now a {{newLevelLabel}}
+			</p>
+		{{/if}}
+
+	</div>
+	
+
+	<div class="modal-footer">
+		<button class="btn btn-success" id="okBadgeBtn" data-dismiss="modal">Ok</button>
+	</div>
+</div>
