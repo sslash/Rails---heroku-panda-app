@@ -11,8 +11,11 @@
   <meta name="viewport" content="width=device-width">
 
   <%= stylesheet_link_tag "application" %>
-  <%= requirejs_include_tag{"application").sub("/assets/application","application") %>
-
+  <%=
+    requirejs_include_tag("application") do |controller|
+      { 'main' => 'application' }
+    end
+  %>
   <%= csrf_meta_tag %>
 
   <%= javascript_tag do %>
