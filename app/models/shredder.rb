@@ -9,6 +9,7 @@ class Shredder
   key :guitars, Array
   key :equiptment, Array
   key :birthdate, Date
+  key :timeCreated, Date
   key :gender, String
   key :history, String
   key :country, String
