@@ -71,7 +71,7 @@ module Shredhub
 
     config.requirejs.logical_asset_filter += [/\.hbs$/]
 
-    config.assets.initialize_on_precompile = false
+    #config.assets.initialize_on_precompile = false
 
 
     # Version of your assets, change this if you want to expire all your assets
