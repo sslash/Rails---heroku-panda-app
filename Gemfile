@@ -17,7 +17,7 @@ gem 'bson_ext'
 
 gem 'rails_12factor', group: :production
 
-gem 'requirejs-rails'
+gem "requirejs-rails", "~> 0.9.1"
 
 
 # Becuase file uploads kill sessions
