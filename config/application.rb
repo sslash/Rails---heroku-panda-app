@@ -70,6 +70,7 @@ module Shredhub
     config.assets.enabled = true
 
     config.requirejs.logical_asset_filter += [/\.hbs$/]
+    config.requirejs.logical_asset_filter += [/\.js$/]
 
     config.assets.initialize_on_precompile = false
 
