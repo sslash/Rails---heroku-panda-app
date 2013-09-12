@@ -9,8 +9,9 @@
   <title>Shredr.</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <!--<link rel="stylesheet" href="assets/app/styles/index.css">-->
+
   <%= stylesheet_link_tag "application" %>
+  <%= requirejs_include_tag "application" %>
   <%= csrf_meta_tag %>
 
   <%= javascript_tag do %>
@@ -27,20 +28,7 @@
   <section id="main"></section>
   <section id="footer"></section>
 
-  <!-- Application source. -->
-
-  <!--(if target dummy)><!-->
-  <!--<script data-main="assets/app/config" src="assets/app/vendor/require.js"></script>-->
-
-  <!--<!(endif)-->
-
-  <!--(if target release)>
-  <script src="require.js"></script>
-  <!(endif)-->
-
-  <!--(if target debug)>
-  <script src="require.js"></script>
-  <!(endif)-->
+  
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
@@ -53,6 +41,5 @@
   <!-- CDN hosted stuff.. TODO: Move this to require! -->
   <script src="http://popcornjs.org/code/dist/popcorn-complete.js"></script>
   <!--<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>-->
-
 </body>
 </html>

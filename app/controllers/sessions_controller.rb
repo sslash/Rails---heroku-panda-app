@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 			@guitars = Guitar.all
 			#logger.debug("User is logged in already: #{@user.username}")
 		end
-		render "layouts/application"
+		render "/home.html.erb"
 	end
 
 	def drums
