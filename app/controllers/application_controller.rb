@@ -56,22 +56,18 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def uploadFile
-		logger.debug "Will store file: #{params[:file]}"
-		# Write file
-		file = params[:file]
-		uploader = AvatarUploader.new
-		uploader.store!(file)
-		return true
-	end
+	# def uploadFile
+	# 	logger.debug "Will store file: #{params[:file]}"
+	# 	# Write file
+	# 	file = params[:file]
+	# 	uploader = AvatarUploader.new
+	# 	model = { :crop_x => params[:x1], :crop_y => params[:y1], :crop_width => params[:w], :crop_height => params[:h]}
 
-	def self.uploadFile (file)
-		logger.debug "Will store file yo: #{file}"
-		# Write file
-		uploader = AvatarUploader.new
-		uploader.store!(file)
-		return true
-	end
+	# 	res = uploader.store!(file, :model => model)
+	# 	logger.debug "SWAG! Uploaded: #{res}"
+	# 	logger.debug "SWAG! Uploadedjson: #{JSON.pretty_generate(res)}"
+	# 	return res
+	# end
 
 private
 	def current_user

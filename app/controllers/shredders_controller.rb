@@ -147,7 +147,8 @@ class ShreddersController < ApplicationController
 		def addFile
 			logger.debug("Add file yea: #{params}")
 			logger.debug("Session: #{session}")
-			file = params[:file]
+			debugger
+			file = params[:profilePicture]
 			kind = params[:kind]
 
 			filename = session[:user_id].to_s + '_'
@@ -157,11 +158,12 @@ class ShreddersController < ApplicationController
 			elsif ( 'gearImg' == kind)
 				filename = filename + "gear_"
 			elsif ( 'profileImg' == kind)
-				filename = filename + "profile_" + file.original_filename
-				file.original_filename = filename
-				uploadFile()
 				@shredder = Shredder.find session[:user_id]
-				@shredder.profileImagePath = filename
+				res = Cloudinary::Uploader.upload(file, 
+                            :width => params[:w], :height => params[:h],
+                            :x  => params[:x1] , :y => params[:y1], 
+                 			:crop => :crop, :format => 'jpg')
+				@shredder.onlineProfileImagePath = res["url"]
 				@shredder.save
 				return render :json => @shredder, :status => 200
 			else
@@ -171,7 +173,7 @@ class ShreddersController < ApplicationController
 			filename = filename + file.original_filename
 			file.original_filename = filename
 
-			uploadFile()
+			super.uploadFile()
 			render :json => {'filename' => filename}, :status => 200		
 		end
 

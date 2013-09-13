@@ -10,8 +10,9 @@ define([
 	// Templates
 	'text!templates/shredder/editProfile.hbs',
 	// Plugins
-	'session'
-	], function (Marionette, Handlebars, bs, Shredder, editProfileTpl, Session) {
+	'session',
+	'jcrop'
+	], function (Marionette, Handlebars, bs, Shredder, editProfileTpl, Session, Jcrop) {
 
 		var EditProfileView = Marionette.ItemView.extend({
 			template: Handlebars.compile(editProfileTpl),
@@ -22,7 +23,9 @@ define([
 				'click #saveGearbtnId' 	: 'saveGearBtnClicked',
 				'change #profileImgId' 	: 'profileImgSelected',
 				'change #guitarFileId' 	: 'guitarImgSelected',
-				'change #gearFileId' 	: 'gearImgSelected'
+				'change #gearFileId' 	: 'gearImgSelected',
+				'click #changeProfileImg': '__changeProfileImgClicked',
+				'click #saveProfileImgBtn' :'__saveProfileImgClicked'
 			},
 
 			initialize : function() {
@@ -41,6 +44,10 @@ define([
 						'/addFile/?kind=guitarImg'
 					});
 				}
+			},
+
+			__changeProfileImgClicked : function() {
+				$('#changeImgModal').modal('show');
 			},
 
 			guitarImgSaved : function(res) {
@@ -109,17 +116,24 @@ define([
 				}
 			},
 
-			saveBtnClicked : function(e) {
-				console.log("save btn clicked");
-				this.seteditProfileData();
+			__saveProfileImgClicked : function(e) {
 				if ( this.profileImg ){
 					this.uploadFile( {
 						file : this.profileImg,
-						handler : function(){console.log("profile img saved");},
+						handler : function(){
+							console.log("profile img saved");
+							$('#changeImgModal').modal('hide');				
+						},
 						url :'/api/shredders/' + Session.getUser().id + 
 						'/addFile/?kind=profileImg'
 					});
 				}
+			},
+
+			saveBtnClicked : function(e) {
+				console.log("save btn clicked");
+				this.seteditProfileData();
+				this.__saveProfileImgClicked();
 			},
 
 			profileSaved : function(res) {
@@ -176,7 +190,53 @@ define([
 				var f = this.getImgFile(e);
 				if ( f ) {
 					this.profileImg = f;
+					this.displayImgOnDom(e);
 				}
+			},
+
+			displayImgOnDom : function(e) {						
+		    	var reader = new FileReader();
+		    	var that = this;
+		     	// Closure to capture the file information.
+			    reader.onload = (function(theFile, handler) {
+			    	return function(e) {
+				        // Render thumbnail.
+				        var image = new Image();
+				        image.src = e.target.result;
+				        $('.profile-img').attr('src',image.src );
+						handler(image);
+				        };
+		  		})(this.profileImg, $.proxy(this.setJCrop,this));
+
+      			// Read in the image file as a data URL.
+      			reader.readAsDataURL(this.profileImg);
+			},
+
+			setJCrop : function(image) {
+		        var img = $('.profile-img');
+		        this.orgImage = image;
+		        this.domImage =  $('.profile-img');
+		        this.cropData = {};
+		        this.cropData.x1 = 30;
+		        this.cropData.x2 = 230;
+		        this.cropData.y1 = 30;
+		        this.cropData.y2 = 180;
+		        this.cropData.w = this.cropData.x1 + this.cropData.x2;
+		        this.cropData.h = this.cropData.y1 + this.cropData.y2;
+		        var that = this;
+
+		        $('.profile-img').Jcrop({
+		            aspectRatio: 4 / 3,
+		            setSelect:   [that.cropData.x1, that.cropData.y1, that.cropData.x2, that.cropData.y2],
+		            onSelect: $.proxy(that.setChords,that)
+		        });
+			},
+
+			setChords : function(c) {
+				this.cropData.x1 = c.x;
+		        this.cropData.y1 = c.y;
+		        this.cropData.w = c.w;
+		        this.cropData.h = c.h;
 			},
 
 			getImgFile : function(e) {
@@ -195,25 +255,40 @@ define([
 				var file = obj.file;
 				if ( file ) {
 					var data = new FormData();
-					data.append("file", file);
+
+					// Set the correct pixel values for image cropping
+					var x1Aspect = this.cropData.x1 / this.domImage.width();
+					var x1 = x1Aspect * this.orgImage.width;
+
+					var y1Aspect = this.cropData.y1 / this.domImage.height();
+					var y1 = y1Aspect * this.orgImage.height;
+
+					var widthAspect = this.cropData.w / this.domImage.width();
+					var w = widthAspect * this.orgImage.width;
+
+					var heightAspect = this.cropData.h / this.domImage.height();
+					var h = heightAspect * this.orgImage.height;
+
+					data.append("profilePicture", file);
+					data.append("x1", Math.round(x1));
+					data.append("y1", Math.round(y1));
+					data.append("w", Math.round(w));
+					data.append("h", Math.round(h));
 
 					$.ajax({
 						url : obj.url,
 						type : 'POST',
 						data : data,
-						/*beforeSend: function ( xhr ) {
-							xhr.setRequestHeader("X-CSRF-Token", $('meta[name=csrf-token]').attr('content'));
-						},*/
 						success : function(res) {
 							obj.handler(res);
 						},
 						error : function(res) {
 							console.log('error occured: ' + res);
 						},
-							//Options to tell JQuery not to process data or worry about content-type
-							cache : false,
-							contentType : false,
-							processData : false
+						//Options to tell JQuery not to process data or worry about content-type
+						cache : false,
+						contentType : false,
+						processData : false
 						});
 				} else {
 					obj.handler();
@@ -224,32 +299,8 @@ define([
 				console.log(JSON.stringify(res));
 				if ( res.filename )
 					this.newFilename = res.filename;
-			},
-
-			showImgThmbAndSetFile : function(f){
-			// var output = [];
-			// output.push('<li><strong>', escape(f.name), '</strong>',
-			// 	'</li>');
-
-			// $('#file_list1').html('<ul>' + output.join('') + '</ul>');
-
-
-			// var reader = new FileReader();
-
-   //    			// Closure to capture the file information.
-   //    			reader.onload = (function(theFile) {
-   //    				return function(e) {
-   //    					$('#addThingImg').attr('src', e.target.result);
-   //    					$('#dropThingImgTxt').remove();
-   //    					$('#chooseNewThingFile').html('Choose another file');
-   //    				};
-   //    			})(f);
-
-   //    			// Read in the image file as a data URL.
-   //    			reader.readAsDataURL(f);
-}
-
-});
+			}
+	});
 
 
    // Return the module for AMD compliance.

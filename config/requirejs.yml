@@ -1,6 +1,6 @@
 modules:
   - name: 'application'
-  
+
 paths:
   backbone : vendor/backbone
   underscore : vendor/underscore
@@ -8,6 +8,7 @@ paths:
   marionette : vendor/backbone.marionette
   handlebars : vendor/handlebars
   text : vendor/text
+  jcrop : vendor/jcrop/jquery.Jcrop
   backbone.wreqr : vendor/backbone.wreqr
   backbone.babysitter : vendor/backbone.babysitter
   bootstrap : vendor/bootstrap.min
@@ -31,4 +32,7 @@ shim:
     exports: 'Bootstrap'
   'panda' :
     exports : 'panda'
+  'jcrop':
+    deps: ['jquery']
+    exports: 'jcrop'
 

@@ -17,3 +17,5 @@ db.shreds.find().sort({'timeCreated' : -1}).limit(1).pretty();
 
 // Reset badges for a user
 db.shredders.update({'_id' : ObjectId("522b26358ca794069a00027d")}, {$set: {'badges' : {}}});
+
+db.shredders.find().sort({'timeCreated' : -1}).limit(1).pretty();

@@ -1,0 +1,8 @@
+development:
+  cloud_name: "shredr"
+  api_key: "984365592265767"
+  api_secret: "EVRTXTV241-gqA2F4c-69_325hY"
+production:
+  cloud_name: "shredr"
+  api_key: "984365592265767"
+  api_secret: "EVRTXTV241-gqA2F4c-69_325hY"

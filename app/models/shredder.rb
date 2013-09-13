@@ -19,5 +19,4 @@ class Shredder
   key :onlineProfileImagePath, String # Only face!
   key :uid, String # For face users only
   many :shreds
-
 end

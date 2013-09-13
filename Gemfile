@@ -27,10 +27,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # File uploads
 gem 'carrierwave'
-
-# streamio-ffmpeg
-#gem 'rubygems'
-#require 'streamio-ffmpeg'
+gem 'cloudinary'
 gem 'panda', '~> 1.6.0'
 
 # Facebook login

@@ -110,6 +110,7 @@ define([
 			},
 
 			editProfilePage : function() {
+				this.__renderNavbar();
 				var user = new Shredder(Session.getUser());
 				var editProfileView = new EditProfileView({model : user});
 				Shredhub.main.show(editProfileView);
