@@ -52,7 +52,7 @@ define([
 				this.listenTo(this, "action:addFanee", this.addFanee);
 				this.listenTo(this, "action:updateNavBar", this.updateNavBar);
 				this.listenTo(this, "shredroom:rendered", this.shredroomViewRendered);	
-				this.listenTo(this, "user:battleAccepted", this.battleAccepted);	
+				this.listenTo(this, "user:battleAccepted", this.battleAccepted);
 				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
 				this.listenTo(this, "shred:createShred:showModal", this.showCreateShredModal);
 				this.listenTo(this, "regions:modal:showBadge", this.showBadgeModal);

@@ -41,8 +41,6 @@ define([
     },
 
     addFaneeRelationship : function(fanee) {
-    // Check if they are friends already
-    delete fanee['shreds'];
     var that = this;
     Ah.post({
       url : "/api/shredders/" +fanee.id + "/addFanee/",
@@ -184,7 +182,15 @@ define([
       // Finally, update the session
       Session.setUser(this.attributes);
       return toReturn;
+    },
+
+    getNewFansSinceLastLogin : function() {
+      var lastLogInSesh = new Date(this.get('last_logged_in'));
+      return _.filter(this.get('fans'), function(fan){
+        return new Date(fan.added) > lastLogInSesh; 
+      });
     }
+
 
   });
 

@@ -23,16 +23,20 @@ class SessionsController < ApplicationController
 		render :file => "app/views/layouts/application.html.erb", "sap" => "saaaap"
 	end
 
+	def add_last_logged_in (shredder)
+		shredder[:last_logged_in] = Time.now
+		shredder.save!
+	end
+
 	def login
-		logger.debug "login: #{params[:username_or_email]}, #{params[:login_password]} "
+		logger.debug "login: #{params[:username_or_email]}, #{params[:login_password]}"
 		authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
 		if authorized_user
-			logger.debug "Auth success: #{session}"
 			# Fetch the shredder
 			shredder = Shredder.first(:username => authorized_user.username);
-			logger.debug "Auth success: #{shredder}"
 			# Always store the ID that refers to the object in the session file, not the object itself”
 			session[:user_id] = shredder._id
+			session[:mongo_user_id] = authorized_user._id
 			logger.debug "LOGGED IN: #{session}"
 			render json: shredder
 		else
@@ -43,6 +47,8 @@ class SessionsController < ApplicationController
 
 	def logout
 		logger.debug "logout: #{@current_user} "
+		user = Shredder.first(:id => session[:user_id])
+		self.add_last_logged_in user
 		session[:user_id] = nil
 		render :nothing => true, :status => 200
 	end
@@ -52,8 +58,8 @@ class SessionsController < ApplicationController
 	def create 
 		auth = request.env["omniauth.auth"]
 		user = FbUser.from_omniauth(auth)
-		logger.debug("SWAG: #{user.id}" )
-		session[:user_id] = user.id
+		session[:user_id] = user[:shredder][:_id]
+		session[:mongo_user_id] = user[:user][:_id]
 		redirect_to root_url
 	end
 

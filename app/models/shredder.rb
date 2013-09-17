@@ -15,8 +15,10 @@ class Shredder
   key :country, String
   key :playstyle, String
   key :badges, Hash, :default => {}
-  key :profileImagePath, String
-  key :onlineProfileImagePath, String # Only face!
+  key :fans, Array, :default => []
+  key :last_logged_in, Time
+  key :profileImagePath, String # Old, this should be removed!
+  key :onlineProfileImagePath, String
   key :uid, String # For face users only
   many :shreds
 end

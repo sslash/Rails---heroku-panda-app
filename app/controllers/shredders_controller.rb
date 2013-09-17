@@ -147,7 +147,6 @@ class ShreddersController < ApplicationController
 		def addFile
 			logger.debug("Add file yea: #{params}")
 			logger.debug("Session: #{session}")
-			debugger
 			file = params[:profilePicture]
 			kind = params[:kind]
 
@@ -178,34 +177,46 @@ class ShreddersController < ApplicationController
 		end
 
 		def addFanee
-			logger.debug("Add fanee: #{params}")
-			logger.debug("Sesh: #{session}")
 			userId = session[:user_id] 
 			uid = params[:uid]
 			shredder = Shredder.find(uid)
 			user = Shredder.find(userId)
 			if shredder and user
+				if shredder.id == user.id
+					logger.debug("Tried to become fan of yourself")
+					return render :nothing => true, :status => 400
+				end
+
 				fanees = user.fanees
 
       			# Check if they are fanee
       			fanees.each do | f |
-      				logger.debug "f: #{f}"
       				if f['id'].to_s == uid
       					return render :nothing => true, :status => 400
       				end
       			end
-
-      			# use data from fetched!!!! 
       			
       			# Add to fanees list
       			fanee = {
       				"_id" => shredder['_id'],
       				"username" => shredder['username'],
-      				"profileImagePath" => shredder['profileImagePath']
+      				"profileImagePath" => shredder['onlineProfileImagePath'],
+      				:added => Time.now
       			}
 
       			fanees.push (fanee)
       			user.save
+
+      			# Add to fan list
+      			fan = {
+      				"_id" => user['_id'],
+      				"username" => user['username'],
+      				"profileImagePath" => user['onlineProfileImagePath'],
+      				:added => Time.now
+      			}      			
+      			shredder[:fans].push(fan)
+      			shredder.save
+
       			render :json => fanee, :status => 200
       		else
       			return render :nothing => true, :status => 400

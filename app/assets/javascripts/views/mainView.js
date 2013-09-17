@@ -5,6 +5,9 @@ define([
 	'handlebars',
 	'bootstrap',
 
+	// Views
+	'views/navbar/newFaneesView',
+
 	// Templates
 	'text!templates/navigation.hbs',
 	'text!templates/mainPage.hbs',
@@ -16,15 +19,19 @@ define([
 	'session',
 	'ajaxHelper'
 
-	], function (Marionette,Handlebars, bs, navigationTpl, mainPageTpl,
+	], function (Marionette,Handlebars, bs, NewFaneesView, navigationTpl, mainPageTpl,
 		footerTpl, navLoggedInTpl,battleReqModalTpl, Session, Ah) {
 
 
 		var MainView = {
 
-			NavigationView : Marionette.ItemView.extend({
+			NavigationView : Marionette.Layout.extend({
 				template: Handlebars.compile(navigationTpl),
 				battleReqTmpl : Handlebars.compile(battleReqModalTpl),
+
+				regions: {
+					newFans: "#newFans"	
+				},
 
 				initialize : function() {
 					if ( Session.getUser() ){
@@ -37,6 +44,13 @@ define([
 					'click .batReqAcc' : 'battleReqAccepted',
 					'click .batReqDec' : 'battleReqDeclined',
 					'click .createShred' : '__createShredClicked',
+				},
+
+				onRender : function() {
+					if ( Shredhub.loggedIn ){
+						this.newFansView = new NewFaneesView.View();
+						this.newFans.show(this.newFansView);
+					}
 				},
 
 				changeNavBar : function() {
@@ -58,7 +72,6 @@ define([
 							id : user.id,
 							username : user.username,
 							battleRequests : Session.getIncomingBattleRequests(),
-							fanees : user.fanees,
 							profilePic : img
 
 						}

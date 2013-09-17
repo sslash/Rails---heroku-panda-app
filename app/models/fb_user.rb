@@ -36,11 +36,11 @@ class FbUser
 				user.email = auth['info']['email'] || ""
 			end
 			if user.save
+				session[:mongo_user_id] = user.id
 				shredder = Shredder.first(:username => user.name)
 				if !shredder
 					shredder = Shredder.new({ :username => user.name, :email =>user.email});
 					shredder.timeCreated = Time.now
-					#shredder.badges = {}
 					shredder.onlineProfileImagePath = auth['info']['image']
 					if shredder.save
 						shredder
@@ -48,7 +48,7 @@ class FbUser
 						nil
 					end
 				else
-					shredder
+					return { :shredder => shredder, :user => user}
 				end
 			else
 				nil
@@ -58,7 +58,7 @@ class FbUser
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			user.save
 			shredder = Shredder.first(:username => user.name)
-			shredder
+			return { :shredder => shredder, :user => user}
 		end
 	end
 end
