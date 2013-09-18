@@ -21,7 +21,8 @@
   <%= javascript_tag do %>
     window.user = <%=raw @user.to_json %>;
     window.options = {
-      guitars : <%=raw @guitars.to_json %>
+      guitars : <%=raw @guitars.to_json %>,
+      newBadges : <%= raw @new_badges.to_json %>
     } 
   <% end %>
 

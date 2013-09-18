@@ -27,3 +27,33 @@ db.shredders.update({},{$set : {"last_logged_in": null}},false,true);
 
 // Remove a field
 db.shredders.update({},{$unset : {"updates":""}},false,true); 
+
+// Create a new badge
+db.badges.save({
+	"title" : "First 10 Fans",
+	"description" : "Obtained when the Shredder gets his first 10 fans",
+	"img" : "first10fanse.png",
+	"xpGained" : 200
+});
+
+// Remove a badge:
+var michael = db.shredders.findOne({'username' : {$regex : 'Michael.*'}});
+michael.badges = {};
+db.shredders.save(michael);
+
+
+// Add 10 first10fanse
+var shredders = db.shredders.find().limit(10);
+var shredder = db.shredders.findOne({'username' : {$regex : 'Michael.*'}});
+for ( var i = 0; i < 10; i++ ) {
+	var s = {
+		"_id" : shredders[i]._id,
+		"username" : shredders[i].username,
+		"profileImagePath" : shredders[i].onlineProfileImagePath,
+		"added" : new Date()
+	}
+
+	shredder.fans.push(s);
+	db.shredders.save(shredder);
+}
+

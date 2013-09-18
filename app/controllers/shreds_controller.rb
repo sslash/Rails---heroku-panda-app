@@ -22,29 +22,6 @@ class ShredsController < ApplicationController
 		return badge
 	end
 
-	# def upload
-	# 	# Write video
-	# 	file = params[:file]
-	# 	uploader = AvatarUploader.new
-	# 	uploader.store!(file)
-
-	# 	# Read file, write thumnail
-	# 	filename = params[:file].original_filename
-	# 	full_filename = "public/uploads/#{filename}"
-	# 	movie = FFMPEG::Movie.new(full_filename)
-
-	# 	filename_stripped = File.basename( filename, ".*" ) 
-	# 	logger.debug("filename stripped: #{filename_stripped}")
-	# 	new_path = "public/uploads/thumbs/#{filename_stripped}.jpg"
-	# 	logger.debug("new path: #{new_path}")
-	# 	movie.screenshot(new_path)
-
-	# 	render :json => {
-	# 		:filename => filename,
-	# 		:thumbname => "#{filename_stripped}.jpg"
-	# 	}
-	# end
-
 	def save
 		logger.debug "Will save shred: #{params[:shred]}"
 		id = params[:owner]

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 			logger.debug("User is logged in already: #{session[:user_id]}")
 			@user = Shredder.first(:id => session[:user_id])
 			@guitars = Guitar.all
-			#logger.debug("User is logged in already: #{@user.username}")
+			@new_badges = self.fetchNewBadges @user
 		end
 		render "/home.html.erb"
 	end
@@ -38,6 +38,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = shredder._id
 			session[:mongo_user_id] = authorized_user._id
 			logger.debug "LOGGED IN: #{session}"
+			@new_badges = self.fetchNewBadges shredder
 			render json: shredder
 		else
 			logger.debug "login: failed"
@@ -66,5 +67,12 @@ class SessionsController < ApplicationController
 	def destroy
 		session[user_id] = nil
 		redirect_to root_url
+	end
+
+
+
+	def fetchNewBadges (shredder)
+		badge = BadgeController.new().checkForFirst10FansBadge shredder
+		return badge
 	end
 end

@@ -49,10 +49,11 @@ define([
 				this.listenTo(this, "mainLayout:rendered", this.mainLayoutRendered);
 				this.listenTo(this, "shredpoolView:rendered", this.shredpoolViewRendered);
 				this.listenTo(this, "show:shredModal", this.showShredModal);
-				this.listenTo(this, "action:addFanee", this.addFanee);
+				this.listenTo(this, "shredder:fans:becomeFan", this.addFanee);
 				this.listenTo(this, "action:updateNavBar", this.updateNavBar);
 				this.listenTo(this, "shredroom:rendered", this.shredroomViewRendered);	
 				this.listenTo(this, "user:battleAccepted", this.battleAccepted);
+				this.listenTo(this, "user:updates:fans:watched", this.newFansWatched);	
 				this.listenTo(this, "battle:battleRequest:showModal", this.showBattleRequest);
 				this.listenTo(this, "shred:createShred:showModal", this.showCreateShredModal);
 				this.listenTo(this, "regions:modal:showBadge", this.showBadgeModal);
@@ -106,11 +107,14 @@ define([
 
 				window.Shredhub.header.show(this.navigationView);
 				window.Shredhub.main.show(this.mainView);
-				window.Shredhub.footer.show(footerView);				
+				window.Shredhub.footer.show(footerView);
+
+				if ( window.options.newBadges){
+					this.displayNewBadges(window.options.newBadges);
+				}
 			},
 
 			editProfilePage : function() {
-				this.__renderNavbar();
 				var user = new Shredder(Session.getUser());
 				var editProfileView = new EditProfileView({model : user});
 				Shredhub.main.show(editProfileView);
@@ -256,6 +260,11 @@ define([
 				})
 			},
 
+			newFansWatched : function() {
+				console.log("SA=");
+				SHredhub.user.newFansWatched();
+			},
+
 			showLevelUpModal : function() {
 				var newLevel = Shredhub.user.checkIfNewLevelReached();
 				if ( newLevel['newLevel'] ) {
@@ -279,6 +288,16 @@ define([
 			__resetUserFromSession : function() {
 				if ( !Shredhub.user )
 					Shredhub.user = new User(Session.getUser());
+			},
+
+			/*
+			* As for now, this is just one badge. later we should
+			* extend the windows.newBadges to be an array instead of object
+			*/
+			displayNewBadges : function(newBadge) {
+				var model = new Badge(newBadge);
+				var view = new BadgeView.ModalView({model : model});
+				Shredhub.modal.show(view);
 			}
 		});
 

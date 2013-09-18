@@ -1,4 +1,19 @@
 class BadgeController < ApplicationController
+
+	def checkForFirst10FansBadge (user)
+		if user.badges['First 10 Fans']
+			return nil
+		end
+
+		if user.fans.length >= 10
+			badge = Badge.first(:title => 'First 10 Fans')
+			return addBadgeToUser(badge, user)
+		else
+			return nil
+		end
+
+	end
+
 	def obainBadgeForShred(user, shred)
 
 	end
@@ -14,9 +29,10 @@ class BadgeController < ApplicationController
 
 	def addBadgeToUser (badge, user)
 		user.badges[badge.title] = {
-			timeCreated => Time.now,
-			badgeRef => badge.id
+			:timeCreated => Time.now,
+			:badgeRef => badge.id
 		}
+		user.xp += badge[:xpGained]
 		user.save
 		return badge
 	end
