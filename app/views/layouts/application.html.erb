@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Shredr.</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <%= stylesheet_link_tag "application" %>
   <%=
@@ -18,17 +18,9 @@
   %>
   <%= csrf_meta_tag %>
 
-  <%= javascript_tag do %>
-    window.user = <%=raw @user.to_json %>;
-    window.message = <%=raw @message.to_json %>
-  <% end %>
-
 </head>
 <body>
-  <section id="navigation"></section>
-  <section id="modal"></section>
-  <section id="main"></section>
-  <section id="footer"></section>
+  <section id="page"></section>
 </body>
 </html>
 

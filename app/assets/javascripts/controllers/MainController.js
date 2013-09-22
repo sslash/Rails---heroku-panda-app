@@ -11,6 +11,8 @@ define([
 		/** Routing functions */
 		landingPage : function() {
 			console.log("landing page");
+			var landingPage = new LandingPageView();
+			Shredr.page.show(landingPage);
 		}
 	});
 

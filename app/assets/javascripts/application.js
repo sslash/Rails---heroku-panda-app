@@ -15,6 +15,7 @@ define([
 
 		Shredr.on("initialize:before", function(options){
 			this.addRegions({
+				page : "#page"
 			});
 		});
 

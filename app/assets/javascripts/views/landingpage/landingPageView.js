@@ -2,7 +2,7 @@ define([
   'marionette',
   'handlebars',
 
-  'text!templates/landingpage/landingPage.hbs'
+  'text!templates/landingPage.hbs'
   ], function (Marionette, Handlebars, tpl) {
 
     LandingPageView = Backbone.Marionette.ItemView.extend({
