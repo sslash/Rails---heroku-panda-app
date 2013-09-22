@@ -1,2 +1,0 @@
-class ShreddersController < ApplicationController
-end
