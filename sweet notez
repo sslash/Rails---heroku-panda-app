@@ -1,2 +1,5 @@
 #Reinstall all gems:
 $ sudo gem pristine --all
+
+# Push different branch (in this case, coming_soon) to heroku:
+git push heroku coming_soon:master

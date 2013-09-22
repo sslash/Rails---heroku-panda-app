@@ -21,3 +21,4 @@ pickle-email-*.html
 test/*
 db/*.js
 log/*
+app/assets/javascripts/node_modules/*
