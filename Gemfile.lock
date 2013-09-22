@@ -205,7 +205,6 @@ DEPENDENCIES
   carrierwave
   cloudinary
   coffee-rails (~> 3.2.1)
-  less-rails
   less-rails-bootstrap
   linecache19!
   mongo_mapper
