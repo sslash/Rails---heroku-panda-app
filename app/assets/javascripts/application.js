@@ -1,60 +1,61 @@
 define([
-  'marionette',
-  'controllers/MainController',
-  'handlebars',
-  'router',
-  'models/user'
-  ], function (Marionette, MainController, Handlebars, AppRouter, User) {
+	'marionette',
+	'handlebars',
+	'controllers/eventController',
+	'controllers/mainController',
+	'mainRouter',
 
-    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
-      return Handlebars.compile(rawTemplate);
-    };
+	// models
+	'models/user'
+	], function (Marionette, Handlebars, EventController, MainController, MainRouter, User) {
 
-    // set up the app instance
-    window.Shredhub = new Marionette.Application();
+		Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+			return Handlebars.compile(rawTemplate);
+		};
 
-    // configuration, setting up regions, etc ...
-    Shredhub.addRegions({
-     header : '#header',
-     main   : '#main',
-     modal  : "#modal",
-     footer : '#footer'
-   });
+		Shredr = new Backbone.Marionette.Application();
 
-    Shredhub.addInitializer(function(options){
-      Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
-        if (arguments.length <3)
-          throw new Error("Handlebars Helper equal needs 2 parameters");
-        if( lvalue!=rvalue ) {
-          return options.inverse(this);
-        } else {
-          return options.fn(this);
-        }
-      });
-    });
+		Shredr.on("initialize:before", function(options){
+			this.addRegions({
+				"navigation" : "#navigation",
+				"modal" : "#modal",
+				"main" : "#main",
+				"footer" : "#footer"
+			});
+		});
 
-    Shredhub.addInitializer(function(options) {
-      $.ajaxSetup({
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-        }
-      }); 
-    });
+		Shredr.addInitializer(function(options) {
+			$.ajaxSetup({
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+				}
+			}); 
+		});
 
-    Shredhub.addInitializer(function(options){
-      window.router = new AppRouter({controller:options.controller});
-      Backbone.history.start();
-    });
+		Shredr.vent.on("user:auth:success", function(userdata) {
+			Shredr.loggedIn = true;
+			Shredr.user = new User(userdata);
+			Shredr.mainController.renderNavigationView(true);
+		});
 
-    Shredhub.addInitializer (function(options) {
-      if ( window.user) {
-        Shredhub.user = new User(window.user);
-        Shredhub.user.initUser(window.user);
-      }
-    });
-    
-    window.mainController = new MainController();
-    Shredhub.start({controller : mainController} );
+		Shredr.addInitializer(function(options){
+			this.router = new MainRouter({controller:options.controller});
+			Backbone.history.start();
+		});
 
-    return Shredhub;
-  });
+		Shredr.on("initialize:before", function(options){
+			if ( window.user ) {
+				Shredr.vent.trigger("user:auth:success", window.user);
+			}
+		});
+
+		Shredr.on("initialize:after", function(options){
+			if (window.message && window.message === "user:register:success")
+				Shredr.buzz.openMessageModal();
+		});
+
+		Shredr.mainController = new MainController();
+		Shredr.buzz = new EventController();
+		Shredr.start({controller : Shredr.mainController} );
+
+});

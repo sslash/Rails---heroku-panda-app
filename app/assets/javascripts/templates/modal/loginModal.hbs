@@ -1,0 +1,38 @@
+<div id="fb-root"></div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<img src="/assets/icons/shreddr-logo.jpg" class="logo-medium">
+    	<section class="modal-body">
+    		<button class="btn btn-info" id="signupBtn">Sign-up</button>
+
+            <section id="login">
+                <label class="error" style="display:none"></label>
+    	    	<form role="form" id="loginForm">
+    	    		<div class="form-group">
+    	    			<input type="text" class="form-control" id="emailInput" placeholder="Enter email">
+    	    		</div>
+    	    		<div class="form-group">
+    	    			<input type="password" class="form-control" id="passwordInput" placeholder="Password">
+    	    		</div>
+    	    		<button type="submit" class="btn btn-success btn-block">Login</button>
+    	    	</form>
+            </section>
+
+             <section id="register">
+             </section>
+
+    	</section>
+
+    	<section id="social-login">
+    		<p> Sign in with
+    			<a href="#" id="faceLoginBtn"><i class="icon-facebook"></i></a>
+    			<a href="/auth/twitter"><i class="icon-twitter"></i></a>
+    			<a href="/auth/google_oauth2"><i class="icon-google-plus"></i></a>
+    		</p>
+    	</section>
+
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

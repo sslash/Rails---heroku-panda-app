@@ -20,31 +20,26 @@
 
   <%= javascript_tag do %>
     window.user = <%=raw @user.to_json %>;
-    window.options = {
-      guitars : <%=raw @guitars.to_json %>,
-      newBadges : <%= raw @new_badges.to_json %>
-    } 
+    window.message = <%=raw @message.to_json %>
   <% end %>
 
 </head>
 <body>
-  <section id="header"></section>
+  <section id="navigation"></section>
   <section id="modal"></section>
   <section id="main"></section>
   <section id="footer"></section>
-
-  
-
-  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-  <script>
-  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src='//www.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
-
-  <!-- CDN hosted stuff.. TODO: Move this to require! -->
-  <script src="http://popcornjs.org/code/dist/popcorn-complete.js"></script>
-  <!--<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>-->
 </body>
 </html>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<!--
+  <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+  </script>
+-->

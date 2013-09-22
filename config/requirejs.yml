@@ -13,10 +13,11 @@ paths:
   backbone.babysitter : vendor/backbone.babysitter
   bootstrap : vendor/bootstrap.min
   panda: cdn.pandastream.com/u/2.0/panda-uploader.min
+  popcorn: vendor/popcorn
 shim:
   'underscore':
     exports: '_'
-  'jquery': 
+  'jquery':
     exports : 'jquery'
   'backbone':
     deps: ['underscore', 'jquery']
@@ -35,4 +36,6 @@ shim:
   'jcrop':
     deps: ['jquery']
     exports: 'jcrop'
+  'popcorn' :
+    exports : 'popcorn'
 

@@ -1,15 +1,6 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3'
-
-#require 'rubygems'
-#require 'mongo'
-#source 'http://gemcutter.org'
-
 gem 'rails', '3.2.13'
 
 gem "mongo_mapper"
@@ -18,7 +9,6 @@ gem 'bson_ext'
 gem 'rails_12factor', group: :production
 
 gem "requirejs-rails", "~> 0.9.1"
-
 
 # Becuase file uploads kill sessions
 #gem "redactor-rails", "~> 0.3"
@@ -30,8 +20,11 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'panda', '~> 1.6.0'
 
-# Facebook login
+#Authentication
+gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-twitter'
+gem "omniauth-google-oauth2"
 
 group :development, :test do
 	gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
@@ -46,16 +39,11 @@ group :assets do
 	gem 'coffee-rails', '~> 3.2.1'
 	gem 'therubyracer'  # If using Ruby
 	gem 'less-rails'
-	#gem 'jquery-rails'  # If using Bootstrap's JS plugins.
-	gem 'less-rails-bootstrap'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
+	gem 'less-rails-bootstrap', '~> 3.0.0.wip', github: 'sinfin/less-rails-bootstrap-3'
+  	gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+#gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

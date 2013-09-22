@@ -13,7 +13,5 @@ class Shred
     key :owner, Hash
     key :tags, Array
     key :shredType, String
-    key :timeCreated, Date #TODO: Check if this gets created
-    #key :_id, ObjectId
-
+    key :timeCreated, Time, :default => Time.now
 end
