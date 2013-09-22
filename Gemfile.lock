@@ -5,6 +5,13 @@ GIT
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
 
+GIT
+  remote: git://github.com/sinfin/less-rails-bootstrap-3.git
+  revision: dd8521ee374fb31b083dfbb312d53f7c79322319
+  specs:
+    less-rails-bootstrap (3.0.0.wip)
+      less-rails (~> 2.3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,7 +65,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
-    commonjs (0.2.6)
+    commonjs (0.2.7)
     debugger-ruby_core_source (1.2.3)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -76,13 +83,11 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    less (2.3.2)
+    less (2.3.3)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
-    less-rails-bootstrap (2.3.3)
-      less-rails (~> 2.3.1)
     libv8 (3.11.8.17)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -209,7 +214,7 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 3.2.1)
   jquery-rails
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 3.0.0.wip)!
   linecache19!
   mongo_mapper
   omniauth
