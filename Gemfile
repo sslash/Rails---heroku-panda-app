@@ -39,7 +39,8 @@ group :assets do
 	gem 'coffee-rails', '~> 3.2.1'
 	gem 'therubyracer'  # If using Ruby
 	gem 'less-rails'
-	gem 'less-rails-bootstrap', '~> 3.0.0.wip', github: 'sinfin/less-rails-bootstrap-3'
+	gem 'less-rails-bootstrap'
+	#gem 'less-rails-bootstrap', '~> 3.0.0.wip', github: 'sinfin/less-rails-bootstrap-3'
   	gem 'uglifier', '>= 1.0.3'
 end
 
