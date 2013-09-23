@@ -8,11 +8,10 @@ paths:
   marionette : vendor/backbone.marionette
   handlebars : vendor/handlebars
   text : vendor/text
-  jcrop : vendor/jcrop/jquery.Jcrop
   backbone.wreqr : vendor/backbone.wreqr
   backbone.babysitter : vendor/backbone.babysitter
   bootstrap : vendor/bootstrap.min
-  panda: cdn.pandastream.com/u/2.0/panda-uploader.min
+  popcorn: vendor/popcorn
 shim:
   'underscore':
     exports: '_'
@@ -30,8 +29,5 @@ shim:
   'bootstrap':
     deps: ['jquery']
     exports: 'Bootstrap'
-  'panda' :
-    exports : 'panda'
-  'jcrop':
-    deps: ['jquery']
-    exports: 'jcrop'
+  'popcorn' :
+    exports: 'popcorn'

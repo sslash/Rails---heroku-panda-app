@@ -5,12 +5,11 @@ define([
 	'mainRouter',
 
 	// models
-	], function (Marionette, Handlebars,MainController, MainRouter) {
+	], function (Marionette, Handlebars, MainController, MainRouter ) {
 
 		Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
 			return Handlebars.compile(rawTemplate);
 		};
-
 		Shredr = new Backbone.Marionette.Application();
 
 		Shredr.on("initialize:before", function(options){
