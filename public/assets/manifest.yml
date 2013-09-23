@@ -31,8 +31,8 @@ templates/battle.hbs: templates/battle-589f3703aa5f8fc219fc82698bf96691.hbs
 templates/battle/index.hbs: templates/battle-589f3703aa5f8fc219fc82698bf96691.hbs
 templates/landingPage.hbs: templates/landingPage-055dd09b849aeb1ff4d0671e8b96e33b.hbs
 templates/landingPage/index.hbs: templates/landingPage-055dd09b849aeb1ff4d0671e8b96e33b.hbs
-application.css: application-3d853bd55c2bee250a1d23adb9c3ff35.css
-application/index.css: application-3d853bd55c2bee250a1d23adb9c3ff35.css
+application.css: application-4f64a49accdf277fabe6c0e8b78da9b2.css
+application/index.css: application-4f64a49accdf277fabe6c0e8b78da9b2.css
 font-awesome/font/FontAwesome.otf: font-awesome/font/FontAwesome-d2e1f2cb067bb8a9b129341f5ed85582.otf
 font-awesome/font/FontAwesome/index.otf: font-awesome/font/FontAwesome-d2e1f2cb067bb8a9b129341f5ed85582.otf
 font-awesome/font/fontawesome-webfont.eot: font-awesome/font/fontawesome-webfont-009f6d1f667cc42c25e712ab3429cbc7.eot
