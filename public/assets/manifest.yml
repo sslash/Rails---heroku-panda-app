@@ -3,6 +3,8 @@ backingtrack.mp3: backingtrack-bf48f3e9eb49833ee939ab06a939c9be.mp3
 backingtrack/index.mp3: backingtrack-bf48f3e9eb49833ee939ab06a939c9be.mp3
 banners/banner1.jpg: banners/banner1-61bd95fc00a5f789f6d83c441b54cd48.jpg
 banners/banner1/index.jpg: banners/banner1-61bd95fc00a5f789f6d83c441b54cd48.jpg
+banners/banner2.jpg: banners/banner2-2defdbffdfa09b30f048add6507a0931.jpg
+banners/banner2/index.jpg: banners/banner2-2defdbffdfa09b30f048add6507a0931.jpg
 icons/logo_md_blck.png: icons/logo_md_blck-2dde3e8b672cb77e9296bf3da8d1c91a.png
 icons/logo_md_blck/index.png: icons/logo_md_blck-2dde3e8b672cb77e9296bf3da8d1c91a.png
 icons/logo_sm_blck.png: icons/logo_sm_blck-a7145d5f3f5c840cbc6d8d50fd0f9790.png
@@ -29,8 +31,8 @@ package.json: package-694204011865ad5cccfc62055ae14d90.json
 package/index.json: package-694204011865ad5cccfc62055ae14d90.json
 templates/battle.hbs: templates/battle-589f3703aa5f8fc219fc82698bf96691.hbs
 templates/battle/index.hbs: templates/battle-589f3703aa5f8fc219fc82698bf96691.hbs
-templates/landingPage.hbs: templates/landingPage-055dd09b849aeb1ff4d0671e8b96e33b.hbs
-templates/landingPage/index.hbs: templates/landingPage-055dd09b849aeb1ff4d0671e8b96e33b.hbs
+templates/landingPage.hbs: templates/landingPage-ca01a1c115f52c24a3d037e8aa15f8d7.hbs
+templates/landingPage/index.hbs: templates/landingPage-ca01a1c115f52c24a3d037e8aa15f8d7.hbs
 application.css: application-4f64a49accdf277fabe6c0e8b78da9b2.css
 application/index.css: application-4f64a49accdf277fabe6c0e8b78da9b2.css
 font-awesome/font/FontAwesome.otf: font-awesome/font/FontAwesome-d2e1f2cb067bb8a9b129341f5ed85582.otf

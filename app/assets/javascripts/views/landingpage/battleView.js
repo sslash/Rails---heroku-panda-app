@@ -15,13 +15,13 @@ define([
       },
 
       mediaTags : [
-        '#leftVideoFile1',
-        '#rightVideoFile1',
-        '#audioFile',
-        '#leftVideoFile2',
-        '#rightVideoFile2',
-        '#leftVideoFile3',
-        '#rightVideoFile3'
+        'audioFile',
+        'leftVideoFile1',
+        'rightVideoFile1',
+        'leftVideoFile2',
+        'rightVideoFile2',
+        'leftVideoFile3',
+        'rightVideoFile3'
       ],
 
       visitObj : {
@@ -36,15 +36,29 @@ define([
       startBarrier : function() {
         console.log("starting barriesr");
         var that = this;
-        that.countDownLatch = 7;
-        for ( var i = 0; i < this.mediaTags.length; i++) {
-          $(this.mediaTags[i]).on("canplay", function(){
-            that.countDownLatch -= 1;
-            console.log("stress");
-            if ( that.countDownLatch === 0) {
-              that.playBattle();
-            }
-          });
+        this.med1 = document.getElementById(this.mediaTags[0]);
+        this.med2 = document.getElementById(this.mediaTags[1]);
+        this.med3 = document.getElementById(this.mediaTags[2]);
+
+        this.med1.addEventListener("canplay", function(e){
+         that.tryPlay();
+        });
+
+        this.med2.addEventListener("canplay", function(e){
+           that.tryPlay();
+        });
+
+        this.med3.addEventListener("canplay", function(e){
+           that.tryPlay();
+        });
+
+      },
+
+      tryPlay : function(barrier) {
+        if ( (this.med1.readyState === 4) &&
+          (this.med2.readyState === 4) &&
+          (this.med3.readyState === 4)){
+          this.playBattle();
         }
       },
 
