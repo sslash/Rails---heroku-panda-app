@@ -34,7 +34,6 @@ define([
       },
 
       __logoHovered : function() {
-        console.log("sap");
         if ( !this.mainAreaPressed ){
           $('#main-area').animate({"top" : "+=60%"}, "slow");
           this.openBattleView();

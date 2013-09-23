@@ -11,8 +11,18 @@ define([
       template: Handlebars.compile(tpl),
 
       ui : {
-        audio : "#audioFile"
+        audio : '#audioFile'
       },
+
+      mediaTags : [
+        '#leftVideoFile1',
+        '#rightVideoFile1',
+        '#audioFile',
+        '#leftVideoFile2',
+        '#rightVideoFile2',
+        '#leftVideoFile3',
+        '#rightVideoFile3'
+      ],
 
       visitObj : {
         waitTime : 0,
@@ -20,6 +30,26 @@ define([
       },
 
       onDomRefresh : function() {
+        this.startBarrier();
+      },
+
+      startBarrier : function() {
+        console.log("starting barriesr");
+        var that = this;
+        that.countDownLatch = 7;
+        for ( var i = 0; i < this.mediaTags.length; i++) {
+          $(this.mediaTags[i]).on("canplay", function(){
+            that.countDownLatch -= 1;
+            console.log("stress");
+            if ( that.countDownLatch === 0) {
+              that.playBattle();
+            }
+          });
+        }
+      },
+
+      playBattle : function() {
+        console.log("starting battle");
         var visitObjs = [
         {
           pre : function(){},
