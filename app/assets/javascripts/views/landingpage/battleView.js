@@ -41,20 +41,21 @@ define([
         this.med3 = document.getElementById(this.mediaTags[2]);
 
         this.med1.addEventListener("canplay", function(e){
-         that.tryPlay();
+         that.tryPlay(e);
         });
 
         this.med2.addEventListener("canplay", function(e){
-           that.tryPlay();
+           that.tryPlay(e);
         });
 
         this.med3.addEventListener("canplay", function(e){
-           that.tryPlay();
+           that.tryPlay(e);
         });
 
       },
 
-      tryPlay : function(barrier) {
+      tryPlay : function(e) {
+        console.log("try play: " + e.currentTarget);
         if ( (this.med1.readyState === 4) &&
           (this.med2.readyState === 4) &&
           (this.med3.readyState === 4)){
