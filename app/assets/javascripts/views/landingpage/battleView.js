@@ -68,7 +68,7 @@ define([
         var visitObjs = [
         {
           pre : function(){},
-          waitTime : 1400,
+          waitTime : 1150,
           thisObj : this.ui.audio[0]
         },
         {
@@ -78,21 +78,21 @@ define([
         },
         {
           pre : function(){},
-          waitTime : 5700,
+          waitTime : 5450,
           thisObj : Popcorn('#rightVideoFile1')
         },
         {
           pre : this.toggle,
           hideTag : "#leftVideoFile1",
           showTag : '#leftVideoFile2',
-          waitTime : 10800,
+          waitTime : 10550,
           thisObj : Popcorn('#leftVideoFile2')
         },
         {
           pre : this.toggle,
           hideTag : "#rightVideoFile1",
           showTag : '#rightVideoFile2',
-          waitTime : 22600,
+          waitTime : 22350,
           thisObj : Popcorn('#rightVideoFile2')
         },
         {
@@ -106,7 +106,7 @@ define([
           pre : this.toggle,
           hideTag : "#rightVideoFile2",
           showTag : '#rightVideoFile3',
-          waitTime : 40200,
+          waitTime : 39900,
           thisObj : Popcorn('#rightVideoFile3')
         }];
 
