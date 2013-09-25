@@ -15,6 +15,7 @@ define([
 			this.renderNavigationView();
 			this.renderLangingView();
 			this.renderFooterView();
+			console.log("sap");
 		},
 
 		stagePage : function() {
