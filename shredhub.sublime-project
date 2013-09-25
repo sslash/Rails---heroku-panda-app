@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/michaelgunnulfsen/code/Shredhub/Shredhub",
+			"folder_exclude_patterns": ["doc","lib","app/assets/javascripts/vendor"]
+		}
+	]
+}

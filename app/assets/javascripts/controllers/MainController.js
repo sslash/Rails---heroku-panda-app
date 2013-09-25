@@ -12,14 +12,12 @@ define([
 
 		/** Routing functions */
 		landingPage : function() {
-			console.log("landing page");
 			this.renderNavigationView();
 			this.renderLangingView();
 			this.renderFooterView();
 		},
 
 		stagePage : function() {
-			console.log("Ready to enter the stage!");
 			this.renderNavigationView();
 			this.renderStageView();
 		},

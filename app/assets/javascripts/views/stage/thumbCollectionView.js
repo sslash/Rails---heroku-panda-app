@@ -8,7 +8,6 @@ define([
 
     initialize : function() {
       this.collection.fetch({reset : true});
-      this.collection.on('reset', this.render);
       this.on("itemview:thumb:pressed", this.thumbItemClicked);
     },
 

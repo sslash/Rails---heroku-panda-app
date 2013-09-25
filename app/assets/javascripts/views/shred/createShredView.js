@@ -19,7 +19,8 @@ define([
       'click #stopBtn' : '__stopBtnClicked',
       'change #syncRange' : '__rangeValChanged',
       'click #rewindBtn' : '__rewindBtnClicked',
-      'change #backingTrackSelect' : "__backingTrackSelected"
+      'change #backingTrackSelect' : '__backingTrackSelected',
+      'click #publishBtn' : '__publishBtnClicked'
     },
 
     initialize : function() {
@@ -83,7 +84,7 @@ define([
       if ( this.jamTrackFilePicked ){
         setTimeout(function(){
           $('#audioFile')[0].play();
-        },delayAudio);        
+        },delayAudio);
       }
     },
 
@@ -97,6 +98,58 @@ define([
       if ( selected === 'Clapton Style Blues') {
         this.showBackingTrack("/assets/jamtrack2.mp3");
       }
+    },
+
+    __publishBtnClicked : function() {
+      attrs = {
+        title : $('#titleInput').val(),
+        description : $('#descInput').val(),
+        type : $('#styleInput option:selected').text(),
+        tags : this.getTags(),
+        guitar : this.getGuitar(),
+        backingTrack : this.getBackingTrack(),
+        shredVideo : this.getShredFile()
+      };
+      var shred = new Shred(attrs);
+      if ( !shred.isValid() ){
+        this.displayErrorMsg(shred.validationError);
+        return;
+      }
+
+      shred.on('shred:save:error', this.displayErrorMsg);
+      shred.save();
+    },
+
+    displayErrorMsg : function(error){
+      var msg ="";
+      if (typeof(error)==="object"){
+        if ( error.status === 401 ){
+          msg = "Error! You must be registered in order to Shred!";
+        }else{
+          errorKeyVal = _.pairs(JSON.parse(error.responseText).errors)[0];
+          msg = errorKeyVal[0];
+          msg += ": " + errorKeyVal[1];
+        }
+      }else{
+        msg = error;
+      }
+      $('.error').text(msg).show();
+    },
+
+    getTags : function() {
+      return $('#tagsInput').val().split(/\s*,\s*/);
+    },
+
+    getGuitar : function() {
+      return $('#guitarInput').val();
+    },
+
+    getBackingTrack : function() {
+      return this.jamTrackFile;
+    },
+
+    getShredFile : function() {
+      return this.file;
     },
 
     showBackingTrack : function(file) {

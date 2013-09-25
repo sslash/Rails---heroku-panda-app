@@ -2,6 +2,28 @@
 	<div class="banner"><h1>Upload A New Shred</h1></div>
 
 	<section class="content">
+		<div class="row">
+			<div class="col-lg-6 col-offset-6">
+				<label class="error" style="display:none"></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<p class="lead" for="titleInput">Set Title</p>
+			</div>
+			<div class="col-lg-6">
+				<input type="text" id="titleInput">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<p class="lead" for="descInput">Give it a short description</p>
+			</div>
+			<div class="col-lg-6">
+				<input type="text" id="descInput">
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-lg-6">
@@ -35,11 +57,11 @@
 				<p class="lead">Set Style</p>
 			</div>
 			<div class="col-lg-6">
-				<select>
+				<select id="styleInput">
 				  <option>Shred</option>
 				  <option>Tutorial</option>
 				  <option>Cover</option>
-				  <option>Gear Review</option>
+				  <option>Gear-Review</option>
 				  <option>JamTrack</option>
 				</select>
 			</div>
@@ -47,19 +69,19 @@
 
 		<div class="row">
 			<div class="col-lg-6">
-				<p class="lead">Add Tags</p>
+				<p class="lead" for="tagsInput">Add Tags</p>
 			</div>
 			<div class="col-lg-6">
-				<input type="text">
+				<input type="text" id="tagsInput">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-6">
-				<p class="lead">Guitar Used</p>
+				<p class="lead" for="guitarInput">Guitar Used</p>
 			</div>
 			<div class="col-lg-6">
-				<input type="text">
+				<input type="text" id="guitarInput">
 			</div>
 		</div>
 	</section>
@@ -68,7 +90,7 @@
 
 		<div class="row">
 			<div class="col-lg-4">
-				<button class="btn btn-large btn-success">Publish</button>
+				<button class="btn btn-large btn-success" id="publishBtn">Publish</button>
 			</div>
 			<div class="col-lg-4">
 

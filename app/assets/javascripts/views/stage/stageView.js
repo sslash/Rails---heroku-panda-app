@@ -16,6 +16,10 @@ define([
   StageView = Backbone.Marionette.Layout.extend({
 		template : Handlebars.compile(tpl),
 
+    initialize : function() {
+      this.collection = new ShredsCollection();
+    },
+
     regions : {
       main : "#thumbs"
     },
@@ -26,19 +30,30 @@ define([
     },
 
     events : {
-      "click #createShred" : "__createShredBtnClicked"
+      "click #createShred" : "__createShredBtnClicked",
+      "submit #searchForm": "__searchFormSubmitted"
     },
 
     serializeData : function() {
-      return {
-        user : Shredr.user.toJSON()
-      };
+      if (Shredr.loggedIn) {
+        return {
+          user : Shredr.user.toJSON()
+        };
+      }
     },
 
     onRender : function() {
-      this.thumbCollectionView = new ThumbCollectionView({collection : new ShredsCollection()});
+      this.thumbCollectionView = new ThumbCollectionView({collection : this.collection});
       this.main.show(this.thumbCollectionView);
       this.thumbCollectionView.on("thumb:pressed", $.proxy(this.changeMainSection, this, this.displayShred));
+    },
+
+    __searchFormSubmitted : function(e) {
+      e.preventDefault();
+      var text = e.currentTarget[0].value;
+      this.collection.setSearchTerm(text);
+      this.collection.fetch({reset:true});
+      
     },
 
     __createShredBtnClicked : function() {
@@ -76,6 +91,7 @@ define([
 
     launchCreateShred : function() {
       var createView = new CreateShredView();
+      this.listenToOnce(Shredr.vent, 'shred:save:success', $.proxy(this.displayShred, this));
       this.main.show(createView);
     },
 

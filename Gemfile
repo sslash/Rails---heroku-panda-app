@@ -28,8 +28,8 @@ gem "omniauth-google-oauth2"
 
 group :development, :test do
 	gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-	gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-	gem 'ruby-debug19'
+	#gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+	#gem 'ruby-debug19'
 end
 
 # Gems used only for assets and not required
@@ -58,5 +58,5 @@ end
 # gem 'capistrano'
 
 # To use debugger
-#gem 'debugger'
+gem 'debugger'
 #gem 'ruby-debug19'

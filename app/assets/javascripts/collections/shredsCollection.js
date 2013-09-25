@@ -4,7 +4,7 @@ define([
 	],
 	function(Shred, Backbone) {
 		var ShredsCollection = Backbone.Collection.extend({
-			model: Shred,
+			models: Shred,
 			page : 0,
 			offset: 40,
 			sort: '',
@@ -19,12 +19,24 @@ define([
 				if ( this.sort ) {
 					url += '&sort=' + this.sort;
 				}
+
+				if ( this.extraParams ) {
+					url += '&params=' + this.extraParams;
+				}
 				return url;
 			},
 
 			advancePage : function(){
 				this.page ++;
 			},
+
+			setSearchTerm : function(q){
+				if (q) {
+					this.extraParams = q;
+				} else {
+					this.extraParams = null;
+				}
+			}
 		});
 
 	return ShredsCollection;
