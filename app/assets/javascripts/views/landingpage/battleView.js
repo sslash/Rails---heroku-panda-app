@@ -11,7 +11,8 @@ define([
       template: Handlebars.compile(tpl),
 
       ui : {
-        audio : '#audioFile'
+        audio : '#audioFile',
+        tab : "#tab-input"
       },
 
       mediaTags : [
@@ -29,7 +30,15 @@ define([
         thisObj : {}
       },
 
+      initialize : function(){
+        if (window.options){
+          this.shred = window.options.shred;
+        }
+      },
+
       onDomRefresh : function() {
+        this.drawTabs();
+        //this.startTabRuler();
         this.startBarrier();
       },
 
@@ -64,6 +73,7 @@ define([
       },
 
       playBattle : function() {
+        this.startTabRuler();
         console.log("starting battle");
         var visitObjs = [
         {
@@ -135,7 +145,87 @@ define([
         setTimeout(function() {
           visitObj.thisObj.play();
         },visitObj.waitTime);
+      },
+
+      startTabRuler : function() {
+        var tempo = this.shred.tabsMeta.tempo;
+        var bts_sec = tempo / 60; // beveg deg bts_sec firedels noter i sekundet
+        var draws_sec = bts_sec * (1*16); // 1/4 noter i sekundet * 16 = 1/64
+        var miliseconds_until_next_draw = 1000/draws_sec;
+
+        var firstRest = this.shred.tabs[0].rest * 2;
+        var widthInterval = 1148 / (4*64); // bredde per bevegelse. vet ikke hvorfor 1140 gir riktig bredde
+        var currWidthInterval = this.tabswidth / (firstRest*4) - 5;
+        var that = this;
+        setInterval(function(){
+          that.drawRuler(currWidthInterval);
+          currWidthInterval += widthInterval;
+        }, miliseconds_until_next_draw);
+
+      },
+
+
+
+
+      /**************************************************************
+      *                         CREATE TABS                         *
+      ***************************************************************/
+      drawTabs : function() {
+        this.drawBackground();
+      },
+
+      drawBackground : function(){
+        this.barsIndex = 0;
+        if (!this.shred.tabs) {
+          return false;
+        }
+
+        this.prevBarsIndex = this.barsIndex;
+        var prevLeft = 0;
+        var that = this;
+        this.tabswidth = 1370; //$('#bars').width(); TODO: SHOULD BE THIS
+        var tabs = this.shred.tabs;
+        var prevRest = tabs[0].rest * 2; // Start from 32 px left margin
+
+        for (var barsCounter = 0; (this.barsIndex < tabs.length && barsCounter < 4); this.barsIndex ++ ){
+          var tab = tabs[this.barsIndex];
+          barsCounter += 1/tab.rest;
+
+          prevLeft = Math.round(( this.tabswidth / (prevRest*4)) + prevLeft);
+          prevRest = tab.rest;
+
+          _.each(tab.stringz, function(obj) {
+            var le_string = Object.keys(obj)[0];
+            var label = $("<label class='note' title='" +tab.rest + "'>" + obj[le_string] + "</label>");
+            label.css('left', (prevLeft + "px") );
+
+            // first 25 = top offset. Multiplier 25 = offset between lines
+            var top = 25 + (le_string*25);
+            label.css('top', (top + "px") );
+
+            that.ui.tab.append(label);
+          });             
+        }
+      },
+
+      drawRuler : function(nextWidth){
+        var ruler=document.getElementById("bars");
+        ruler.width  = 1370;
+        this.rulerHeight = 126; 
+        this.currRulerX = 0;
+        
+        this.ctx = ruler.getContext("2d");
+        this.ctx.clearRect(0, 0, ruler.width, ruler.height);
+        this.ctx.strokeStyle='#cc0000';
+        this.ctx.lineWidth = 2;
+
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(nextWidth,0);
+        this.ctx.lineTo(nextWidth,this.rulerHeight);
+        this.ctx.stroke();
       }
+
     });
 
     return BattleView;

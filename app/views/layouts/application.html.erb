@@ -17,6 +17,12 @@
   %>
   <%= csrf_meta_tag %>
 
+  <%= javascript_tag do %>
+    window.options = {
+      shred : <%=raw @shred.to_json %>
+    } 
+  <% end %>
+
 </head>
 <body>
   <section id="page"></section>
