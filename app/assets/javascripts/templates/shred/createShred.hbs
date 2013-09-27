@@ -89,10 +89,7 @@
 	<section class="videoHandle">
 
 		<div class="row">
-			<div class="col-lg-4">
-				<button class="btn btn-large btn-success" id="publishBtn">Publish</button>
-			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4 col-offset-4">
 
 				<div id="leVideo"></div>
 				<div id="leAudio"></div>
@@ -112,18 +109,46 @@
 
 	<section id="createTabsArea">
 		<div class="row">
-			<div class="col-lg-1"> <li class="icon-chevron-left icon-2x"></li></div>
+			<div class="col-lg-3">
+				<p><li class="icon-music icon-large"></li>=<span>120</span></p>
+			</div>
+
+			<div class="col-lg-6">
+				<img src="/assets/icons/notes/helnote.png" class="notes" id="semibreve">
+				<img src="/assets/icons/notes/halvnote.png"class="notes" id="minim">
+				<img src="/assets/icons/notes/firedels.png"class="notes selected" id="crotchet">
+				<img src="/assets/icons/notes/attedels.png"class="notes" id="quaver">
+				<img src="/assets/icons/notes/sekstendels.png"class="notes" id="semiquaver">
+				<img src="/assets/icons/notes/tretitodels.png"class="notes" id="demisemiquaver">
+				<img src="/assets/icons/notes/64dels.png"class="notes" id="hemidemisemiquaver">
+			</div>
+
+
+			<div class="col-lg-3">
+				<img src="/assets/icons/notes/hvilepause.png"class="notes">
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-1 arrows"><li class="icon-chevron-left icon-2x"></li></div>
 			<div class="col-lg-10">
 
 				<div class="row tabsArea">
-					<img src="/assets/tabs2.png">
-					
-					<div id="tab-input">
-					</div>
+					<img src="/assets/tabs.png">
+					<input type="text" id="tab-input" autofocus maxlength="2"></input>
 				</div>
 
 			</div>
-			<div class="col-lg-1"><li class="icon-chevron-right icon-2x"></li> </div>
+			<div class="col-lg-1 arrows"><li class="icon-chevron-right icon-2x"></li> </div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-6 col-offset-6">
+				<button class="btn btn-large btn-success" id="publishBtn">Publish</button>
+			</div>
 		</div>
 	</section>
 </div>

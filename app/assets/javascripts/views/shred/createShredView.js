@@ -3,11 +3,12 @@ define([
   'handlebars',
   'bootstrap',
   'popcorn',
+  'models/tabGenerator',
 
   'models/shred',
   // Templates
   'text!templates/shred/createShred.hbs',
-  ],function (Marionette, Handlebars, bs, Popcorn, Shred, tpl) {
+  ],function (Marionette, Handlebars, bs, tg, Popcorn, Shred, tpl) {
 
   CreateShredView = Backbone.Marionette.Layout.extend({
 		template : Handlebars.compile(tpl),
@@ -31,6 +32,7 @@ define([
 
     onDomRefresh: function(){
       //this.initPanda();
+      $('.tabsArea').tabGenerator({notes : $('.notes')});
     },
 
     __jamTrackChanged : function(e) {
