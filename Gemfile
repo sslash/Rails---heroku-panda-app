@@ -14,6 +14,7 @@ gem "requirejs-rails", "~> 0.9.1"
 #gem "redactor-rails", "~> 0.3"
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'newrelic_rpm'
 
 # File uploads
 gem 'carrierwave'
