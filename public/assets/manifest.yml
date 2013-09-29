@@ -33,8 +33,8 @@ application.js: application-cb316b0137452911ae55ecac403dac59.js
 application/index.js: application-cb316b0137452911ae55ecac403dac59.js
 package.json: package-694204011865ad5cccfc62055ae14d90.json
 package/index.json: package-694204011865ad5cccfc62055ae14d90.json
-templates/battle.hbs: templates/battle-e5f175db534a698d4a0bba1c5aad3636.hbs
-templates/battle/index.hbs: templates/battle-e5f175db534a698d4a0bba1c5aad3636.hbs
+templates/battle.hbs: templates/battle-2c187aa722e4c41851d0ddc2cb530655.hbs
+templates/battle/index.hbs: templates/battle-2c187aa722e4c41851d0ddc2cb530655.hbs
 templates/landingPage.hbs: templates/landingPage-09f1de095a1394262d5805020b412072.hbs
 templates/landingPage/index.hbs: templates/landingPage-09f1de095a1394262d5805020b412072.hbs
 application.css: application-deca003f219ad04499baca4ed95d7854.css

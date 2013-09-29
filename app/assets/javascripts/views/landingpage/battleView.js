@@ -38,8 +38,8 @@ define([
 
       onDomRefresh : function() {
         this.drawTabs();
-        //this.startTabRuler();
-        this.startBarrier();
+        this.startTabRuler();
+        //this.startBarrier();
       },
 
       startBarrier : function() {
