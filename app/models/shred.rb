@@ -40,8 +40,8 @@ class Shred
 
     end
 
-    def addTabs tabs
-
+    def addTabs(tabs)
+        self.tabs = JSON.parse(tabs)
     end
 
     def self.parseTags(tags)

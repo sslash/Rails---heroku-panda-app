@@ -32,7 +32,7 @@ define([
 
     onDomRefresh: function(){
       //this.initPanda();
-      $('.tabsArea').tabGenerator({notes : $('.notes')});
+      this.tabsGen = $('.tabsArea').tabGenerator({notes : $('.notes')});
     },
 
     __jamTrackChanged : function(e) {
@@ -112,6 +112,11 @@ define([
         backingTrack : this.getBackingTrack(),
         shredVideo : this.getShredFile()
       };
+
+      var tabs = this.tabsGen.getTabs();
+      if (tabs) {
+        attrs.tabs = JSON.stringify(tabs);
+      }
       var shred = new Shred(attrs);
       if ( !shred.isValid() ){
         this.displayErrorMsg(shred.validationError);

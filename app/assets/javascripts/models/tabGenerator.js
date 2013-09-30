@@ -29,6 +29,14 @@
 			return this.tabInput.val();
 		};
 
+		this.getTabs = function() {
+			return {
+				tempo: "125",
+				tabs: this.tabs
+			}
+			
+		};
+
 		this.getNextMoveWidth = function() {
 			return this.width() / (this.intervall*4);
 		};
