@@ -1,4 +1,4 @@
 class Shred
     include MongoMapper::Document
-    key :tabs, Array
+    key :tabs, Object
 end

@@ -38,8 +38,8 @@ define([
 
       onDomRefresh : function() {
         this.drawTabs();
-        this.startTabRuler();
-        //this.startBarrier();
+        //this.startTabRuler();
+        this.startBarrier();
       },
 
       startBarrier : function() {
@@ -148,23 +148,33 @@ define([
       },
 
       startTabRuler : function() {
-        var tempo = this.shred.tabsMeta.tempo;
+        var tempo = this.shred.tabs.tempo;
         var bts_sec = tempo / 60; // beveg deg bts_sec firedels noter i sekundet
-        var draws_sec = bts_sec * (1*16); // 1/4 noter i sekundet * 16 = 1/64
+        var draws_sec = bts_sec * (1*4); // 1/4 noter i sekundet * 16 = 1/64
         var miliseconds_until_next_draw = 1000/draws_sec;
 
-        var firstRest = this.shred.tabs[0].rest * 2;
-        var widthInterval = 1148 / (4*64); // bredde per bevegelse. vet ikke hvorfor 1140 gir riktig bredde
-        var currWidthInterval = this.tabswidth / (firstRest*4) - 5;
+        this.firstRest = this.shred.tabs.tempo * 2;
+        var widthInterval = 1148 / (4*16); // bredde per bevegelse. vet ikke hvorfor 1140 gir riktig bredde
+        this.currWidthInterval = this.tabswidth / (firstRest*4) - 5;
         var that = this;
-        setInterval(function(){
-          that.drawRuler(currWidthInterval);
-          currWidthInterval += widthInterval;
-        }, miliseconds_until_next_draw);
 
+        this.antallRulerMvmnts = 4*16;
+        setInterval(function(){
+          antallRulerMvmnts --;
+          if (antallRulerMvmnts == 0) {
+            that.redrawTabs();            
+          }
+          that.drawRuler(that.currWidthInterval);
+          that.currWidthInterval += widthInterval;
+        }, miliseconds_until_next_draw);
       },
 
-
+      redrawTabs : function() {
+        this.currWidthInterval = this.tabswidth / (this.firstRest*4) - 5;
+        $('.note').remove();
+        this.drawBackground();
+        this.antallRulerMvmnts = 4*16;
+      },
 
 
       /**************************************************************
@@ -175,16 +185,18 @@ define([
       },
 
       drawBackground : function(){
-        this.barsIndex = 0;
+        if ( !this.barsIndex ){
+          this.barsIndex = 0;
+        }
         if (!this.shred.tabs) {
           return false;
         }
 
-        this.prevBarsIndex = this.barsIndex;
+        //this.prevBarsIndex = this.barsIndex;
         var prevLeft = 0;
         var that = this;
         this.tabswidth = 1370; //$('#bars').width(); TODO: SHOULD BE THIS
-        var tabs = this.shred.tabs;
+        var tabs = this.shred.tabs.tabs;
         var prevRest = tabs[0].rest * 2; // Start from 32 px left margin
 
         for (var barsCounter = 0; (this.barsIndex < tabs.length && barsCounter < 4); this.barsIndex ++ ){
@@ -200,7 +212,7 @@ define([
             label.css('left', (prevLeft + "px") );
 
             // first 25 = top offset. Multiplier 25 = offset between lines
-            var top = 25 + (le_string*25);
+            var top = 32 + (le_string*27);
             label.css('top', (top + "px") );
 
             that.ui.tab.append(label);

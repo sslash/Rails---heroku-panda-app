@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
 	def landingpage
-		@shred = Shred.find("5242dedfca85e58a166decf3")
+		@shred = Shred.find("524979eb8ca79402df0000a7")
 		render "/home.html.erb"
 	end
 
