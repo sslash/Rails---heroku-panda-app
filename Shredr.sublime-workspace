@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"move",
+				"moveBarBackwards"
+			],
+			[
 				"renve",
 				"renderNavigationView"
 			],
@@ -100,11 +104,31 @@
 	},
 	"file_history":
 	[
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/stage/shredThumb.hbs",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/views/stage/stageView.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/views/stage/thumbItemView.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/models/tabGenerator.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/shred/createShred.hbs",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/stage.css.less",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/createShred.css.less",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/shred.css.less",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/views/landingpage/battleView.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/sessions_controller.rb",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/models/shred.rb",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/public/assets/templates/battle.hbs",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/shreds_controller.rb",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/views/shred/createShredView.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/tmp/assets/models/tabGenerator.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/Gemfile",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/views/layouts/application.html.erb",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/battle.hbs",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/config/newrelic.yml",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/tmp/assets/vendor/popcorn.js",
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/Shredr.sublime-workspace",
 		"/Users/michaelgunnulfsen/code/Shredhub kopi/Shredhub/app/assets/javascripts/views/shred/createShredView.js",
 		"/Users/michaelgunnulfsen/code/Shredhub kopi/Shredhub/app/assets/javascripts/views/shred/shredView.js",
 		"/Users/michaelgunnulfsen/code/shredhub v0.1/app/assets/javascripts/vendor/popcorn,js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/controllers/eventController.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/sessions_controller.rb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/application_controller.rb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/mainRouter.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/controllers/mainController.js",
@@ -116,9 +140,7 @@
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/modals.css.less",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/modal/mainMessageLayout.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/modal/loginModal.hbs",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/views/layouts/application.html.erb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/models/shredder.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/Gemfile",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/views/landingpage/landingPageView.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/modal/mainLayout.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/commons.css.less",
@@ -137,7 +159,6 @@
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/landingPage/landingPageLoggedIn.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/navigation.css.less",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/landingPage.css.less",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/models/shred.rb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/images.css.less",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/modals/loginModal.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/config/application.rb",
@@ -193,7 +214,6 @@
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/badges/badgeModalView.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shredder/levelModalTpl.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/views/shredderView.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/shreds_controller.rb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/models/shredder.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/models/user.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/views/shredView.js",
@@ -205,29 +225,13 @@
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/controllers/MainController.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/models/shred.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/badgesModal.css.less",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/createShred.css.less",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shred/createShred.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/models/badge.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/badge_controller.rb",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/createTest.js",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shred/createTabs.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/config.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/config.ru",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/db/seed_mongo.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/controllers/panda_controller.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/test/unit/badges_test.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/badges/badges.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/badges/badges.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/collections/shreds.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/views/show.html.erb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shredpool/shredpool.hbs",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shredpool/shredInPool.hbs",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/shred/shredModal.hbs",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/views/mainView.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/app/templates/mainPage.hbs",
-		"/Users/michaelgunnulfsen/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
-		"/Users/michaelgunnulfsen/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/db/webTestData.js"
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/config.ru"
 	],
 	"find":
 	{
@@ -238,6 +242,8 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"*.hbs",
+			"*.less",
 			"",
 			"*.rb",
 			"*.js",
@@ -263,6 +269,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"note",
+			"prevBarsIndex",
+			"drawTabs",
+			"tabs",
+			"offset",
+			"transform",
+			"animate",
+			"note",
+			"$",
+			"jquery",
+			"$.fn",
 			"audio",
 			"transform",
 			"landingPageImg",
@@ -379,18 +396,7 @@
 			"Failed",
 			"renderShreddersPage",
 			"__renderNavbar",
-			"__renderN",
-			"tabs",
-			"top",
-			"shredModal",
-			"tags",
-			"shredModal",
-			"this.title",
-			"thie.title",
-			"alert",
-			"tabs",
-			"note",
-			"bars"
+			"__renderN"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -448,7 +454,7 @@
 		"cols":
 		[
 			0.0,
-			0.523993727469,
+			0.562065080162,
 			1.0
 		],
 		"rows":
@@ -472,6 +478,54 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"tab",
+				"app/assets/javascripts/models/tabGenerator.js"
+			],
+			[
+				"thumb",
+				"app/assets/javascripts/views/stage/thumbItemView.js"
+			],
+			[
+				"shred.css",
+				"app/assets/stylesheets/shred.css.less"
+			],
+			[
+				"shredth",
+				"app/assets/javascripts/templates/stage/shredThumb.hbs"
+			],
+			[
+				"templates/battle",
+				"public/assets/templates/battle.hbs"
+			],
+			[
+				"shred.rb",
+				"app/models/shred.rb"
+			],
+			[
+				"battleview",
+				"app/assets/javascripts/views/landingpage/battleView.js"
+			],
+			[
+				"createshre",
+				"app/assets/javascripts/views/shred/createShredView.js"
+			],
+			[
+				"applic",
+				"app/views/layouts/application.html.erb"
+			],
+			[
+				"gemfil",
+				"Gemfile"
+			],
+			[
+				"createshred",
+				"app/assets/javascripts/views/shred/createShredView.js"
+			],
+			[
+				"popco",
+				"tmp/assets/vendor/popcorn.js"
+			],
 			[
 				"landing",
 				"Shredhub/app/assets/javascripts/templates/landingPage/landingPage.hbs"
@@ -519,10 +573,6 @@
 			[
 				"maincon",
 				"Shredhub/app/assets/javascripts/controllers/mainController.js"
-			],
-			[
-				"createshre",
-				"app/assets/javascripts/templates/shred/createShred.hbs"
 			],
 			[
 				"shredvie",
@@ -939,50 +989,6 @@
 			[
 				"read",
 				"README.md"
-			],
-			[
-				"shredcontroller",
-				"app/controllers/shreds_controller.rb"
-			],
-			[
-				"badges",
-				"app/assets/stylesheets/badgesModal.css.less"
-			],
-			[
-				"applications.",
-				"app/assets/stylesheets/application.css.less"
-			],
-			[
-				"createshred",
-				"app/assets/stylesheets/createShred.css.less"
-			],
-			[
-				"badge_con",
-				"app/controllers/badge_controller.rb"
-			],
-			[
-				"createtabs",
-				"app/assets/javascripts/app/templates/shred/createTabs.hbs"
-			],
-			[
-				"conf",
-				"app/assets/javascripts/app/config.js"
-			],
-			[
-				"config",
-				"config.ru"
-			],
-			[
-				"shredscon",
-				"app/controllers/shreds_controller.rb"
-			],
-			[
-				"shred.rb",
-				"app/models/shred.rb"
-			],
-			[
-				"shreds",
-				"app/assets/javascripts/app/collections/shreds.js"
 			]
 		],
 		"width": 0.0
@@ -999,6 +1005,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 274.0,
+	"side_bar_width": 201.0,
 	"status_bar_visible": true
 }

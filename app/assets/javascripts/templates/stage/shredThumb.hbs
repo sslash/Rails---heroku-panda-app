@@ -2,5 +2,11 @@
 <img src="/assets/guitarist.jpg">
 <p class="lead">{{title}}</p>
 <label><small> {{#each tags}}<i class="icon-music"></i>{{this}} {{/each}}</small></label>
-<p>By <a href="/#shredders/{{owner._id}}">{{owner.username}}</a></p>
+<p>By <a class="shrdr-name" href="/#shredders/{{owner._id}}">{{owner.username}}</a></p>
 <p>{{timeCreated}}</p>
+
+<div class="shrdr-popover">
+	<label>{{owner.username}}</label>
+	<img src="/assets/trtls.jpg">
+	<a href="">Challenge</a>
+</div>

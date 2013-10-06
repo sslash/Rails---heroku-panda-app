@@ -12,13 +12,24 @@ define([
     tagName: "div",
     className: "shredThumb",
 
+    ui : {
+      shredderPopover : ".shrdr-popover"
+    },
+
     events : {
-      "click img" : "__thumbClicked"
+      "click img" : "__thumbClicked",
+      "mouseover a.shrdr-name" : "__shredderNameHovered"
     },
 
     __thumbClicked : function() {
       this.trigger("thumb:pressed");
+    },
+
+    __shredderNameHovered : function(e) {
+      e.preventDefault();
+      this.ui.shredderPopover.show();
     }
+
   });
 
   return ThumbItemView;

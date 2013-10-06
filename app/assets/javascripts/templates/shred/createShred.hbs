@@ -12,7 +12,7 @@
 				<p class="lead" for="titleInput">Set Title</p>
 			</div>
 			<div class="col-lg-6">
-				<input type="text" id="titleInput">
+				<input type="text" id="titleInput" autofocus>
 			</div>
 		</div>
 
@@ -108,28 +108,6 @@
 	</section>
 
 	<section id="createTabsArea">
-		<div class="row">
-			<div class="col-lg-3">
-				<p><li class="icon-music icon-large"></li>=<span>120</span></p>
-			</div>
-
-			<div class="col-lg-6">
-				<img src="/assets/icons/notes/helnote.png" class="notes" id="semibreve">
-				<img src="/assets/icons/notes/halvnote.png"class="notes" id="minim">
-				<img src="/assets/icons/notes/firedels.png"class="notes selected" id="crotchet">
-				<img src="/assets/icons/notes/attedels.png"class="notes" id="quaver">
-				<img src="/assets/icons/notes/sekstendels.png"class="notes" id="semiquaver">
-				<img src="/assets/icons/notes/tretitodels.png"class="notes" id="demisemiquaver">
-				<img src="/assets/icons/notes/64dels.png"class="notes" id="hemidemisemiquaver">
-			</div>
-
-
-			<div class="col-lg-3">
-				<img src="/assets/icons/notes/hvilepause.png"class="notes">
-			</div>
-
-		</div>
-
 
 		<div class="row">
 			<div class="col-lg-1 arrows"><li class="icon-chevron-left icon-2x"></li></div>
@@ -137,7 +115,25 @@
 
 				<div class="row tabsArea">
 					<img src="/assets/tabs.png">
-					<input type="text" id="tab-input" autofocus maxlength="2"></input>
+
+					<div class="note-decorator">
+						<ul>
+							<li><img src="/assets/icons/notes/helnote.png" class="notes" id="semibreve"></li>
+							<li><img src="/assets/icons/notes/halvnote.png"class="notes" id="minim"></li>
+							<li><img src="/assets/icons/notes/firedels.png"class="notes selected" id="crotchet"></li>
+							<li><img src="/assets/icons/notes/attedels.png"class="notes" id="quaver"></li>
+							<li><img src="/assets/icons/notes/sekstendels.png"class="notes" id="semiquaver"></li>
+							<li><img src="/assets/icons/notes/tretitodels.png"class="notes" id="demisemiquaver"></li>
+							<li><img src="/assets/icons/notes/64dels.png"class="notes" id="hemidemisemiquaver"></li>
+							<li class="icon-music icon-large"></li>=<span>120</span>
+							<li><img src="/assets/icons/notes/hvilepause.png"class="notes"></li>
+						</ul>
+						<ul>
+							<li><img src="/assets/icons/arrow.png" id="bendBtn"></li>
+							<li><p>P.M</p></li>
+						</ul>
+					</div>
+					<input type="text" id="tab-input" maxlength="2"></input>
 				</div>
 
 			</div>

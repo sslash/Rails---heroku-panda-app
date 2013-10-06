@@ -8,11 +8,13 @@
 		
 		this.init = function(){
 			this.tabInput = this.find("input");
+
 			if (!this.tabInput){
 				throw "Could not find tab input";
 			}
 
-			this.notes = that.options.notes || $('.notes');			
+			this.notes = that.options.notes || $('.notes');
+			this.bendBtn = that.options.bendBtn || $('#bendBtn');	
 			this.tabs = [];
 			this.tabsIndex = 0;			/* current Y */
 			this.tabsStringIndex = 0;	/* current string */
@@ -20,9 +22,14 @@
 			this.bars = 0; 				/* current bar / space */
 			this.stringzHeight = "22px";/* Height between strings */
 			this.noteDiv = "#crotchet";	/* Current interval image */
+			this.note_color = "white";
 
+
+			// Listeners
 			this.tabInput.on('keyup', $.proxy(that.__keypressed, that));
 			this.notes.on('click', $.proxy(that.__noteChangeClicked, that));
+			this.bendBtn.on('click', $.proxy(that.__bendBtnClicked, that));
+
 		};
 
 		this.getTabInput = function() {
@@ -96,7 +103,15 @@
 				this.tabsStringIndex ++;
 			}
 			return fret;
-		},
+		};
+
+		this.__bendBtnClicked = function(e) {
+			console.log("SAP");
+			if (!this.currDecorators){
+				this.currDecorators = {};
+			}
+			this.currDecorators['bend'] = true;
+		};
 		
 		this.__keypressed = function(e) {
 			var key = e.keyCode;
@@ -128,10 +143,17 @@
 				fret = "<img src='/assets/icons/notes/hvilepause.png'>"
 			}
 
-			var label = $("<label class='note'>" + fret + "</label>");
+			var label = $("<label class='note' style='color:" + this.note_color + ";'>" + fret + "</label>");
 			label.offset(this.tabInput.position());
 			this.tabInput.after(label);
 			this.tabInput.val("");
+
+			if (this.currDecorators){
+				var img = $("<img src='/assets/icons/arrow_white.png' class='bendImg'>");
+				img.offset($(label).position());
+				label.after(img);
+				this.currDecorators = null;
+			}
 
 			if ( this.bars === 4 ) {
 				this.clearAndIterateBars();				
@@ -143,24 +165,31 @@
 			switch (true) {
 				case /^semibreve$/.test(divId):
 					this.intervall = 1;
+					this.note_color = "red";
 					break;
 				case /^minim$/.test(divId):
 					this.intervall = 2;
+					this.note_color = "blue";
 					break;
 				case /^crotchet$/.test(divId):
 					this.intervall = 4;
+					this.note_color = "white";
 					break;
 				case /^quaver$/.test(divId):
 					this.intervall = 8;
+					this.note_color = "yellow";
 					break;
 				case /^semiquaver$/.test(divId):
 					this.intervall = 16;
+					this.note_color = "purple";
 					break;
 				case /^demisemiquaver$/.test(divId):
 					this.intervall = 32;
+					this.note_color = "green";
 					break;
 				case /^hemidemisemiquaver$/.test(divId):
 					this.intervall = 64;
+					this.note_color = "brown";
 					break;
 			}
 			$(this.noteDiv).removeClass("selected");
