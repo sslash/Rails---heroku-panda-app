@@ -1,26 +1,14 @@
 define([
   'marionette',
   'handlebars',
-  'popcorn',
-
-  'views/landingPage/battleView',
-
   'text!templates/landingPage.hbs'
-  ], function (Marionette, Handlebars, Popcorn, BattleView, tpl) {
+  ], function (Marionette, Handlebars, tpl) {
 
     LandingPageView = Backbone.Marionette.Layout.extend({
       template: Handlebars.compile(tpl),
 
-      regions : {
-        battle : "#battle-area"
-      },
-
-      events : {},
-
       events : {
-        'submit form' : '__formSubmitted',
-        'click #logo-img' : '__logoHovered'
-
+        'submit form' : '__formSubmitted'
       },
 
       __formSubmitted : function(e) {
@@ -31,22 +19,6 @@ define([
           .done(this.postSuccess)
           .fail(this.postFail)
         }
-      },
-
-      __logoHovered : function() {
-        if ( !this.mainAreaPressed ){
-          $('#main-area').animate({"top" : "+=60%"}, "slow");
-          this.openBattleView();
-          this.mainAreaPressed = true;
-        } else {
-          this.mainAreaPressed = false;
-          $('#main-area').animate({"top" : "-=60%"}, "slow");
-        }
-      },
-
-      openBattleView : function() {
-        var view = new BattleView();
-        this.battle.show(view);
       },
 
       postSuccess : function(res) {
