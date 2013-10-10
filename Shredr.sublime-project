@@ -6,6 +6,8 @@
 			[
 				"doc",
 				"lib",
+				"tmp",
+				"public",
 				"app/assets/javascripts/vendor"
 			],
 			"path": "/Users/michaelgunnulfsen/code/Shredhub/Shredhub"

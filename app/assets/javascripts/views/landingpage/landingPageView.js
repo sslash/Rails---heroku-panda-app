@@ -22,7 +22,7 @@ define([
       },
 
       postSuccess : function(res) {
-        $('#success').text("Thank you").show();
+        $('#success').text("Thank you!").show();
       },
 
       postFail : function(errorObj) {
