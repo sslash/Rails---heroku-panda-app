@@ -7,6 +7,10 @@
 	var Shred = Backbone.Model.extend({
 		urlRoot : "/api/shreds",
 
+		defaults : {
+			title : ''
+		},
+
 		validate : function(attrs, options){
 			if (!attrs.title){
 				return "Title must be included";

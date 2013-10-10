@@ -5,7 +5,7 @@ define([
 	'text!templates/nav/mainNav.hbs'
 	], function (Marionette, Handlebars, tpl) {
 
-		MainNav = Backbone.Marionette.ItemView.extend({
+		var MainNav = Backbone.Marionette.ItemView.extend({
 			template: Handlebars.compile(tpl),
 
 			serializeData : function() {

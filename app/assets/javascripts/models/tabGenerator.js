@@ -19,7 +19,7 @@
 			this.tabsIndex = 0;			/* current Y */
 			this.tabsStringIndex = 0;	/* current string */
 			this.intervall = 4;			/* current rest */
-			this.bars = 0; 				/* current bar / space */
+			this.bars = 0;				/* current bar / space */
 			this.stringzHeight = "22px";/* Height between strings */
 			this.noteDiv = "#crotchet";	/* Current interval image */
 			this.note_color = "white";
@@ -40,8 +40,7 @@
 			return {
 				tempo: "125",
 				tabs: this.tabs
-			}
-			
+			};			
 		};
 
 		this.getNextMoveWidth = function() {
@@ -58,12 +57,12 @@
 
 			this.tabs[tabsIndex].rest = this.intervall;
 			if (!this.tabs[tabsIndex].stringz) {
-				this.tabs[tabsIndex].stringz = []
+				this.tabs[tabsIndex].stringz = [];
 			}
 
 			// add the fret at the given string
-			var obj = {}
-			obj[tabsStringIndex] = parsedFret
+			var obj = {};
+			obj[tabsStringIndex] = parsedFret;
 			this.tabs[tabsIndex].stringz.push(obj);
 			return parsedFret;
 		};
@@ -87,7 +86,7 @@
 			this.tabInput.animate({ left: "-=" + intervallWidthPx + "px"}, 1);
 			this.tabsIndex --;
 			this.bars -= 1/this.intervall;
-			return
+			return;
 		};
 
 		this.moveBarDownOrUpwards = function(dir) {
@@ -110,7 +109,7 @@
 			if (!this.currDecorators){
 				this.currDecorators = {};
 			}
-			this.currDecorators['bend'] = true;
+			this.currDecorators.bend = true;
 		};
 		
 		this.__keypressed = function(e) {
@@ -140,7 +139,7 @@
 					return;
 			}
 			if ( fret === -1) {
-				fret = "<img src='/assets/icons/notes/hvilepause.png'>"
+				fret = "<img src='/assets/icons/notes/hvilepause.png'>";
 			}
 
 			var label = $("<label class='note' style='color:" + this.note_color + ";'>" + fret + "</label>");
@@ -213,7 +212,7 @@
 		this.options = options;
 		this.init();
 		return this;
-	}
+	};
 
 
 	$.fn.tabGenerator = TabGenerator;

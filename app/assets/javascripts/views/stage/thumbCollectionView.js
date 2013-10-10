@@ -13,6 +13,10 @@ define([
 
     thumbItemClicked : function(thumb) {
       this.trigger("thumb:pressed", thumb.model);
+    },
+
+    setItemView : function(newItemView) {
+      this.itemView = newItemView;
     }
 
 

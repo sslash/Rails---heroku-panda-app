@@ -7,17 +7,22 @@ define([
   'views/shred/shredView',
   'views/shred/createShredView',
 
+  'views/stage/shreddersThumbItemView',
+
   'collections/shredsCollection',
+  'collections/shreddersCollection',
 
   // Templates
   'text!templates/stage/mainStage.hbs',
-  ],function (Marionette, Handlebars, bs, ThumbCollectionView, ShredView, CreateShredView, ShredsCollection, tpl) {
+  ],function (Marionette, Handlebars, bs, ThumbCollectionView, ShredView,
+   CreateShredView,ShreddersThumbItemView, ShredsCollection, ShreddersCollection,tpl) {
 
   StageView = Backbone.Marionette.Layout.extend({
 		template : Handlebars.compile(tpl),
 
     initialize : function() {
       this.collection = new ShredsCollection();
+      this.thumbCollectionView = new ThumbCollectionView({collection : this.collection});
     },
 
     regions : {
@@ -30,8 +35,11 @@ define([
     },
 
     events : {
-      "click #createShred" : "__createShredBtnClicked",
-      "submit #searchForm": "__searchFormSubmitted"
+      'click #createShred' : '__createShredBtnClicked',
+      'submit #searchForm': '__searchFormSubmitted',
+      'click #shred-view-btn': '__shredViewBtnClicked',
+      'click #battle-view-btn': '__battleViewBtnClicked',
+      'click #shredder-view-btn': '__shredderViewBtnClicked',
     },
 
     serializeData : function() {
@@ -43,9 +51,21 @@ define([
     },
 
     onRender : function() {
-      this.thumbCollectionView = new ThumbCollectionView({collection : this.collection});
       this.main.show(this.thumbCollectionView);
       this.thumbCollectionView.on("thumb:pressed", $.proxy(this.changeMainSection, this, this.displayShred));
+    },
+
+    __battleViewBtnClicked : function(){
+    },
+
+    __shredderViewBtnClicked : function() {
+      this.collection = new ShreddersCollection();
+      this.thumbCollectionView.setItemView(ShreddersThumbItemView);
+      this.render();
+    },
+
+    __shredViewBtnClicked : function(){
+      console.log("SAP");
     },
 
     __searchFormSubmitted : function(e) {
@@ -98,6 +118,13 @@ define([
     displayShred : function(shred) {
       var shredView = new ShredView({model : shred});
       this.main.show(shredView);
+    },
+
+    test : function(arg) {
+      if ( arg===2)
+        return 2;
+      else
+        return 1;
     }
   });
 

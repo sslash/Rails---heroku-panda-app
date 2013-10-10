@@ -11,6 +11,10 @@ Shredhub::Application.routes.draw do
   scope "/api" do
     post "/shredders/" => "sessions#create_new_user"
 
+
+    # Shredders
+    get "/shredders/" => "shredders#getShreddersByQuery"
+
     # Shreds
     post "/shreds/" => "shreds#save"
     get "/shreds/" => "shreds#getShredsByQuery"
